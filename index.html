@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cam match</title>
     
-    <!-- FUENTES: Importación correcta desde Google Fonts -->
+    <!-- FUENTES: Carga segura optimizada para móviles -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
 
-    <!-- LIBRERÍA: Hammer.js para reconocer los gestos de deslizamiento -->
+    <!-- LIBRERÍA: Hammer.js para gestos en celulares -->
     <script src="https://cloudflare.com"></script>
     
     <style>
@@ -105,7 +105,13 @@
         .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: -0.3px; line-height: 1.1; }
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; color: #8c8c8c; }
         .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #8c8c8c; text-transform: uppercase; letter-spacing: -0.3px; }
-        .status-message { text-align: center; padding: 35% 10px 0 10px; color: #6488b4; font-weight: 700; font-size: 1.5rem; font-family: 'Oswald', sans-serif; text-transform: uppercase; line-height: 1.3; }
+        
+        /* Contenedor de resultados finales */
+        .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.3rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
+        .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.1rem; color: #333; max-height: 220px; overflow-y: auto; }
+        .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .likes-item span { color: #8c8c8c; }
+        
         .buttons { margin-top: 25px; display: flex; gap: 25px; }
         .btn { border: none; width: 55px; height: 55px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.1s ease; }
         .btn:active { transform: scale(0.9); }
@@ -119,8 +125,6 @@
     <div class="login-screen" id="loginScreen">
         <h1>cam match</h1>
         <div class="subtitle">pensamos el cine</div>
-        <!-- Vinculamos la sala a un código único simple -->
-        <input type="text" id="roomInput" placeholder="Código de la sala (Ej: cine123)" maxlength="10">
         <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15">
         <button id="loginBtn">Ingresar</button>
     </div>
@@ -138,19 +142,11 @@
     <script>
         const container = document.getElementById('cardContainer');
         let usuarioActual = "";
-        let salaId = "";
-        let likesUsuario = [];
-        let juegoTerminado = false;
-        
-        // Usamos una URL de almacenamiento global compartida basada en el PIN de la sala
-        let apiStorageUrl = "https://psty.io";
+        let peliculasElegidas = [];
 
         document.getElementById('loginBtn').addEventListener('click', () => {
-            const sala = document.getElementById('roomInput').value.trim().toLowerCase();
-            const nombre = document.getElementById('usernameInput').value.trim().toLowerCase();
-            
-            if (sala && nombre) {
-                salaId = sala;
+            const nombre = document.getElementById('usernameInput').value.trim();
+            if (nombre) {
                 usuarioActual = nombre;
                 document.getElementById('loginScreen').style.display = 'none';
                 inicializarApp();
@@ -162,12 +158,9 @@
                 const respuesta = await fetch('peliculas.json');
                 const peliculasReales = await respuesta.json();
                 
-                // Mantenemos el mismo orden aleatorio para todo el grupo basándonos en el ID de película
-                peliculasReales.sort((a, b) => a.id - b.id);
+                // Las mezclamos de forma aleatoria por sesión
+                peliculasReales.sort(() => Math.random() - 0.5);
                 cargarTarjetas(peliculasReales);
-
-                // Empezamos a monitorizar en segundo plano si alguien del grupo ya hizo MATCH
-                setInterval(comprobarMatchesEnLaNube, 5000);
             } catch (error) {
                 container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
             }
@@ -180,6 +173,7 @@
                 card.classList.add('movie-card');
                 card.setAttribute('data-id', movie.id);
                 card.setAttribute('data-titulo', movie.titulo);
+                card.setAttribute('data-anio', movie.anio);
                 card.style.zIndex = listaPeliculas.length - index; 
                 
                 const tituloOriginal = movie.titulo_original || movie.titulo;
@@ -202,14 +196,12 @@
         function configurarGesto(card) {
             const hamertime = new Hammer(card);
             hamertime.on('pan', (event) => {
-                if (juegoTerminado) return;
                 card.style.transition = 'none';
                 let rotation = event.deltaX / 10;
                 card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotation}deg)`;
             });
 
             hamertime.on('panend', (event) => {
-                if (juegoTerminado) return;
                 card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
                 if (event.deltaX > 120) {
                     animarSalida(card, 1000, event.deltaY, true);
@@ -225,73 +217,40 @@
             card.style.transform = `translate(${x}px, ${y}px) rotate(${x/10}deg)`;
             card.style.opacity = '0';
             
-            const movieId = card.getAttribute('data-id');
-            const movieTitulo = card.getAttribute('data-titulo');
-            
             if (esLike) {
-                enviarVotoALaNube(movieId, movieTitulo);
+                peliculasElegidas.push({
+                    titulo: card.getAttribute('data-titulo'),
+                    anio: card.getAttribute('data-anio')
+                });
             }
             
             setTimeout(() => {
                 card.remove();
-                if (container.children.length === 0 && !juegoTerminado) {
-                    container.innerHTML = "<div class='status-message'>¡Terminaste la lista!<br><br><span style='font-size:1.1rem; font-weight:400; color:#333;'>Esperando que los demás terminen de votar...</span></div>";
-                    document.querySelector('.buttons').style.display = 'none';
+                if (container.children.length === 0) {
+                    finalizarVotacion();
                 }
             }, 300);
         }
 
-        // Envía el voto de forma transparente a internet
-        async function enviarVotoALaNube(movieId, titulo) {
-            const urlGrupo = apiStorageUrl + salaId + "_" + movieId;
-            try {
-                let actualesRef = await fetch(urlGrupo);
-                let datos = { titulo: titulo, usuarios: [] };
-                
-                if (actualesRef.ok) {
-                    datos = await actualesRef.json();
-                }
-                
-                if (!datos.usuarios.includes(usuarioActual)) {
-                    datos.usuarios.push(usuarioActual);
-                    
-                    await fetch(urlGrupo, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(datos)
-                    });
-                }
-            } catch (e) { console.error("Error de sincronización", e); }
-        }
-
-        // Revisa automáticamente si hay coincidencia de las 8 personas
-        async function comprobarMatchesEnLaNube() {
-            if (juegoTerminado) return;
+        function finalizarVotacion() {
+            document.querySelector('.buttons').style.display = 'none';
             
-            try {
-                const respuesta = await fetch('peliculas.json');
-                const peliculas = await respuesta.json();
-
-                for (let movie of peliculas) {
-                    let res = await fetch(apiStorageUrl + salaId + "_" + movie.id);
-                    if (res.ok) {
-                        let datosPeli = await res.json();
-                        // Si alcanzó las 8 personas del grupo
-                        if (datosPeli.usuarios && datosPeli.usuarios.length >= 8) {
-                            juegoTerminado = true;
-                            
-                            container.innerHTML = `
-                                <div class='status-message' style='color: #2ed573; padding-top: 25%;'>
-                                    🎉 ¡TENEMOS MATCH!<br><br>
-                                    <span style='color:#000; font-size:2rem; line-height:1.2; display:block; font-family:Oswald;'>${datosPeli.titulo}</span><br>
-                                    Coincidencia total de las 8 personas
-                                </div>`;
-                            document.querySelector('.buttons').style.display = 'none';
-                            break;
-                        }
-                    }
-                }
-            } catch (e) { }
+            let HTMLResultados = `
+                <div class='status-message'>
+                    🍿 ¡Elegiste ${peliculasElegidas.length} películas!<br>
+                    <div class='likes-list'>
+            `;
+            
+            if(peliculasElegidas.length === 0) {
+                HTMLResultados += "<div style='text-align:center;color:#8c8c8c;padding:20px;'>No seleccionaste ninguna película.</div>";
+            } else {
+                peliculasElegidas.forEach(p => {
+                    HTMLResultados += `<div class='likes-item'>${p.titulo} <span>${p.anio}</span></div>`;
+                });
+            }
+            
+            HTMLResultados += `</div></div>`;
+            container.innerHTML = HTMLResultados;
         }
 
         document.getElementById('rejectBtn').addEventListener('click', () => {
