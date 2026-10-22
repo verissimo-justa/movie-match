@@ -31,9 +31,8 @@
             height: 100vh;
         }
         h1 {
-            /* AJUSTE PARA MÓVILES: Forzamos la descarga de la tipografía correcta en cualquier pantalla */
-            font-family: 'Alfa Slab One', 'Cooper LT BT', serif;
-            font-weight: 400;
+            font-family: 'Alfa Slab One', serif !important;
+            font-weight: 400 !important;
             font-size: 2.5rem;
             margin-bottom: 3px;
             color: #6488b4; 
@@ -136,7 +135,7 @@
     </div>
 
     <script>
-        // Recuerda rellenar este objeto con tus credenciales de la consola de Firebase
+        // Asegúrate de tener aquí tus credenciales reales de Firebase
         const firebaseConfig = {
             apiKey: "TU_API_KEY",
             authDomain: "TU_DOMINIO",
@@ -176,7 +175,7 @@
         }
 
         function cargarTarjetas(listaPeliculas) {
-            container.innerHTML = ""; // Limpiamos mensajes previos
+            container.innerHTML = ""; 
             listaPeliculas.forEach((movie, index) => {
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
@@ -270,12 +269,14 @@
         function escucharMatches() {
             db.collection('votos').where('totalLikes', '==', 8)
                 .onSnapshot((snapshot) => {
+                    /* SOLUCIÓN AL BLOQUEO: Leemos los cambios del documento de forma correcta en Firestore */
                     if (!snapshot.empty && !juegoTerminado) {
                         juegoTerminado = true;
                         
-                        // Extraemos la información del primer documento que hizo match
-                        const docGanador = snapshot.docs[0].data();
-                        const peliculaGanadora = docGanador.titulo;
+                        let peliculaGanadora = "";
+                        snapshot.forEach((doc) => {
+                            peliculaGanadora = doc.data().titulo;
+                        });
                         
                         container.innerHTML = `
                             <div class='status-message' style='color: #2ed573; padding-top: 30%;'>
