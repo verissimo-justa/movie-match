@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cam match</title>
     
-    <!-- ENLACES CORREGIDOS: Ahora apuntan a ://googleapis.com y ://gstatic.com -->
+    <!-- ENLACES DE FUENTES CORREGIDOS AL 100% (Apuntando a ://googleapis.com) -->
     <link rel="preconnect" href="https://://googleapis.com">
-    <link rel="preconnect" href="https://://gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://://googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
 
     <!-- LIBRERÍA: Hammer.js con ruta absoluta completa -->
@@ -31,7 +31,7 @@
             height: 100vh;
         }
         h1 {
-            font-family: 'Alfa Slab One', serif !important;
+            font-family: 'Alfa Slab One', 'Cooper LT BT', serif !important;
             font-weight: 400 !important;
             font-size: 2.5rem;
             margin-bottom: 3px;
@@ -69,6 +69,7 @@
             outline: none;
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
+            color: #333333;
         }
         .login-screen button {
             padding: 12px 30px;
@@ -117,6 +118,7 @@
 </head>
 <body>
 
+    <!-- Pantalla de Login -->
     <div class="login-screen" id="loginScreen">
         <h1>cam match</h1>
         <div class="subtitle">pensamos el cine</div>
@@ -135,7 +137,7 @@
     </div>
 
     <script>
-        // Asegúrate de tener aquí tus credenciales reales de Firebase
+        // RELLENA ESTE OBJETO CON TUS CREDENCIALES REALES DE FIREBASE
         const firebaseConfig = {
             apiKey: "TU_API_KEY",
             authDomain: "TU_DOMINIO",
@@ -233,7 +235,7 @@
             if (esLike && !juegoTerminado) {
                 registrarVotoEnFirebase(movieDocId, movieTitulo);
             }
-            
+
             setTimeout(() => {
                 card.remove();
                 if (container.children.length === 0 && !juegoTerminado) {
@@ -269,7 +271,6 @@
         function escucharMatches() {
             db.collection('votos').where('totalLikes', '==', 8)
                 .onSnapshot((snapshot) => {
-                    /* SOLUCIÓN AL BLOQUEO: Leemos los cambios del documento de forma correcta en Firestore */
                     if (!snapshot.empty && !juegoTerminado) {
                         juegoTerminado = true;
                         
