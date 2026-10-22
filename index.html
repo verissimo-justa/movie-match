@@ -1,1 +1,205 @@
- 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cam match</title>
+    <!-- Importamos las fuentes de Google: Alfa Slab One (estilo Cooper) e Inter -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Importamos Hammer.js para detectar gestos táctiles (Swipe) -->
+    <script src="https://cloudflare.com"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #14181c; /* Color oscuro estilo Letterboxd */
+            color: #fff;
+            /* Aplicamos Inter como fuente global por defecto */
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            /* Título estilizado como Cooper Lt BT usando Alfa Slab One */
+            font-family: 'Cooper LT BT', 'Alfa Slab One', serif;
+            font-weight: 400;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #40bcf4;
+            letter-spacing: -0.5px;
+        }
+        /* Contenedor de la pila de tarjetas */
+        .tinder-container {
+            position: relative;
+            width: 320px;
+            height: 480px;
+            perspective: 1000px;
+        }
+        /* Estilo de cada tarjeta de película */
+        .movie-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #24303c;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            cursor: grab;
+            transform-origin: 50% 100%;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .movie-card img {
+            width: 100%;
+            height: 75%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .movie-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .movie-title {
+            font-size: 1.2rem;
+            font-weight: 700; /* Inter Bold */
+            margin-bottom: 5px;
+        }
+        .movie-year {
+            font-size: 0.9rem;
+            font-weight: 400; /* Inter Regular */
+            color: #9ab;
+        }
+        /* Estado final */
+        .status-message {
+            text-align: center; 
+            padding: 50% 20px 0 20px; 
+            color: #9ab;
+            font-weight: 500; /* Inter Medium */
+        }
+        /* Botones de control inferiores */
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .btn {
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.1s ease;
+        }
+        .btn:active { transform: scale(0.9); }
+        .btn-no { background-color: #ff4757; color: white; }
+        .btn-yes { background-color: #2ed573; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>cam match</h1>
+
+    <div class="tinder-container" id="cardContainer">
+        <!-- Las tarjetas se inyectarán dinámicamente aquí -->
+    </div>
+
+    <div class="buttons">
+        <button class="btn btn-no" id="rejectBtn">❌</button>
+        <button class="btn btn-yes" id="acceptBtn">💚</button>
+    </div>
+
+    <script>
+        // Datos de prueba temporales
+        const peliculasMock = [
+            { id: 1, titulo: "Inception", anio: 2010, poster: "https://tmdb.org" },
+            { id: 2, titulo: "Pulp Fiction", anio: 1994, poster: "https://tmdb.org" },
+            { id: 3, titulo: "Interstellar", anio: 2014, poster: "https://tmdb.org" }
+        ];
+
+        const container = document.getElementById('cardContainer');
+
+        function cargarTarjetas() {
+            peliculasMock.forEach((movie, index) => {
+                const card = document.createElement('div');
+                card.classList.add('movie-card');
+                card.style.zIndex = peliculasMock.length - index; 
+                
+                card.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.titulo}">
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.titulo}</div>
+                        <div class="movie-year">${movie.anio}</div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+                configurarGesto(card);
+            });
+        }
+
+        function configurarGesto(card) {
+            const hamertime = new Hammer(card);
+
+            hamertime.on('pan', (event) => {
+                card.style.transition = 'none';
+                let rotation = event.deltaX / 10;
+                card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotation}deg)`;
+            });
+
+            hamertime.on('panend', (event) => {
+                card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                if (event.deltaX > 120) {
+                    animarSalida(card, 1000, event.deltaY, true);
+                } else if (event.deltaX < -120) {
+                    animarSalida(card, -1000, event.deltaY, false);
+                } else {
+                    card.style.transform = 'translate(0px, 0px) rotate(0deg)';
+                }
+            });
+        }
+
+        function animarSalida(card, x, y, esMatch) {
+            card.style.transform = `translate(${x}px, ${y}px) rotate(${x/10}deg)`;
+            card.style.opacity = '0';
+            
+            setTimeout(() => {
+                card.remove();
+                if (container.children.length === 0) {
+                    container.innerHTML = "<div class='status-message'>¡Terminaste la lista! Esperando al grupo...</div>";
+                }
+            }, 300);
+        }
+
+        document.getElementById('rejectBtn').addEventListener('click', () => {
+            const tarjetaActual = container.querySelector('.movie-card');
+            if (tarjetaActual) animarSalida(tarjetaActual, -1000, 0, false);
+        });
+
+        document.getElementById('acceptBtn').addEventListener('click', () => {
+            const tarjetaActual = container.querySelector('.movie-card');
+            if (tarjetaActual) animarSalida(tarjetaActual, 1000, 0, true);
+        });
+
+        cargarTarjetas();
+    </script>
+</body>
+</html>
