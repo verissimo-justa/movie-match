@@ -155,7 +155,7 @@
 
         async function inicializarApp() {
             try {
-                const respuesta = await fetch('peliculas.json');
+                const respuesta = await fetch('./peliculas.json');
                 const peliculasReales = await respuesta.json();
                 
                 // Las mezclamos de forma aleatoria por sesión
