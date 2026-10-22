@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cam match</title>
-    <!-- Importamos Alfa Slab One, Inter y Oswald (para el título condensado de la película) -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
-
     
-    <!-- Importamos Hammer.js para detectar gestos táctiles (Swipe) -->
+    <!-- ENLACES CORREGIDOS: Importamos las fuentes oficiales desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
+
+    <!-- ENLACE CORREGIDO: Cargamos la librería Hammer.js completa para que funcionen los gestos -->
     <script src="https://cloudflare.com"></script>
+    
     <style>
         * {
             box-sizing: border-box;
@@ -19,9 +20,9 @@
             padding: 0;
         }
         body {
-            background-color: #14181c; /* Color oscuro estilo Letterboxd */
-            color: #fff;
-            /* Aplicamos Inter como fuente global por defecto */
+            /* Identidad de Marca: Fondo crema claro del logo */
+            background-color: #f7f2d4; 
+            color: #333333;
             font-family: 'Inter', -apple-system, sans-serif;
             overflow: hidden;
             display: flex;
@@ -31,35 +32,45 @@
             height: 100vh;
         }
         h1 {
-            /* Título estilizado como Cooper Lt BT usando Alfa Slab One */
             font-family: 'Cooper LT BT', 'Alfa Slab One', serif;
             font-weight: 400;
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: #40bcf4;
+            font-size: 2.5rem;
+            margin-bottom: 3px;
+            /* Identidad de Marca: Color azul apagado exacto de cámara */
+            color: #6488b4; 
             letter-spacing: -0.5px;
+        }
+        /* Eslogan debajo del título */
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #222222;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
         }
         /* Contenedor de la pila de tarjetas */
         .tinder-container {
             position: relative;
             width: 320px;
-            height: 480px;
+            height: 460px;
             perspective: 1000px;
         }
-        /* Estilo de cada tarjeta de película */
+        /* Tarjeta adaptada a la estética clara */
         .movie-card {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #24303c;
-            border-radius: 12px;
+            background: #ffffff;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(100, 136, 180, 0.15); 
             display: flex;
             flex-direction: column;
             cursor: grab;
             transform-origin: 50% 100%;
             transition: transform 0.2s ease, opacity 0.2s ease;
+            border: 1px solid rgba(100, 136, 180, 0.1);
         }
         .movie-card img {
             width: 100%;
@@ -75,7 +86,7 @@
             justify-content: flex-start;
             background: #ffffff;
         }
-        /* Contenedor del título principal y año en la misma línea */
+        /* Contenedor del título principal y año estilo compacto */
         .movie-title-row {
             display: flex;
             align-items: baseline;
@@ -89,7 +100,7 @@
             font-size: 1.4rem;
             font-weight: 600;
             color: #000000;
-            text-transform: uppercase; /* Fuerza las mayúsculas */
+            text-transform: uppercase; 
             letter-spacing: -0.3px;
             line-height: 1.1;
         }
@@ -97,9 +108,9 @@
             font-family: 'Oswald', sans-serif;
             font-size: 1.2rem;
             font-weight: 600;
-            color: #8c8c8c; /* Gris para el año */
+            color: #8c8c8c; 
         }
-        /* Nueva clase para el título original abajo en gris */
+        /* Título original abajo en gris */
         .movie-original-title {
             font-family: 'Oswald', sans-serif;
             font-size: 1.1rem;
@@ -108,41 +119,42 @@
             text-transform: uppercase;
             letter-spacing: -0.3px;
         }
-
         /* Estado final */
         .status-message {
             text-align: center; 
             padding: 50% 20px 0 20px; 
-            color: #9ab;
-            font-weight: 500; /* Inter Medium */
+            color: #6488b4;
+            font-weight: 500;
+            font-size: 1.1rem;
         }
-        /* Botones de control inferiores */
+        /* Botones de control inferiores estilizados para fondo claro */
         .buttons {
-            margin-top: 20px;
+            margin-top: 25px;
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
         .btn {
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.1s ease;
         }
         .btn:active { transform: scale(0.9); }
-        .btn-no { background-color: #ff4757; color: white; }
-        .btn-yes { background-color: #2ed573; color: white; }
+        .btn-no { background-color: #ffecef; color: #ff4757; border: 1px solid #ffccd2; }
+        .btn-yes { background-color: #e6f9ed; color: #2ed573; border: 1px solid #c2f0d5; }
     </style>
 </head>
 <body>
 
     <h1>cam match</h1>
+    <div class="subtitle">pensamos el cine</div>
 
     <div class="tinder-container" id="cardContainer">
         <!-- Las tarjetas se inyectarán dinámicamente aquí -->
@@ -156,14 +168,12 @@
     <script>
         const container = document.getElementById('cardContainer');
 
-        // Función dinámica para leer las películas reales desde el JSON del repositorio
         async function inicializarApp() {
             try {
-                // Buscamos el archivo peliculas.json local
                 const respuesta = await fetch('peliculas.json');
                 const peliculasReales = await respuesta.json();
                 
-                // Mezclamos la lista de forma aleatoria para que no salgan siempre igual
+                // Mezclamos la lista de forma aleatoria
                 peliculasReales.sort(() => Math.random() - 0.5);
 
                 cargarTarjetas(peliculasReales);
@@ -173,14 +183,12 @@
             }
         }
 
-        // Función para renderizar las películas reales en pantalla
         function cargarTarjetas(listaPeliculas) {
             listaPeliculas.forEach((movie, index) => {
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
                 card.style.zIndex = listaPeliculas.length - index; 
                 
-                // Si la película no incluye título original en el JSON, usamos el mismo título
                 const tituloOriginal = movie.titulo_original || movie.titulo;
                 
                 card.innerHTML = `
@@ -195,12 +203,11 @@
                 `;
                 
                 container.appendChild(card);
-                configurarGesto(card, listaPeliculas.length);
+                configurarGesto(card);
             });
         }
 
-
-        function configurarGesto(card, total) {
+        function configurarGesto(card) {
             const hamertime = new Hammer(card);
 
             hamertime.on('pan', (event) => {
@@ -228,7 +235,7 @@
             setTimeout(() => {
                 card.remove();
                 if (container.children.length === 0) {
-                    container.innerHTML = "<div class='status-message'>¡Terminaste la lista de 68 películas! Esperando al grupo...</div>";
+                    container.innerHTML = "<div class='status-message'>¡Terminaste la lista! Esperando al grupo...</div>";
                 }
             }, 300);
         }
@@ -243,7 +250,6 @@
             if (tarjetaActual) animarSalida(tarjetaActual, 1000, 0, true);
         });
 
-        // Iniciamos el proceso dinámico
         inicializarApp();
     </script>
 </body>
