@@ -1,246 +1,246 @@
 [
   {
     "id": 1,
-    "titulo": "Parasite",
-    "titulo_original": "Parasite",
+    "titulo": "Parásitos",
+    "titulo_original": "기생충",
     "anio": 2019,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/4N55tgxDW0RRATyrZHbx0q9HUKv.jpg"
   },
   {
     "id": 2,
-    "titulo": "12 Angry Men",
+    "titulo": "Doce hombres sin piedad",
     "titulo_original": "12 Angry Men",
     "anio": 1957,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/t88XfoxO5cX3f0qaSxWsBS0Lc3.jpg"
   },
   {
     "id": 3,
-    "titulo": "Sunset Boulevard",
+    "titulo": "El crepúsculo de los dioses",
     "titulo_original": "Sunset Boulevard",
     "anio": 1950,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sVILYytrnjsEXBcZyxHMJ5jP74t.jpg"
   },
   {
     "id": 4,
     "titulo": "Playtime",
-    "titulo_original": "Playtime",
+    "titulo_original": "PlayTime",
     "anio": 1967,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cVTaZoFmws0jRSXykK4ayrYTkij.jpg"
   },
   {
     "id": 5,
     "titulo": "Persona",
     "titulo_original": "Persona",
     "anio": 1966,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/pnJMAumh0gaZC02r9t5YmN9HR74.jpg"
   },
   {
     "id": 6,
-    "titulo": "A Woman Under The Influence",
+    "titulo": "Una mujer bajo la influencia",
     "titulo_original": "A Woman Under the Influence",
     "anio": 1974,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/xX9xyqocEh4OvkhGip9m9JjXNTe.jpg"
   },
   {
     "id": 7,
-    "titulo": "Les 400 Coups",
+    "titulo": "Los cuatrocientos golpes",
     "titulo_original": "Les Quatre Cents Coups",
     "anio": 1959,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1uqxcqhTNXZLyZoNKeqVkMVzuU4.jpg"
   },
   {
     "id": 8,
-    "titulo": "Trois Couleurs. Rouge",
+    "titulo": "Tres colores: Rojo",
     "titulo_original": "Trois couleurs : Rouge",
     "anio": 1994,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eePgjE6ZP381J77dUPVgJy9cIJ4.jpg"
   },
   {
     "id": 9,
-    "titulo": "Marketa Lazarova",
+    "titulo": "Marketa Lazarová",
     "titulo_original": "Marketa Lazarová",
     "anio": 1967,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/iAD1q8GOO1q1h6hRCXgslAxDHBY.jpg"
   },
   {
     "id": 10,
-    "titulo": "Do The Right Thing",
+    "titulo": "Haz lo que debas",
     "titulo_original": "Do the Right Thing",
     "anio": 1989,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fu5kXCAX9xcjpCSeEROYZ3iBdLb.jpg"
   },
   {
     "id": 11,
-    "titulo": "Citizen Kane",
+    "titulo": "Ciudadano Kane",
     "titulo_original": "Citizen Kane",
     "anio": 1941,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/w7V0bv38Z0q0DgHmMfcGM4WRNTv.jpg"
   },
   {
     "id": 12,
-    "titulo": "Vagabond",
+    "titulo": "Sin techo ni ley",
     "titulo_original": "Sans toit ni loi",
     "anio": 1985,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/a42VZYIhgHIyrlvhVpzvLtOAdmf.jpg"
   },
   {
     "id": 13,
-    "titulo": "Le Samourai",
+    "titulo": "El silencio de un hombre",
     "titulo_original": "Le Samouraï",
     "anio": 1967,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rjA2UW47qTIeuL6aNHTbUu6yTP6.jpg"
   },
   {
     "id": 14,
-    "titulo": "Les yeux sans visage",
+    "titulo": "Los ojos sin rostro",
     "titulo_original": "Les Yeux sans visage",
     "anio": 1960,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uV1rTX8m0tzbiO4WtcEJnwf02Oc.jpg"
   },
   {
     "id": 15,
     "titulo": "Chungking Express",
     "titulo_original": "重慶森林",
     "anio": 1994,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nl246bqCp6lmRF4mHF293F9w42O.jpg"
   },
   {
     "id": 16,
     "titulo": "Amarcord",
     "titulo_original": "Amarcord",
     "anio": 1973,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/i2BL91OVOONviajAE0VlbMAyOm9.jpg"
   },
   {
     "id": 17,
-    "titulo": "Il conformista",
+    "titulo": "El conformista",
     "titulo_original": "Il conformista",
     "anio": 1970,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1fOtsLKzGAWJA41NmhRB9yNk0z1.jpg"
   },
   {
     "id": 18,
-    "titulo": "Shoplifters",
+    "titulo": "Un asunto de familia",
     "titulo_original": "万引き家族",
     "anio": 2018,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7f8nFFOoifqHRbtCzgYVjOZ9XBl.jpg"
   },
   {
     "id": 19,
-    "titulo": "The Saragossa Manuscript",
+    "titulo": "El manuscrito encontrado en Zaragoza",
     "titulo_original": "Rękopis znaleziony w Saragossie",
     "anio": 1965,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7FbveRzxtdn7zbZyjjZnT0FsxKI.jpg"
   },
   {
     "id": 20,
-    "titulo": "Peeping Tom",
+    "titulo": "El fotógrafo del pánico",
     "titulo_original": "Peeping Tom",
     "anio": 1960,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/9IJuvJ5khuoZyB7k2fLw4cgs3L2.jpg"
   },
   {
     "id": 21,
     "titulo": "Gritos y susurros",
     "titulo_original": "Viskningar och rop",
     "anio": 1972,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sr8qYAG8JP33goQC87Ym4d16njF.jpg"
   },
   {
     "id": 22,
-    "titulo": "Anatomy of a Murder",
+    "titulo": "Anatomía de un asesinato",
     "titulo_original": "Anatomy of a Murder",
     "anio": 1959,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2lHWDt5kQcd4yZ5yBPUuiEFYEXD.jpg"
   },
   {
     "id": 23,
-    "titulo": "Jeanne Dielman, 23 Quai Du Commerce 1080, Bruxelles",
+    "titulo": "Jeanne Dielman, 23 quai du Commerce, 1080 Bruxelles",
     "titulo_original": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
     "anio": 1975,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b5cey5yKfPXZBwj2gTRREALUvzA.jpg"
   },
   {
     "id": 24,
-    "titulo": "Poetry",
+    "titulo": "Poesía",
     "titulo_original": "시",
     "anio": 2010,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7sKXNd9WXzrncgMEGNpegl1Y2M8.jpg"
   },
   {
     "id": 25,
-    "titulo": "Blue Velvet",
+    "titulo": "Terciopelo azul",
     "titulo_original": "Blue Velvet",
     "anio": 1986,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rzcigN8ujeVJiEKGP3y3mJybvii.jpg"
   },
   {
     "id": 26,
-    "titulo": "Network",
+    "titulo": "Network, un mundo implacable",
     "titulo_original": "Network",
     "anio": 1976,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/r8CrxsvFK8JIBUpIZX0rBmojsC9.jpg"
   },
   {
     "id": 27,
-    "titulo": "Beau Travail",
+    "titulo": "Buen trabajo",
     "titulo_original": "Beau Travail",
     "anio": 1999,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7aVQFvGkLnpA71mYoDkVkzSzBZM.jpg"
   },
   {
     "id": 28,
-    "titulo": "La Haine",
+    "titulo": "El odio",
     "titulo_original": "La Haine",
     "anio": 1995,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cRhjRtGfUvm9pOVid2BrrNUnjR5.jpg"
   },
   {
     "id": 29,
-    "titulo": "La Maman et la Putain",
+    "titulo": "La mamá y la puta",
     "titulo_original": "La Maman et la Putain",
     "anio": 1973,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/wDbguEVHet9w8yRGcl0vVk01UrB.jpg"
   },
   {
     "id": 30,
-    "titulo": "Le Bonheur",
+    "titulo": "La felicidad",
     "titulo_original": "Le Bonheur",
     "anio": 1965,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/mHYX8Jo6sNlQPX7yOHhBoFyHiEF.jpg"
   },
   {
     "id": 31,
-    "titulo": "Les diaboliques",
+    "titulo": "Las diabólicas",
     "titulo_original": "Les Diaboliques",
     "anio": 1955,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eX2SM3UECXJgrGknXHdYS2veReS.jpg"
   },
   {
     "id": 32,
-    "titulo": "Belle de Jour",
+    "titulo": "Bella de día",
     "titulo_original": "Belle de jour",
     "anio": 1967,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6LBPUWNYYtC4R4tTxLSsVG4qKPG.jpg"
   },
   {
     "id": 33,
-    "titulo": "Indagine su un cittadino al de sopra di ogni sospetto",
+    "titulo": "Investigación sobre un ciudadano libre de toda sospecha",
     "titulo_original": "Indagine su un cittadino al di sopra di ogni sospetto",
     "anio": 1970,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5eUBcyilUy0sy6AcqNpjgXQX4A4.jpg"
   },
   {
     "id": 34,
-    "titulo": "Perfect Days",
-    "titulo_original": "Perfect Days",
+    "titulo": "Días perfectos",
+    "titulo_original": "PERFECT DAYS",
     "anio": 2023,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/efnvsuEdkdwiWR7WyQ2QgcGt8mM.jpg"
   },
   {
     "id": 35,
     "titulo": "Welt Am Draht",
-    "titulo_original": "Welt am Draht",
+    "titulo_original": "Welt Am Draht",
     "anio": 1973,
     "poster": null
   },
@@ -249,230 +249,230 @@
     "titulo": "Walkabout",
     "titulo_original": "Walkabout",
     "anio": 1971,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/24vooYt5StgtgcQObVr1GHuM5gy.jpg"
   },
   {
     "id": 37,
-    "titulo": "Two Days, One Night",
+    "titulo": "Dos días, una noche",
     "titulo_original": "Deux jours, une nuit",
     "anio": 2014,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zTI4FYCp28I6SYsmQa0rSImtChu.jpg"
   },
   {
     "id": 38,
-    "titulo": "Lavoura Arcaica",
+    "titulo": "A la izquierda del padre",
     "titulo_original": "Lavoura Arcaica",
     "anio": 2001,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/orRApy2BHy99HyWf7PwzHtoZRd1.jpg"
   },
   {
     "id": 39,
     "titulo": "Aquarius",
     "titulo_original": "Aquarius",
     "anio": 2016,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b4BA2Kkp1x82FP4pQZWXcpCCjiI.jpg"
   },
   {
     "id": 40,
     "titulo": "Safe",
     "titulo_original": "Safe",
     "anio": 1995,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2O71QsBkbqdLqQdx2yuNpJ4pFPq.jpg"
   },
   {
     "id": 41,
-    "titulo": "Anatomie d'une chute",
+    "titulo": "Anatomía de una caída",
     "titulo_original": "Anatomie d'une chute",
     "anio": 2023,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/vGzjaQyv4NPjhgI0hHmKXz3Orjs.jpg"
   },
   {
     "id": 42,
-    "titulo": "Roma città aperta",
+    "titulo": "Roma. Ciudad abierta",
     "titulo_original": "Roma città aperta",
     "anio": 1945,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/mgBiTwHjd9ILQXUCSS4v3eAaCIu.jpg"
   },
   {
     "id": 43,
-    "titulo": "La notte",
+    "titulo": "La noche",
     "titulo_original": "La notte",
     "anio": 1961,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/tisVoVpKpe9EynTgFLamBStGd9Z.jpg"
   },
   {
     "id": 44,
-    "titulo": "Hana bi",
+    "titulo": "Hana-bi: Flores de fuego",
     "titulo_original": "HANA-BI",
     "anio": 1997,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/A3ubCSK5Y8ObcTNWdjqnoMlROCl.jpg"
   },
   {
     "id": 45,
     "titulo": "La calle de la vergüenza",
-    "titulo_original": "Street of Shame",
+    "titulo_original": "赤線地帯",
     "anio": 1956,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/se6UvAiUxDSaaeKuwcOQ8eRU91E.jpg"
   },
   {
     "id": 46,
-    "titulo": "Spoorloos",
+    "titulo": "Desaparecida",
     "titulo_original": "Spoorloos",
     "anio": 1988,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6pBloz1mwz8S0gYjUao6iUoyCng.jpg"
   },
   {
     "id": 47,
-    "titulo": "Zimna Wojna",
+    "titulo": "Cold War",
     "titulo_original": "Zimna wojna",
     "anio": 2018,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2MNuonmf074NuCRuVVnUMexhnyn.jpg"
   },
   {
     "id": 48,
-    "titulo": "If",
-    "titulo_original": "If....",
+    "titulo": "If...",
+    "titulo_original": "if....",
     "anio": 1968,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/oqlpAGq4aXhc6ODtxBcGM1SEoIp.jpg"
   },
   {
     "id": 49,
-    "titulo": "The Servant",
+    "titulo": "El sirviente",
     "titulo_original": "The Servant",
     "anio": 1963,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7aqzvi7mRfQAzSdWKSZcm7haoix.jpg"
   },
   {
     "id": 50,
-    "titulo": "The Innocents",
+    "titulo": "Suspense",
     "titulo_original": "The Innocents",
     "anio": 1961,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2NvJwOeAMIpbzuP6SjTy2yZAvds.jpg"
   },
   {
     "id": 51,
-    "titulo": "4 Months, 3 Weeks And 2 Days",
+    "titulo": "4 meses, 3 semanas, 2 días",
     "titulo_original": "4 luni, 3 săptămâni și 2 zile",
     "anio": 2007,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/taoajT5Cg8corabvH0EMXAPklNh.jpg"
   },
   {
     "id": 52,
-    "titulo": "Das Lehrerzimmer",
+    "titulo": "Sala de profesores",
     "titulo_original": "Das Lehrerzimmer",
     "anio": 2023,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3xFWOPWzN4mwFx0js8bDvHOUIO0.jpg"
   },
   {
     "id": 53,
     "titulo": "Zama",
     "titulo_original": "Zama",
     "anio": 2017,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3pfgZyIJ1AyXD4JB6b0d2IHzTLV.jpg"
   },
   {
     "id": 54,
     "titulo": "El aura",
     "titulo_original": "El aura",
     "anio": 2005,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1mHxd9DQLVTLJzWQObgsuewn2kx.jpg"
   },
   {
     "id": 55,
     "titulo": "Arrebato",
     "titulo_original": "Arrebato",
     "anio": 1979,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/hsG18cvuzcQXpdPCQY7gYG4hqVX.jpg"
   },
   {
     "id": 56,
     "titulo": "Teorema",
     "titulo_original": "Teorema",
     "anio": 1968,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3S6HGnzTJJ23jJIbKgU2k4yjf1x.jpg"
   },
   {
     "id": 57,
     "titulo": "Funeral Parade of Roses",
     "titulo_original": "薔薇の葬列",
     "anio": 1969,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5hxdRupM919r4LpevX2etgQ0OrQ.jpg"
   },
   {
     "id": 58,
     "titulo": "Fish Tank",
     "titulo_original": "Fish Tank",
     "anio": 2009,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zNvxW4wlWsLyy6Qe8FDcvKXKoaU.jpg"
   },
   {
     "id": 59,
-    "titulo": "W.R. - Misterije organizma",
+    "titulo": "Los misterios del organismo",
     "titulo_original": "W.R. - Misterije organizma",
     "anio": 1971,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/aNK9tib62Pq92tdsldO0lLNZxeb.jpg"
   },
   {
     "id": 60,
     "titulo": "Bacurau",
     "titulo_original": "Bacurau",
     "anio": 2019,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/lmaOXE74iTZfFv1Sif4Ez71RT1g.jpg"
   },
   {
     "id": 61,
     "titulo": "Una mujer fantástica",
     "titulo_original": "Una mujer fantástica",
     "anio": 2017,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uIlx33SKoJh3Ne0QmQDi9mlcjGx.jpg"
   },
   {
     "id": 62,
     "titulo": "Memoria",
     "titulo_original": "Memoria",
     "anio": 2021,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fjHHXOxYZL22UYkUfnQqZzuHMfc.jpg"
   },
   {
     "id": 63,
-    "titulo": "Primavera, verano, otoño, invierno... y otra vez primavera",
+    "titulo": "Primavera, verano, otoño, invierno... y primavera",
     "titulo_original": "봄 여름 가을 겨울 그리고 봄",
     "anio": 2003,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/A7dJXiyhcNkdJKsK3EeB8itzXWV.jpg"
   },
   {
     "id": 64,
     "titulo": "Los colonos",
     "titulo_original": "Los colonos",
     "anio": 2023,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/qT4pDQnsPRxt5P4DZkIkjSYVZrs.jpg"
   },
   {
     "id": 65,
-    "titulo": "Gueros",
+    "titulo": "Güeros",
     "titulo_original": "Güeros",
     "anio": 2014,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/xyT8NgctwO9rqbwBTcrSMeeBqjH.jpg"
   },
   {
     "id": 66,
     "titulo": "Ghost World",
     "titulo_original": "Ghost World",
     "anio": 2001,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/yYB8BzkNDvv9eQwdZNweeh0sQ7G.jpg"
   },
   {
     "id": 67,
     "titulo": "An Education",
     "titulo_original": "An Education",
     "anio": 2009,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/gLIvvUdlocGjm8XVLxhWHAKWrRq.jpg"
   },
   {
     "id": 68,
     "titulo": "La luz incidente",
     "titulo_original": "La luz incidente",
     "anio": 2015,
-    "poster": null
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/vkvKvuLGrRbO1owtPAWRnHDFJNW.jpg"
   }
 ]
