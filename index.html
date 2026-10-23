@@ -117,10 +117,12 @@
         /* Achicamos un poquito la tarjeta para que entren las flechas */
         .tinder-container {
             position: relative;
-            width: 220px; /* Antes 240px, ahora es un poquito más chica */
-            height: 400px; 
+            width: 220px; 
+            height: 380px; /* Un poquito más baja para que quepa todo */
             overflow: hidden; 
             border-radius: 16px; 
+            margin-top: 15px; /* Lo separa del texto de arriba */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Una sombra suave para que resalte */
         }
 
         .movie-card {
@@ -298,6 +300,7 @@
         const container = document.getElementById('cardContainer');
         let usuarioActual = "";
         let peliculasElegidas = [];
+        let tarjetaActualIndex = 0;
 
         document.getElementById('loginBtn').addEventListener('click', () => {
             const nombre = document.getElementById('usernameInput').value.trim();
@@ -323,8 +326,6 @@
                 container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
             }
         }
-
-        let tarjetaActualIndex = 0;
 
         function cargarTarjetas(listaPeliculas) {
             container.innerHTML = ""; 
