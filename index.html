@@ -95,9 +95,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 10px; /* Reducido un poco para compensar el ancho de la tarjeta */
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
         }
 
         .flecha-lateral {
@@ -117,15 +117,16 @@
             transform: scale(1.2);
         }
 
+        /* --- TARJETA +10% --- */
         .tinder-container {
             position: relative;
-            width: 220px;
-            height: 380px;
+            width: 242px; /* 220 + 10% */
+            height: 418px; /* 380 + 10% */
             overflow: hidden;
-            border-radius: 16px;
+            border-radius: 18px;
             margin-top: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            background: transparent; /* Asegura que el fondo sea transparente */
+            background: transparent;
         }
 
         .movie-card {
@@ -135,27 +136,27 @@
             width: 100%;
             height: 100%;
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(100, 136, 180, 0.15);
-            padding: 10px;
+            padding: 11px;
             transition: left 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
         }
 
         .movie-card img {
             width: 100%;
-            height: 270px;
+            height: 297px; /* 270 + 10% */
             object-fit: contain;
             background-color: #ffffff;
             pointer-events: none;
             display: block;
-            border-radius: 12px;
+            border-radius: 13px;
         }
 
         .movie-info {
-            padding: 10px 5px 0px 5px;
+            padding: 11px 6px 0px 6px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -174,7 +175,7 @@
 
         .movie-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: #000000;
             text-transform: uppercase;
@@ -189,25 +190,25 @@
 
         .movie-year {
             font-family: 'Oswald', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: #8c8c8c;
         }
 
         .movie-original-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #8c8c8c;
             text-transform: uppercase;
             letter-spacing: -0.3px;
-            margin-top: 2px;
+            margin-top: 3px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* --- BOTONES --- */
+        /* --- BOTONES +10% --- */
         .buttons {
             margin-top: 15px;
             display: flex;
@@ -219,8 +220,8 @@
 
         .btn {
             border: none;
-            width: 55px;
-            height: 55px;
+            width: 60px; /* 55 + 10% */
+            height: 60px; /* 55 + 10% */
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -281,13 +282,13 @@
     <!-- Botones OUT / IN -->
     <div class="buttons">
         <button type="button" class="btn btn-no" id="rejectBtn" aria-label="No me interesa">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
         <button type="button" class="btn btn-yes" id="acceptBtn" aria-label="Me interesa">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="#6488b4" stroke="none" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="#6488b4" stroke="none" aria-hidden="true">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
         </button>
@@ -407,7 +408,7 @@
             if (subtitulo) {
                 subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${total}`;
                 subtitulo.style.fontWeight = "bold";
-                subtitulo.style.color = "rgba(120, 120, 120, 0.5)"; // Gris con 70% de opacidad
+                subtitulo.style.color = "rgba(120, 120, 120, 0.5)";
             }
 
             flechaIzq.style.opacity = "0.5";
@@ -422,7 +423,7 @@
             if (tarjetaActualIndex > 0) {
                 tarjetaActualIndex--;
             } else {
-                tarjetaActualIndex = total - 1; // Salta a la última
+                tarjetaActualIndex = total - 1;
             }
             actualizarCarrusel();
         }
@@ -435,7 +436,7 @@
             if (tarjetaActualIndex < total - 1) {
                 tarjetaActualIndex++;
             } else {
-                tarjetaActualIndex = 0; // Salta a la primera
+                tarjetaActualIndex = 0;
             }
             actualizarCarrusel();
         }
@@ -463,18 +464,16 @@
 
                 if (!procesando) {
                     if (event.deltaX > 40) {
-                        // Deslizó a la derecha (película anterior)
                         if (tarjetaActualIndex > 0) {
                             tarjetaActualIndex--;
                         } else {
-                            tarjetaActualIndex = total - 1; // Salta al final
+                            tarjetaActualIndex = total - 1;
                         }
                     } else if (event.deltaX < -40) {
-                        // Deslizó a la izquierda (película siguiente)
                         if (tarjetaActualIndex < total - 1) {
                             tarjetaActualIndex++;
                         } else {
-                            tarjetaActualIndex = 0; // Salta al principio
+                            tarjetaActualIndex = 0;
                         }
                     }
                 }
