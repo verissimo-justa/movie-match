@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>cam match</title>
     
-    <!-- FUENTES CORREGIDAS (Fraunces en lugar de Alfa Slab One) -->
+    <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             background-color: #f7f2d4; 
             color: #333333;
@@ -26,29 +27,31 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            /* Evita que el usuario haga zoom sin querer en el celular */
+            touch-action: pan-y; 
         }
+
         h1 {
             font-family: 'Fraunces', serif !important;
             font-weight: 900 !important;
-            /* Achicamos de 2.5rem a 2rem */
-            font-size: 2rem; 
-            margin-top: -20px; /* Lo subimos un poco */
+            font-size: 2.2rem; 
+            margin-top: 0px;
             margin-bottom: 0px;
             color: #6488b4; 
             letter-spacing: -1px;
             text-align: center;
         }
+
         .subtitle {
             font-family: 'Inter', sans-serif;
-            /* Achicamos de 1.1rem a 0.95rem */
-            font-size: 0.95rem; 
+            font-size: 1rem; 
             font-weight: 400;
             color: #222222;
-            /* Achicamos el margen de abajo de 25px a 15px */
-            margin-bottom: 15px; 
+            margin-bottom: 20px; 
             letter-spacing: 0.5px;
             text-align: center;
         }
+
         .login-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -60,6 +63,7 @@
             justify-content: center;
             padding: 20px;
         }
+
         .login-screen input {
             padding: 12px 20px;
             font-size: 1.1rem;
@@ -73,6 +77,7 @@
             color: #333333;
             text-align: center;
         }
+
         .login-screen button {
             padding: 12px 30px;
             font-size: 1.1rem;
@@ -84,115 +89,108 @@
             font-family: 'Inter', sans-serif;
             font-weight: bold;
         }
+
+        /* --- CONTENEDOR DE TARJETAS --- */
         .tinder-container {
             position: relative;
-            /* Reducimos de 210px a 180px */
-            width: 180px; 
-            /* Reducimos la altura mínima para que no deje hueco abajo */
-            min-height: 320px; 
+            width: 240px;  /* Ancho de la tarjeta */
+            height: 390px; /* Altura exacta para que no se desborde ni pise los botones */
             perspective: 1000px;
             margin: 0 auto; 
         }
+
         .movie-card {
             position: absolute;
-            /* En lugar de un ancho fijo, usamos 100% del contenedor padre que ahora achicaremos */
             width: 100%; 
-            /* Quitamos el height: 100% para que la tarjeta crezca según la imagen */
+            height: 100%; /* Ocupa todo el contenedor */
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
-            /* ELIMINADO: box-shadow (el sombreado azulado) */
             display: flex;
             flex-direction: column;
             cursor: grab;
             transform-origin: 50% 100%;
             transition: transform 0.2s ease, opacity 0.2s ease;
-            border: 1px solid rgba(100, 136, 180, 0.1); /* Este bordecito sutil lo dejamos */
+            border: 1px solid rgba(100, 136, 180, 0.15);
         }
 
         .movie-card img { 
             width: 100%; 
-            /* CAMBIO CLAVE: height auto para que respete la proporción original */
-            height: auto; 
-            /* CAMBIO CLAVE: object-fit contain para que no se recorte nada */
-            object-fit: contain; 
+            height: 310px; /* Espacio reservado para la foto */
+            object-fit: contain; /* Mantiene la foto completa sin recortar */
+            background-color: #f9f9f9; /* Fondo por si la foto no es exactamente de esa proporción */
             pointer-events: none; 
-            display: block; /* Evita un pequeño espacio en blanco debajo de la imagen */
+            display: block; 
         }
 
         .movie-info { 
-            /* Achicamos el padding a 8px */
-            padding: 8px 10px; 
+            padding: 10px 12px; 
             display: flex; 
             flex-direction: column; 
             justify-content: flex-start; 
-            background: #ffffff; 
+            background: #ffffff;
+            flex-grow: 1; /* Ocupa el espacio que sobra */
         }
+
         .movie-title-row { 
             display: flex; 
             align-items: baseline; 
-            /* Cambiamos flex-start por space-between para separar el título del año */
             justify-content: space-between; 
-            gap: 4px; /* Reducimos de 8px a 4px */
+            gap: 6px; 
             width: 100%; 
             margin-bottom: 2px; 
         }
+
         .movie-title { 
             font-family: 'Oswald', sans-serif; 
-            /* Reducimos de 1.1rem a 1rem */
-            font-size: 1rem; 
+            font-size: 1.05rem; 
             font-weight: 600; 
             color: #000000; 
             text-transform: uppercase; 
             letter-spacing: -0.3px; 
             line-height: 1.1; 
-            flex: 1; 
-            word-break: break-word; 
+            /* EL TRUCO PARA TÍTULOS LARGOS: corta a las 2 líneas y pone "..." */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
         }
         
         .movie-year { 
             font-family: 'Oswald', sans-serif; 
-            /* Reducimos de 1rem a 0.9rem */
-            font-size: 0.9rem; 
+            font-size: 0.95rem; 
             font-weight: 600; 
             color: #8c8c8c; 
         }
         
         .movie-original-title { 
             font-family: 'Oswald', sans-serif; 
-            /* Reducimos de 0.85rem a 0.75rem */
             font-size: 0.75rem; 
             font-weight: 600; 
             color: #8c8c8c; 
             text-transform: uppercase; 
             letter-spacing: -0.3px; 
-            margin-top: 4px;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Corta el texto original si es muy largo */
         }
-        .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.3rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
-        .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.1rem; color: #333; max-height: 220px; overflow-y: auto; }
-        .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
-        .likes-item span { color: #8c8c8c; }
-        
+
+        /* --- BOTONES --- */
         .buttons { 
-            /* Achicamos el margen de arriba de 25px a 15px */
-            margin-top: 15px; 
+            margin-top: 25px; /* Separación de la tarjeta */
             display: flex; 
-            /* Separación entre botones */
-            gap: 20px; 
-            /* Mismo ancho que la tarjeta para que queden alineados */
-            width: 180px; 
-            /* Los centramos */
+            gap: 25px; 
             justify-content: center; 
-            /* Aseguramos que estén por encima de las tarjetas */
             position: relative; 
-            z-index: 9999; 
+            z-index: 10; 
         }
         
         .btn { 
             border: none; 
-            /* Achicamos de 50px a 45px */
-            width: 45px; 
-            height: 45px; 
+            width: 55px; 
+            height: 55px; 
             border-radius: 50%; 
             cursor: pointer; 
             display: flex; 
@@ -205,17 +203,17 @@
             transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease; 
         }
         
-        /* La animación al tocar (o mantener el mouse encima en compu) */
         .btn:hover, .btn:active { 
-            transform: scale(1.2); /* Crece un 20% */
-            opacity: 1; /* Opacidad al 100% */
-            background-color: rgba(100, 136, 180, 0.1); /* Un fondito sutil para dar feedback */
+            transform: scale(1.2); 
+            opacity: 1; 
+            background-color: rgba(100, 136, 180, 0.1); 
         }
-        
-        /* Ya no necesitamos los colores rojo y verde, pero dejamos las clases por si las usas */
-        .btn-no, .btn-yes { 
-            background-color: transparent; 
-        }
+
+        /* --- RESULTADOS --- */
+        .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.2rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
+        .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1rem; color: #333; max-height: 220px; overflow-y: auto; }
+        .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .likes-item span { color: #8c8c8c; }
     </style>
 </head>
 <body>
@@ -234,13 +232,15 @@
 
     <div class="buttons">
         <button class="btn btn-no" id="rejectBtn">
+            <!-- Ícono X -->
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
         <button class="btn btn-yes" id="acceptBtn">
-            <svg viewBox="0 0 24 24" width="30" height="30" fill="#6488b4" stroke="none">
+            <!-- Ícono Corazón (un poco más grande para equiparar visualmente) -->
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="#6488b4" stroke="none">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
         </button>
@@ -318,15 +318,15 @@
             const hamertime = new Hammer(card);
             hamertime.on('pan', (event) => {
                 card.style.transition = 'none';
-                let rotation = event.deltaX / 10;
+                let rotation = event.deltaX / 15; // Un poco menos de rotación para que sea sutil
                 card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotation}deg)`;
             });
 
             hamertime.on('panend', (event) => {
                 card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-                if (event.deltaX > 120) {
+                if (event.deltaX > 100) { // Reduje un poco la distancia para que sea más fácil deslizar
                     animarSalida(card, 1000, event.deltaY, true);
-                } else if (event.deltaX < -120) {
+                } else if (event.deltaX < -100) {
                     animarSalida(card, -1000, event.deltaY, false);
                 } else {
                     card.style.transform = 'translate(0px, 0px) rotate(0deg)';
