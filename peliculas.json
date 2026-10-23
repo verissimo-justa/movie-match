@@ -5,23 +5,30 @@
     "titulo_original": "기생충",
     "anio": 2019,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "director": "Bong Joon Ho",
+    "pais": "KR",
+    "duracion": 133,
     "activa": true
   },
   {
     "id": 2,
-    "titulo": "Doce hombres en pugna",
+    "titulo": "Doce hombres sin piedad",
     "titulo_original": "12 Angry Men",
     "anio": 1957,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg",
-    "activa": true
+    "director": "Sidney Lumet",
+    "pais": "US",
+    "duracion": 97
   },
   {
     "id": 3,
-    "titulo": "El ocaso de una vida",
+    "titulo": "El crepúsculo de los dioses",
     "titulo_original": "Sunset Boulevard",
     "anio": 1950,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
-    "activa": true
+    "director": "Billy Wilder",
+    "pais": "US",
+    "duracion": 110
   },
   {
     "id": 4,
@@ -29,7 +36,9 @@
     "titulo_original": "",
     "anio": 1967,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg",
-    "activa": true
+    "director": "Jacques Tati",
+    "pais": "FR",
+    "duracion": 115
   },
   {
     "id": 5,
@@ -37,23 +46,29 @@
     "titulo_original": "",
     "anio": 1966,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cl0HEZT8UfzLqaMrYTvGNHOfPYj.jpg",
-    "activa": true
+    "director": "Ingmar Bergman",
+    "pais": "SE",
+    "duracion": 85
   },
   {
     "id": 6,
-    "titulo": "Una mujer bajo influencia",
+    "titulo": "Una mujer bajo la influencia",
     "titulo_original": "A Woman Under the Influence",
     "anio": 1974,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6EJ4JoTxnH1QmGTE9pPzgtW1cLW.jpg",
-    "activa": true
+    "director": "John Cassavetes",
+    "pais": "US",
+    "duracion": 155
   },
   {
     "id": 7,
-    "titulo": "Los 400 golpes",
+    "titulo": "Los cuatrocientos golpes",
     "titulo_original": "Les Quatre Cents Coups",
     "anio": 1959,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/12PuU23kkDLvTd0nb8hMlE3oShB.jpg",
-    "activa": true
+    "director": "François Truffaut",
+    "pais": "FR",
+    "duracion": 99
   },
   {
     "id": 8,
@@ -61,7 +76,9 @@
     "titulo_original": "Trois couleurs : Rouge",
     "anio": 1994,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/JHmsBiX1tjCKqAul1lzC20WcAW.jpg",
-    "activa": true
+    "director": "Krzysztof Kieślowski",
+    "pais": "FR",
+    "duracion": 100
   },
   {
     "id": 9,
@@ -69,23 +86,29 @@
     "titulo_original": "",
     "anio": 1967,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bBf0N1kNQGr6btlO9F66VAV1moz.jpg",
-    "activa": true
+    "director": "František Vláčil",
+    "pais": "XC",
+    "duracion": 166
   },
   {
     "id": 10,
-    "titulo": "Haz lo correcto",
+    "titulo": "Haz lo que debas",
     "titulo_original": "Do the Right Thing",
     "anio": 1989,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
-    "activa": true
+    "director": "Spike Lee",
+    "pais": "US",
+    "duracion": 120
   },
   {
     "id": 11,
-    "titulo": "El ciudadano",
+    "titulo": "Ciudadano Kane",
     "titulo_original": "Citizen Kane",
     "anio": 1941,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
-    "activa": true
+    "director": "Orson Welles",
+    "pais": "US",
+    "duracion": 119
   },
   {
     "id": 12,
@@ -93,7 +116,9 @@
     "titulo_original": "Sans toit ni loi",
     "anio": 1985,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2KFfwiPct1hwqi9dkKqoom0BenC.jpg",
-    "activa": true
+    "director": "Agnès Varda",
+    "pais": "FR",
+    "duracion": 106
   },
   {
     "id": 13,
@@ -101,7 +126,9 @@
     "titulo_original": "Le Samouraï",
     "anio": 1967,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5Fa6o5nfUPEatQ9b3OwEvdEdR7T.jpg",
-    "activa": true
+    "director": "Jean-Pierre Melville",
+    "pais": "FR",
+    "duracion": 105
   },
   {
     "id": 14,
@@ -109,7 +136,9 @@
     "titulo_original": "Les Yeux sans visage",
     "anio": 1960,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/8y7Z9Gvcq52uOlJlUWyn2epGGRd.jpg",
-    "activa": true
+    "director": "Georges Franju",
+    "pais": "FR",
+    "duracion": 84
   },
   {
     "id": 15,
@@ -117,7 +146,9 @@
     "titulo_original": "重慶森林",
     "anio": 1994,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/43I9DcNoCzpyzK8JCkJYpHqHqGG.jpg",
-    "activa": true
+    "director": "Wong Kar-wai",
+    "pais": "HK",
+    "duracion": 102
   },
   {
     "id": 16,
@@ -125,7 +156,9 @@
     "titulo_original": "",
     "anio": 1973,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kS7i093sQpkLTawUEdgf4HVOHSc.jpg",
-    "activa": true
+    "director": "Federico Fellini",
+    "pais": "IT",
+    "duracion": 123
   },
   {
     "id": 17,
@@ -133,30 +166,39 @@
     "titulo_original": "Il conformista",
     "anio": 1970,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nLJjFRqIJAK8qz0OKYnpKCblZNK.jpg",
-    "activa": true
+    "director": "Bernardo Bertolucci",
+    "pais": "DE",
+    "duracion": 108
   },
   {
     "id": 18,
-    "titulo": "Somos una familia",
+    "titulo": "Un asunto de familia",
     "titulo_original": "万引き家族",
     "anio": 2018,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/4nfRUOv3LX5zLn98WS1WqVBk9E9.jpg",
-    "activa": true
+    "director": "Hirokazu Kore-eda",
+    "pais": "JP",
+    "duracion": 120
   },
   {
     "id": 19,
     "titulo": "El manuscrito encontrado en Zaragoza",
     "titulo_original": "Rękopis znaleziony w Saragossie",
     "anio": 1965,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3P8g5U4gbifjM2lnqSpZogh7FrD.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3P8g5U4gbifjM2lnqSpZogh7FrD.jpg",
+    "director": "Wojciech Has",
+    "pais": "PL",
+    "duracion": 183
   },
   {
     "id": 20,
-    "titulo": "Tres rostros para el miedo",
+    "titulo": "El fotógrafo del pánico",
     "titulo_original": "Peeping Tom",
     "anio": 1960,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kM4AfLIlbcuRZ621vYjyeBFkuba.jpg",
-    "activa": true
+    "director": "Michael Powell",
+    "pais": "GB",
+    "duracion": 101
   },
   {
     "id": 21,
@@ -164,15 +206,19 @@
     "titulo_original": "Viskningar och rop",
     "anio": 1972,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/a1bMgB09YDvvRN9SitCclUYragr.jpg",
-    "activa": true
+    "director": "Ingmar Bergman",
+    "pais": "SE",
+    "duracion": 95
   },
   {
     "id": 22,
-    "titulo": "Anatomía de un crimen",
+    "titulo": "Anatomía de un asesinato",
     "titulo_original": "Anatomy of a Murder",
     "anio": 1959,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b2G1QSAwtBv9luhEwErIgSRaU92.jpg",
-    "activa": true
+    "director": "Otto Preminger",
+    "pais": "US",
+    "duracion": 161
   },
   {
     "id": 23,
@@ -180,7 +226,9 @@
     "titulo_original": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
     "anio": 1975,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fqfSu8Y1YSVFkoCJyiTXI6woYma.jpg",
-    "activa": true
+    "director": "Chantal Akerman",
+    "pais": "BE",
+    "duracion": 202
   },
   {
     "id": 24,
@@ -188,7 +236,9 @@
     "titulo_original": "시",
     "anio": 2010,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5RS3zovYbHdpZqLqyEOr24qWKwf.jpg",
-    "activa": true
+    "director": "Lee Chang-dong",
+    "pais": "KR",
+    "duracion": 139
   },
   {
     "id": 25,
@@ -196,307 +246,255 @@
     "titulo_original": "Blue Velvet",
     "anio": 1986,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6v1zYh2FKOYVddY5pCQhd4PO9uX.jpg",
-    "activa": true
+    "director": "David Lynch",
+    "pais": "US",
+    "duracion": 120
   },
   {
     "id": 26,
     "titulo": "Network, un mundo implacable",
     "titulo_original": "Network",
     "anio": 1976,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg",
+    "director": "Sidney Lumet",
+    "pais": "US",
+    "duracion": 122
   },
   {
     "id": 27,
     "titulo": "Buen trabajo",
     "titulo_original": "Beau Travail",
     "anio": 1999,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5ySa1aQaT7kMcAbKwlS1HXxp2hM.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5ySa1aQaT7kMcAbKwlS1HXxp2hM.jpg",
+    "director": "Claire Denis",
+    "pais": "FR",
+    "duracion": 93
   },
   {
     "id": 28,
     "titulo": "El odio",
     "titulo_original": "La Haine",
     "anio": 1995,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/OHdz4GxlkcdLubyo7bSoIBkibu.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/OHdz4GxlkcdLubyo7bSoIBkibu.jpg",
+    "director": "Mathieu Kassovitz",
+    "pais": "FR",
+    "duracion": 98
   },
   {
     "id": 29,
     "titulo": "La mamá y la puta",
     "titulo_original": "La Maman et la Putain",
     "anio": 1973,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/qUBmGLgADWnWd7SCCl3KR7EggKj.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/qUBmGLgADWnWd7SCCl3KR7EggKj.jpg",
+    "director": "Jean Eustache",
+    "pais": "FR",
+    "duracion": 219
   },
   {
     "id": 30,
     "titulo": "La felicidad",
     "titulo_original": "Le Bonheur",
     "anio": 1965,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nNW4ewpsqxEQQoHXv4PAUsFuDmd.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nNW4ewpsqxEQQoHXv4PAUsFuDmd.jpg",
+    "director": "Agnès Varda",
+    "pais": "FR",
+    "duracion": 80
   },
   {
     "id": 31,
     "titulo": "Las diabólicas",
     "titulo_original": "Les Diaboliques",
     "anio": 1955,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/jE8ygUYBUGyUcM4sR6iinPqYeDK.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/jE8ygUYBUGyUcM4sR6iinPqYeDK.jpg",
+    "director": "Henri-Georges Clouzot",
+    "pais": "FR",
+    "duracion": 118
   },
   {
     "id": 32,
     "titulo": "Bella de día",
     "titulo_original": "Belle de jour",
     "anio": 1967,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/iUAFECovwPA0cVV9bo4uNGLJSGL.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/iUAFECovwPA0cVV9bo4uNGLJSGL.jpg",
+    "director": "Luis Buñuel",
+    "pais": "FR",
+    "duracion": 101
   },
   {
     "id": 33,
     "titulo": "Investigación sobre un ciudadano libre de toda sospecha",
     "titulo_original": "Indagine su un cittadino al di sopra di ogni sospetto",
     "anio": 1970,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/vPTZwlq1IC4o1DCsEZEl2uGljzm.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/vPTZwlq1IC4o1DCsEZEl2uGljzm.jpg",
+    "director": "Elio Petri",
+    "pais": "IT",
+    "duracion": 111
   },
   {
     "id": 34,
     "titulo": "Días perfectos",
     "titulo_original": "PERFECT DAYS",
     "anio": 2023,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/tvUHVSTJV9ITON3oyHaWp7oaAc8.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/tvUHVSTJV9ITON3oyHaWp7oaAc8.jpg",
+    "director": "Wim Wenders",
+    "pais": "DE",
+    "duracion": 124
   },
   {
     "id": 35,
     "titulo": "Welt Am Draht",
     "titulo_original": "",
     "anio": 1973,
-    "poster": null
+    "poster": null,
+    "director": "",
+    "pais": "",
+    "duracion": 0
   },
   {
     "id": 36,
     "titulo": "Walkabout",
     "titulo_original": "",
     "anio": 1971,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/24vooYt5StgtgcQObVr1GHuM5gy.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/24vooYt5StgtgcQObVr1GHuM5gy.jpg",
+    "director": "Nicolas Roeg",
+    "pais": "US",
+    "duracion": 95
   },
   {
     "id": 37,
     "titulo": "Dos días, una noche",
     "titulo_original": "Deux jours, une nuit",
     "anio": 2014,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2qpZZ5a5Axpk8OeCtrvNTQfJiB2.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2qpZZ5a5Axpk8OeCtrvNTQfJiB2.jpg",
+    "director": "Jean-Pierre Dardenne",
+    "pais": "BE",
+    "duracion": 95
   },
   {
     "id": 38,
     "titulo": "A la izquierda del padre",
     "titulo_original": "Lavoura Arcaica",
     "anio": 2001,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/u6Bz2BnPnuCgT6koT4LeiCUNJQi.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/u6Bz2BnPnuCgT6koT4LeiCUNJQi.jpg",
+    "director": "Luiz Fernando Carvalho",
+    "pais": "BR",
+    "duracion": 171
   },
   {
     "id": 39,
     "titulo": "Aquarius",
     "titulo_original": "",
     "anio": 2016,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b4BA2Kkp1x82FP4pQZWXcpCCjiI.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b4BA2Kkp1x82FP4pQZWXcpCCjiI.jpg",
+    "director": "Timofey Zhalnin",
+    "pais": "RU",
+    "duracion": 9
   },
   {
     "id": 40,
     "titulo": "Safe",
     "titulo_original": "",
     "anio": 1995,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2O71QsBkbqdLqQdx2yuNpJ4pFPq.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2O71QsBkbqdLqQdx2yuNpJ4pFPq.jpg",
+    "director": "Todd Haynes",
+    "pais": "GB",
+    "duracion": 119
   },
   {
     "id": 41,
     "titulo": "Anatomía de una caída",
     "titulo_original": "Anatomie d'une chute",
     "anio": 2023,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1ho0d4LNZw3Y0voeKmSvPSgJOJ2.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1ho0d4LNZw3Y0voeKmSvPSgJOJ2.jpg",
+    "director": "Justine Triet",
+    "pais": "FR",
+    "duracion": 151
   },
   {
     "id": 42,
     "titulo": "Roma. Ciudad abierta",
     "titulo_original": "Roma città aperta",
     "anio": 1945,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/ijGV4v8JxgbNzgEhqKdzHdaZn8a.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/ijGV4v8JxgbNzgEhqKdzHdaZn8a.jpg",
+    "director": "Roberto Rossellini",
+    "pais": "IT",
+    "duracion": 104
   },
   {
     "id": 43,
     "titulo": "La noche",
     "titulo_original": "La notte",
     "anio": 1961,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/xkd7wPJSIC76scBRHCFZ85uOH5d.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/xkd7wPJSIC76scBRHCFZ85uOH5d.jpg",
+    "director": "Michelangelo Antonioni",
+    "pais": "IT",
+    "duracion": 122
   },
   {
     "id": 44,
     "titulo": "Hana-bi: Flores de fuego",
     "titulo_original": "HANA-BI",
     "anio": 1997,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bWIo1nDJnSyGJvVt8bRw8PHBqo4.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bWIo1nDJnSyGJvVt8bRw8PHBqo4.jpg",
+    "director": "Takeshi Kitano",
+    "pais": "JP",
+    "duracion": 103
   },
   {
     "id": 45,
     "titulo": "La calle de la vergüenza",
     "titulo_original": "赤線地帯",
     "anio": 1956,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eVKXkGG9xQiVj9kTt9PbdxJJoKS.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eVKXkGG9xQiVj9kTt9PbdxJJoKS.jpg",
+    "director": "Kenji Mizoguchi",
+    "pais": "JP",
+    "duracion": 87
   },
   {
     "id": 46,
     "titulo": "Desaparecida",
     "titulo_original": "Spoorloos",
     "anio": 1988,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eE5bbuRJluooG2MjEAsLEYyuJoa.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eE5bbuRJluooG2MjEAsLEYyuJoa.jpg",
+    "director": "George Sluizer",
+    "pais": "NL",
+    "duracion": 106
   },
   {
     "id": 47,
     "titulo": "Cold War",
     "titulo_original": "Zimna wojna",
     "anio": 2018,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6rbS8oPIgUMhQgIX8oGVTtlNgLR.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6rbS8oPIgUMhQgIX8oGVTtlNgLR.jpg",
+    "director": "Paweł Pawlikowski",
+    "pais": "PL",
+    "duracion": 88
   },
   {
     "id": 48,
     "titulo": "If...",
     "titulo_original": "if....",
     "anio": 1968,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/oqlpAGq4aXhc6ODtxBcGM1SEoIp.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/oqlpAGq4aXhc6ODtxBcGM1SEoIp.jpg",
+    "director": "Lindsay Anderson",
+    "pais": "GB",
+    "duracion": 112
   },
   {
     "id": 49,
     "titulo": "El sirviente",
     "titulo_original": "The Servant",
     "anio": 1963,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/pRa4og93BeOoMCt6oWuPCwu5Coo.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/pRa4og93BeOoMCt6oWuPCwu5Coo.jpg",
+    "director": "Joseph Losey",
+    "pais": "GB",
+    "duracion": 116
   },
   {
     "id": 50,
     "titulo": "Suspense",
     "titulo_original": "The Innocents",
     "anio": 1961,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/idqvLBmlEHUITMnQ0EJ6Yb5TpVw.jpg"
-  },
-  {
-    "id": 51,
-    "titulo": "4 meses, 3 semanas, 2 días",
-    "titulo_original": "4 luni, 3 săptămâni și 2 zile",
-    "anio": 2007,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/acEtvzFPeOQwbzRWncjRLenhnKV.jpg"
-  },
-  {
-    "id": 52,
-    "titulo": "Sala de profesores",
-    "titulo_original": "Das Lehrerzimmer",
-    "anio": 2023,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kWXA6PfQ0PpZpoCXoeBFRciRrUw.jpg"
-  },
-  {
-    "id": 53,
-    "titulo": "Zama",
-    "titulo_original": "",
-    "anio": 2017,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kpp9R6iYKSIXxfyW0feVYrk0jsg.jpg"
-  },
-  {
-    "id": 54,
-    "titulo": "El aura",
-    "titulo_original": "",
-    "anio": 2005,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/waaFS27AOSt2JvKMZyFi9m7uGKY.jpg"
-  },
-  {
-    "id": 55,
-    "titulo": "Arrebato",
-    "titulo_original": "",
-    "anio": 1979,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rJlEhLIVsQHPi2uVM26VK0in9hG.jpg"
-  },
-  {
-    "id": 56,
-    "titulo": "Teorema",
-    "titulo_original": "",
-    "anio": 1968,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/wftXxZPCduFbv9TsVRZfCy2qDsn.jpg"
-  },
-  {
-    "id": 57,
-    "titulo": "Funeral Parade of Roses",
-    "titulo_original": "薔薇の葬列",
-    "anio": 1969,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7cRQ6rSGajW2soWDr3voEN2rgYO.jpg"
-  },
-  {
-    "id": 58,
-    "titulo": "Fish Tank",
-    "titulo_original": "",
-    "anio": 2009,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rI3MKBDsWzQHi9PWDAMKkgmYcff.jpg"
-  },
-  {
-    "id": 59,
-    "titulo": "Los misterios del organismo",
-    "titulo_original": "W.R. - Misterije organizma",
-    "anio": 1971,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/k0TNEVnIUgMIQrkcBasprdZh5Bz.jpg"
-  },
-  {
-    "id": 60,
-    "titulo": "Bacurau",
-    "titulo_original": "",
-    "anio": 2019,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/tBa4zMGzZUco26XT3WfZZCwQ76i.jpg"
-  },
-  {
-    "id": 61,
-    "titulo": "Una mujer fantástica",
-    "titulo_original": "",
-    "anio": 2017,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/x2yNruMR8bAJOIQ3wd7HR9qWjW3.jpg"
-  },
-  {
-    "id": 62,
-    "titulo": "Memoria",
-    "titulo_original": "",
-    "anio": 2021,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/mkJl2dVJnPgWAALCuIXJ61TlwHf.jpg"
-  },
-  {
-    "id": 63,
-    "titulo": "Primavera, verano, otoño, invierno... y primavera",
-    "titulo_original": "봄 여름 가을 겨울 그리고 봄",
-    "anio": 2003,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6SQQ5REuAz7k0FMQ9mSCT40T2LN.jpg"
-  },
-  {
-    "id": 64,
-    "titulo": "Los colonos",
-    "titulo_original": "",
-    "anio": 2023,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1IwpJK6AyUmdJRnphBQFBLwVfRd.jpg"
-  },
-  {
-    "id": 65,
-    "titulo": "Güeros",
-    "titulo_original": "",
-    "anio": 2014,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7JRxlC4CjaKeLN57mDK52uvkmIv.jpg"
-  },
-  {
-    "id": 66,
-    "titulo": "Ghost World",
-    "titulo_original": "",
-    "anio": 2001,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uwKqnUPE4dSM0kKuMW0vXpURh2T.jpg"
-  },
-  {
-    "id": 67,
-    "titulo": "An Education",
-    "titulo_original": "",
-    "anio": 2009,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/gLIvvUdlocGjm8XVLxhWHAKWrRq.jpg"
-  },
-  {
-    "id": 68,
-    "titulo": "La luz incidente",
-    "titulo_original": "",
-    "anio": 2015,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4QxGvJO8.jpg"
-  }
-]
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/idqvLBmlEHUITMnQ0EJ6Yb5TpVw.jpg",
+    "director": "Jack Clayton",
+    "p
