@@ -5,14 +5,14 @@
     "titulo_original": "기생충",
     "anio": 2019,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
-    "director": "Bong Joon Ho",
+    "director": "Joon-Ho Bong",
     "pais": "KR",
     "duracion": 133,
     "activa": true
   },
   {
     "id": 2,
-    "titulo": "Doce hombres sin piedad",
+    "titulo": "Doce hombres en pugna",
     "titulo_original": "12 Angry Men",
     "anio": 1957,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg",
@@ -23,7 +23,7 @@
   },
   {
     "id": 3,
-    "titulo": "El crepúsculo de los dioses",
+    "titulo": "El ocaso de una vida",
     "titulo_original": "Sunset Boulevard",
     "anio": 1950,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
@@ -56,7 +56,7 @@
   },
   {
     "id": 6,
-    "titulo": "Una mujer bajo la influencia",
+    "titulo": "Una mujer bajo influencia",
     "titulo_original": "A Woman Under the Influence",
     "anio": 1974,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6EJ4JoTxnH1QmGTE9pPzgtW1cLW.jpg",
@@ -67,7 +67,7 @@
   },
   {
     "id": 7,
-    "titulo": "Los cuatrocientos golpes",
+    "titulo": "Los 400 golpes",
     "titulo_original": "Les Quatre Cents Coups",
     "anio": 1959,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/12PuU23kkDLvTd0nb8hMlE3oShB.jpg",
@@ -100,7 +100,7 @@
   },
   {
     "id": 10,
-    "titulo": "Haz lo que debas",
+    "titulo": "Haz lo correcto",
     "titulo_original": "Do the Right Thing",
     "anio": 1989,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
@@ -111,7 +111,7 @@
   },
   {
     "id": 11,
-    "titulo": "Ciudadano Kane",
+    "titulo": "El ciudadano",
     "titulo_original": "Citizen Kane",
     "anio": 1941,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
