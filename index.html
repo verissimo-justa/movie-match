@@ -389,7 +389,26 @@
                 container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
             }
         }
-
+        
+        // Función para abreviar el nombre del director
+        function abreviarNombre(nombreCompleto) {
+            if (!nombreCompleto) return "";
+            
+            return nombreCompleto.split(' ').map((palabra, index, array) => {
+                // Si la palabra empieza con mayúscula y no es la última, la abreviamos
+                if (palabra[0] === palabra[0].toUpperCase() && index < array.length - 1) {
+                    // Si la palabra tiene un guion (ej: Jean-Luc), abrevia ambos lados: J.-L.
+                    if (palabra.includes('-')) {
+                        return palabra.split('-').map(p => p[0] + '.').join('-');
+                    }
+                    // Si es una palabra normal, saca la inicial y un punto
+                    return palabra[0] + '.';
+                }
+                // La última palabra (el apellido) se deja completa
+                return palabra;
+            }).join(' ');
+        }
+        
         function crearTarjeta(movie) {
             const card = document.createElement('div');
             card.classList.add('movie-card');
@@ -433,10 +452,21 @@
                 if (movie.director) partes.push(movie.director);
                 if (movie.pais) partes.push(movie.pais);
                 if (movie.duracion) partes.push(`${movie.duracion} min`);
-                
-                details.textContent = partes.join(' · '); // Separado por un punto medio
-                info.appendChild(details);
-            }
+
+                            // NUEVO: Ficha técnica (Director, País, Duración)
+                if (movie.director || movie.pais || movie.duracion) {
+                    const details = document.createElement('div');
+                    details.className = 'movie-details';
+                    
+                    let partes = [];
+                    // ACÁ USAMOS LA FUNCIÓN: pasamos el director por el abreviador
+                    if (movie.director) partes.push(abreviarNombre(movie.director)); 
+                    if (movie.pais) partes.push(movie.pais);
+                    if (movie.duracion) partes.push(`${movie.duracion} min`);
+    
+                    details.textContent = partes.join(' · '); // Separado por un punto medio
+                    info.appendChild(details);
+                }
 
             card.appendChild(img);
             card.appendChild(info);
