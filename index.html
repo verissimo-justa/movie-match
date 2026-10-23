@@ -211,6 +211,42 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        
+        .tinder-container.finalizado {
+            box-shadow: none;
+            border: none;
+            background: transparent;
+        }
+
+        /* La lista de películas elegidas (más larga) */
+        .likes-list { 
+            text-align: left; 
+            background: white; 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-top: 15px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            font-family: 'Oswald', sans-serif; 
+            text-transform: uppercase; 
+            font-size: 1rem; 
+            color: #333; 
+            /* ACÁ LA HACEMOS MÁS LARGA: de 220px a 300px */
+            max-height: 300px; 
+            overflow-y: auto; 
+            /* Un pequeño padding extra abajo para que la flechita no tape el texto */
+            padding-bottom: 25px; 
+            position: relative; /* Para posicionar la flechita */
+        }
+
+        /* El ícono de la flechita hacia abajo */
+        .flecha-abajo {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
 
         /* --- BOTONES +10% --- */
         .buttons {
