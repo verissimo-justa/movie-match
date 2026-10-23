@@ -90,12 +90,37 @@
         }
 
         /* --- CONTENEDOR DE TARJETAS --- */
+        /* --- CARRUSEL WRAPPER Y FLECHAS --- */
+        .carrusel-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px; /* Espacio entre la flecha y la tarjeta */
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .flecha-lateral {
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px; /* Para que sea fácil de tocar */
+        }
+
+        .flecha-lateral:active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Achicamos un poquito la tarjeta para que entren las flechas */
         .tinder-container {
             position: relative;
-            width: 240px;  
+            width: 220px; /* Antes 240px, ahora es un poquito más chica */
             height: 400px; 
             overflow: hidden; 
-            margin: 0 auto; 
             border-radius: 16px; 
         }
 
@@ -230,8 +255,41 @@
     <!-- Este subtítulo es el que va a cambiar a "Película 1 de X" -->
     <div class="subtitle">pensamos el cine</div>
 
-    <div class="tinder-container" id="cardContainer"></div>
+<body>
 
+    <!-- Pantalla de Login (no se toca) -->
+    <div class="login-screen" id="loginScreen">
+        <h1>cam match</h1>
+        <div class="subtitle">pensamos el cine</div>
+        <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15">
+        <button id="loginBtn">Ingresar</button>
+    </div>
+
+    <!-- Título y subtítulo -->
+    <h1>cam match</h1>
+    <div class="subtitle">pensamos el cine</div>
+
+    <!-- ACÁ VA LA MAGIA: El contenedor con las flechas laterales -->
+    <div class="carrusel-wrapper">
+        <!-- Flecha Izquierda -->
+        <div class="flecha-lateral" id="flechaIzq">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </div>
+
+        <!-- La caja donde van las tarjetas -->
+        <div class="tinder-container" id="cardContainer"></div>
+
+        <!-- Flecha Derecha -->
+        <div class="flecha-lateral" id="flechaDer">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Los botones de IN / OUT se quedan acá abajo intactos -->
     <div class="buttons">
         <button class="btn btn-no" id="rejectBtn">
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -245,6 +303,8 @@
             </svg>
         </button>
     </div>
+    
+    <!-- Acá sigue tu etiqueta <script> -->
     
     <script>
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
@@ -285,6 +345,7 @@
         function cargarTarjetas(listaPeliculas) {
             container.innerHTML = ""; 
             window.listaPeliculas = listaPeliculas; 
+            tarjetaActualIndex = 0; // Reiniciamos el índice
 
             listaPeliculas.forEach((movie, index) => {
                 const card = document.createElement('div');
@@ -292,7 +353,11 @@
                 card.setAttribute('data-id', movie.id);
                 card.setAttribute('data-titulo', movie.titulo);
                 card.setAttribute('data-anio', movie.anio);
+                
+                // Posicionamos cada tarjeta exactamente al lado de la otra
                 card.style.left = `${index * 100}%`; 
+                // Y las movemos para que la primera quede centrada
+                card.style.transform = `translateX(${-tarjetaActualIndex * 100}%)`;
                 
                 const tituloOriginal = movie.titulo_original; 
                 const displayOriginal = tituloOriginal ? "block" : "none";
@@ -320,34 +385,68 @@
             const tarjetas = container.querySelectorAll('.movie-card');
             
             tarjetas.forEach(card => {
+                card.style.transition = 'transform 0.3s ease';
                 card.style.transform = `translateX(${offset}%)`;
             });
 
-            // Actualizamos el subtítulo con el indicador
+            // Actualizamos el subtítulo
             const subtitulo = document.querySelector('.subtitle');
             if(subtitulo && window.listaPeliculas.length > 0) {
                 subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${window.listaPeliculas.length}`;
                 subtitulo.style.fontWeight = "bold";
                 subtitulo.style.color = "#6488b4";
             }
+
+            // Opacidad de las flechas (se apagan si no hay más para donde ir)
+            document.getElementById('flechaIzq').style.opacity = tarjetaActualIndex === 0 ? "0.1" : "0.5";
+            document.getElementById('flechaDer').style.opacity = tarjetaActualIndex === window.listaPeliculas.length - 1 ? "0.1" : "0.5";
         }
 
         function configurarGestosCarrusel() {
-            const hamertime = new Hammer(container);
+            // EL SECRETO ESTÁ ACÁ: Forzamos a Hammer a usar Touch y Mouse
+            const hamertime = new Hammer(container, { inputClass: Hammer.TouchMouseInput });
             
+            hamertime.on('pan', (event) => {
+                // Feedback visual mientras arrastra
+                const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.2); 
+                const tarjetas = container.querySelectorAll('.movie-card');
+                tarjetas.forEach(card => {
+                    card.style.transition = 'none';
+                    card.style.transform = `translateX(${offset}%)`;
+                });
+            });
+
             hamertime.on('panend', (event) => {
-                if (event.deltaX > 50) {
+                // Volvemos a poner la transición suave
+                const tarjetas = container.querySelectorAll('.movie-card');
+                tarjetas.forEach(card => card.style.transition = 'transform 0.3s ease');
+
+                if (event.deltaX > 40) {
+                    // Deslizó a la derecha (película anterior)
                     if (tarjetaActualIndex > 0) {
                         tarjetaActualIndex--;
-                        actualizarCarrusel();
                     }
-                } else if (event.deltaX < -50) {
+                    actualizarCarrusel();
+                } else if (event.deltaX < -40) {
+                    // Deslizó a la izquierda (siguiente película)
                     if (tarjetaActualIndex < window.listaPeliculas.length - 1) {
                         tarjetaActualIndex++;
-                        actualizarCarrusel();
                     }
+                    actualizarCarrusel();
+                } else {
+                    // Si no deslizó lo suficiente, vuelve a su lugar
+                    actualizarCarrusel();
                 }
             });
+
+            // Conectamos las flechas a los mismos movimientos
+            document.getElementById('flechaIzq').onclick = () => {
+                if (tarjetaActualIndex > 0) { tarjetaActualIndex--; actualizarCarrusel(); }
+            };
+            document.getElementById('flechaDer').onclick = () => {
+                if (tarjetaActualIndex < window.listaPeliculas.length - 1) { tarjetaActualIndex++; actualizarCarrusel(); }
+            };
+        }
 
             hamertime.on('pan', (event) => {
                 const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.4);
