@@ -89,7 +89,6 @@
             font-weight: bold;
         }
 
-        /* --- CONTENEDOR DE TARJETAS --- */
         /* --- CARRUSEL WRAPPER Y FLECHAS --- */
         .carrusel-wrapper {
             display: flex;
@@ -205,7 +204,7 @@
 
         /* --- BOTONES --- */
         .buttons { 
-            margin-top: 15px; /* Achicado para que entre mejor con el texto del subtítulo */
+            margin-top: 15px; 
             display: flex; 
             gap: 25px; 
             justify-content: center; 
@@ -244,20 +243,7 @@
 </head>
 <body>
 
-    <div class="login-screen" id="loginScreen">
-        <h1>cam match</h1>
-        <div class="subtitle">pensamos el cine</div>
-        <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15">
-        <button id="loginBtn">Ingresar</button>
-    </div>
-
-    <h1>cam match</h1>
-    <!-- Este subtítulo es el que va a cambiar a "Película 1 de X" -->
-    <div class="subtitle">pensamos el cine</div>
-
-<body>
-
-    <!-- Pantalla de Login (no se toca) -->
+    <!-- Pantalla de Login -->
     <div class="login-screen" id="loginScreen">
         <h1>cam match</h1>
         <div class="subtitle">pensamos el cine</div>
@@ -269,7 +255,7 @@
     <h1>cam match</h1>
     <div class="subtitle">pensamos el cine</div>
 
-    <!-- ACÁ VA LA MAGIA: El contenedor con las flechas laterales -->
+    <!-- Contenedor con las flechas laterales -->
     <div class="carrusel-wrapper">
         <!-- Flecha Izquierda -->
         <div class="flecha-lateral" id="flechaIzq">
@@ -289,7 +275,7 @@
         </div>
     </div>
 
-    <!-- Los botones de IN / OUT se quedan acá abajo intactos -->
+    <!-- Los botones de IN / OUT -->
     <div class="buttons">
         <button class="btn btn-no" id="rejectBtn">
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -303,8 +289,6 @@
             </svg>
         </button>
     </div>
-    
-    <!-- Acá sigue tu etiqueta <script> -->
     
     <script>
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
@@ -345,7 +329,7 @@
         function cargarTarjetas(listaPeliculas) {
             container.innerHTML = ""; 
             window.listaPeliculas = listaPeliculas; 
-            tarjetaActualIndex = 0; // Reiniciamos el índice
+            tarjetaActualIndex = 0;
 
             listaPeliculas.forEach((movie, index) => {
                 const card = document.createElement('div');
@@ -354,9 +338,7 @@
                 card.setAttribute('data-titulo', movie.titulo);
                 card.setAttribute('data-anio', movie.anio);
                 
-                // Posicionamos cada tarjeta exactamente al lado de la otra
                 card.style.left = `${index * 100}%`; 
-                // Y las movemos para que la primera quede centrada
                 card.style.transform = `translateX(${-tarjetaActualIndex * 100}%)`;
                 
                 const tituloOriginal = movie.titulo_original; 
@@ -389,7 +371,6 @@
                 card.style.transform = `translateX(${offset}%)`;
             });
 
-            // Actualizamos el subtítulo
             const subtitulo = document.querySelector('.subtitle');
             if(subtitulo && window.listaPeliculas.length > 0) {
                 subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${window.listaPeliculas.length}`;
@@ -397,17 +378,14 @@
                 subtitulo.style.color = "#6488b4";
             }
 
-            // Opacidad de las flechas (se apagan si no hay más para donde ir)
             document.getElementById('flechaIzq').style.opacity = tarjetaActualIndex === 0 ? "0.1" : "0.5";
             document.getElementById('flechaDer').style.opacity = tarjetaActualIndex === window.listaPeliculas.length - 1 ? "0.1" : "0.5";
         }
 
         function configurarGestosCarrusel() {
-            // EL SECRETO ESTÁ ACÁ: Forzamos a Hammer a usar Touch y Mouse
             const hamertime = new Hammer(container, { inputClass: Hammer.TouchMouseInput });
             
             hamertime.on('pan', (event) => {
-                // Feedback visual mientras arrastra
                 const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.2); 
                 const tarjetas = container.querySelectorAll('.movie-card');
                 tarjetas.forEach(card => {
@@ -417,45 +395,26 @@
             });
 
             hamertime.on('panend', (event) => {
-                // Volvemos a poner la transición suave
                 const tarjetas = container.querySelectorAll('.movie-card');
                 tarjetas.forEach(card => card.style.transition = 'transform 0.3s ease');
 
                 if (event.deltaX > 40) {
-                    // Deslizó a la derecha (película anterior)
-                    if (tarjetaActualIndex > 0) {
-                        tarjetaActualIndex--;
-                    }
+                    if (tarjetaActualIndex > 0) tarjetaActualIndex--;
                     actualizarCarrusel();
                 } else if (event.deltaX < -40) {
-                    // Deslizó a la izquierda (siguiente película)
-                    if (tarjetaActualIndex < window.listaPeliculas.length - 1) {
-                        tarjetaActualIndex++;
-                    }
+                    if (tarjetaActualIndex < window.listaPeliculas.length - 1) tarjetaActualIndex++;
                     actualizarCarrusel();
                 } else {
-                    // Si no deslizó lo suficiente, vuelve a su lugar
                     actualizarCarrusel();
                 }
             });
 
-            // Conectamos las flechas a los mismos movimientos
             document.getElementById('flechaIzq').onclick = () => {
                 if (tarjetaActualIndex > 0) { tarjetaActualIndex--; actualizarCarrusel(); }
             };
             document.getElementById('flechaDer').onclick = () => {
                 if (tarjetaActualIndex < window.listaPeliculas.length - 1) { tarjetaActualIndex++; actualizarCarrusel(); }
             };
-        }
-
-            hamertime.on('pan', (event) => {
-                const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.4);
-                const tarjetas = container.querySelectorAll('.movie-card');
-                tarjetas.forEach(card => {
-                    card.style.transition = 'none';
-                    card.style.transform = `translateX(${offset}%)`;
-                });
-            });
         }
 
         function decidirPelicula(esLike) {
@@ -488,7 +447,6 @@
 
                 if (window.listaPeliculas.length === 0) {
                     finalizarVotacion();
-                    // Restauramos el subtítulo original
                     document.querySelector('.subtitle').innerText = "pensamos el cine";
                     document.querySelector('.subtitle').style.fontWeight = "400";
                     document.querySelector('.subtitle').style.color = "#222222";
