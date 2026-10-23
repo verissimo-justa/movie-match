@@ -127,10 +127,32 @@
             background: #ffffff; 
         }
         .movie-title-row { display: flex; align-items: baseline; justify-content: flex-start; gap: 8px; width: 100%; margin-bottom: 2px; }
-        .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: -0.3px; line-height: 1.1; }
-        .movie-year { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; color: #8c8c8c; }
-        .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #8c8c8c; text-transform: uppercase; letter-spacing: -0.3px; }
+        .movie-title { 
+            font-family: 'Oswald', sans-serif; 
+            font-size: 1.1rem; /* Antes 1.4rem */
+            font-weight: 600; 
+            color: #000000; 
+            text-transform: uppercase; 
+            letter-spacing: -0.3px; 
+            line-height: 1.1; 
+        }
         
+        .movie-year { 
+            font-family: 'Oswald', sans-serif; 
+            font-size: 1rem; /* Antes 1.2rem */
+            font-weight: 600; 
+            color: #8c8c8c; 
+        }
+        
+        .movie-original-title { 
+            font-family: 'Oswald', sans-serif; 
+            font-size: 0.85rem; /* Antes 1.1rem */
+            font-weight: 600; 
+            color: #8c8c8c; 
+            text-transform: uppercase; 
+            letter-spacing: -0.3px; 
+            margin-top: 4px;
+        }
         .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.3rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
         .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.1rem; color: #333; max-height: 220px; overflow-y: auto; }
         .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
@@ -144,8 +166,8 @@
         
         .btn { 
             border: none; 
-            width: 65px; /* Un poco más grandes para que respiren los SVG */
-            height: 65px; 
+            width: 50px; 
+            height: 50px; 
             border-radius: 50%; 
             cursor: pointer; 
             display: flex; 
