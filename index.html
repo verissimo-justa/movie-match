@@ -305,6 +305,9 @@
                 const tituloOriginal = movie.titulo_original || movie.titulo;
                 const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
                 
+                // Si el titulo_original está vacío, creamos la etiqueta con un display:none
+                const displayOriginal = tituloOriginal ? "block" : "none";
+
                 card.innerHTML = `
                     <img src="${urlPoster}" alt="${movie.titulo}">
                     <div class="movie-info">
@@ -312,13 +315,9 @@
                             <span class="movie-title">${movie.titulo}</span>
                             <span class="movie-year">${movie.anio}</span>
                         </div>
-                        <div class="movie-original-title">${tituloOriginal}</div>
+                        <div class="movie-original-title" style="display: ${displayOriginal};">${tituloOriginal}</div>
                     </div>
                 `;
-                container.appendChild(card);
-                configurarGesto(card);
-            });
-        }
 
         function configurarGesto(card) {
             const hamertime = new Hammer(card);
