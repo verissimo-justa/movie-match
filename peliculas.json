@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "titulo": "Doce hombres sin piedad",
+    "titulo": "Doce hombres en pugna",
     "titulo_original": "12 Angry Men",
     "anio": 1957,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg",
@@ -17,7 +17,7 @@
   },
   {
     "id": 3,
-    "titulo": "El crepúsculo de los dioses",
+    "titulo": "El ocaso de una vida",
     "titulo_original": "Sunset Boulevard",
     "anio": 1950,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "titulo": "Una mujer bajo la influencia",
+    "titulo": "Una mujer bajo influencia",
     "titulo_original": "A Woman Under the Influence",
     "anio": 1974,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6EJ4JoTxnH1QmGTE9pPzgtW1cLW.jpg",
@@ -49,7 +49,7 @@
   },
   {
     "id": 7,
-    "titulo": "Los cuatrocientos golpes",
+    "titulo": "Los 400 golpes",
     "titulo_original": "Les Quatre Cents Coups",
     "anio": 1959,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/12PuU23kkDLvTd0nb8hMlE3oShB.jpg",
@@ -73,7 +73,7 @@
   },
   {
     "id": 10,
-    "titulo": "Haz lo que debas",
+    "titulo": "Haz lo correcto",
     "titulo_original": "Do the Right Thing",
     "anio": 1989,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
@@ -81,7 +81,7 @@
   },
   {
     "id": 11,
-    "titulo": "Ciudadano Kane",
+    "titulo": "El ciudadano",
     "titulo_original": "Citizen Kane",
     "anio": 1941,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
@@ -100,42 +100,48 @@
     "titulo": "El silencio de un hombre",
     "titulo_original": "Le Samouraï",
     "anio": 1967,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5Fa6o5nfUPEatQ9b3OwEvdEdR7T.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5Fa6o5nfUPEatQ9b3OwEvdEdR7T.jpg",
+    "activa": true
   },
   {
     "id": 14,
     "titulo": "Los ojos sin rostro",
     "titulo_original": "Les Yeux sans visage",
     "anio": 1960,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/8y7Z9Gvcq52uOlJlUWyn2epGGRd.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/8y7Z9Gvcq52uOlJlUWyn2epGGRd.jpg",
+    "activa": true
   },
   {
     "id": 15,
     "titulo": "Chungking Express",
     "titulo_original": "重慶森林",
     "anio": 1994,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/43I9DcNoCzpyzK8JCkJYpHqHqGG.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/43I9DcNoCzpyzK8JCkJYpHqHqGG.jpg",
+    "activa": true
   },
   {
     "id": 16,
     "titulo": "Amarcord",
     "titulo_original": "",
     "anio": 1973,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kS7i093sQpkLTawUEdgf4HVOHSc.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kS7i093sQpkLTawUEdgf4HVOHSc.jpg",
+    "activa": true
   },
   {
     "id": 17,
     "titulo": "El conformista",
     "titulo_original": "Il conformista",
     "anio": 1970,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nLJjFRqIJAK8qz0OKYnpKCblZNK.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nLJjFRqIJAK8qz0OKYnpKCblZNK.jpg",
+    "activa": true
   },
   {
     "id": 18,
-    "titulo": "Un asunto de familia",
+    "titulo": "Somos una familia",
     "titulo_original": "万引き家族",
     "anio": 2018,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/4nfRUOv3LX5zLn98WS1WqVBk9E9.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/4nfRUOv3LX5zLn98WS1WqVBk9E9.jpg",
+    "activa": true
   },
   {
     "id": 19,
@@ -143,48 +149,54 @@
     "titulo_original": "Rękopis znaleziony w Saragossie",
     "anio": 1965,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3P8g5U4gbifjM2lnqSpZogh7FrD.jpg"
-  },
+  }
   {
     "id": 20,
-    "titulo": "El fotógrafo del pánico",
+    "titulo": "Tres rostros para el miedo",
     "titulo_original": "Peeping Tom",
     "anio": 1960,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kM4AfLIlbcuRZ621vYjyeBFkuba.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kM4AfLIlbcuRZ621vYjyeBFkuba.jpg",
+    "activa": true
   },
   {
     "id": 21,
     "titulo": "Gritos y susurros",
     "titulo_original": "Viskningar och rop",
     "anio": 1972,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/a1bMgB09YDvvRN9SitCclUYragr.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/a1bMgB09YDvvRN9SitCclUYragr.jpg",
+    "activa": true
   },
   {
     "id": 22,
-    "titulo": "Anatomía de un asesinato",
+    "titulo": "Anatomía de un crimen",
     "titulo_original": "Anatomy of a Murder",
     "anio": 1959,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b2G1QSAwtBv9luhEwErIgSRaU92.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b2G1QSAwtBv9luhEwErIgSRaU92.jpg",
+    "activa": true
   },
   {
     "id": 23,
     "titulo": "Jeanne Dielman, 23 quai du Commerce, 1080 Bruxelles",
     "titulo_original": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
     "anio": 1975,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fqfSu8Y1YSVFkoCJyiTXI6woYma.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fqfSu8Y1YSVFkoCJyiTXI6woYma.jpg",
+    "activa": true
   },
   {
     "id": 24,
     "titulo": "Poesía",
     "titulo_original": "시",
     "anio": 2010,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5RS3zovYbHdpZqLqyEOr24qWKwf.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5RS3zovYbHdpZqLqyEOr24qWKwf.jpg",
+    "activa": true
   },
   {
     "id": 25,
     "titulo": "Terciopelo azul",
     "titulo_original": "Blue Velvet",
     "anio": 1986,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6v1zYh2FKOYVddY5pCQhd4PO9uX.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6v1zYh2FKOYVddY5pCQhd4PO9uX.jpg",
+    "activa": true
   },
   {
     "id": 26,
