@@ -4,84 +4,96 @@
     "titulo": "Parásitos",
     "titulo_original": "기생충",
     "anio": 2019,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "activa": true
   },
   {
     "id": 2,
     "titulo": "Doce hombres sin piedad",
     "titulo_original": "12 Angry Men",
     "anio": 1957,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg",
+    "activa": true
   },
   {
     "id": 3,
     "titulo": "El crepúsculo de los dioses",
     "titulo_original": "Sunset Boulevard",
     "anio": 1950,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
+    "activa": true
   },
   {
     "id": 4,
     "titulo": "Playtime",
     "titulo_original": "",
     "anio": 1967,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg",
+    "activa": true
   },
   {
     "id": 5,
     "titulo": "Persona",
     "titulo_original": "",
     "anio": 1966,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cl0HEZT8UfzLqaMrYTvGNHOfPYj.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cl0HEZT8UfzLqaMrYTvGNHOfPYj.jpg",
+    "activa": true
   },
   {
     "id": 6,
     "titulo": "Una mujer bajo la influencia",
     "titulo_original": "A Woman Under the Influence",
     "anio": 1974,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6EJ4JoTxnH1QmGTE9pPzgtW1cLW.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6EJ4JoTxnH1QmGTE9pPzgtW1cLW.jpg",
+    "activa": true
   },
   {
     "id": 7,
     "titulo": "Los cuatrocientos golpes",
     "titulo_original": "Les Quatre Cents Coups",
     "anio": 1959,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/12PuU23kkDLvTd0nb8hMlE3oShB.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/12PuU23kkDLvTd0nb8hMlE3oShB.jpg",
+    "activa": true
   },
   {
     "id": 8,
     "titulo": "Tres colores: Rojo",
     "titulo_original": "Trois couleurs : Rouge",
     "anio": 1994,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/JHmsBiX1tjCKqAul1lzC20WcAW.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/JHmsBiX1tjCKqAul1lzC20WcAW.jpg",
+    "activa": true
   },
   {
     "id": 9,
     "titulo": "Marketa Lazarová",
     "titulo_original": "",
     "anio": 1967,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bBf0N1kNQGr6btlO9F66VAV1moz.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bBf0N1kNQGr6btlO9F66VAV1moz.jpg",
+    "activa": true
   },
   {
     "id": 10,
     "titulo": "Haz lo que debas",
     "titulo_original": "Do the Right Thing",
     "anio": 1989,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
+    "activa": true
   },
   {
     "id": 11,
     "titulo": "Ciudadano Kane",
     "titulo_original": "Citizen Kane",
     "anio": 1941,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
+    "activa": true
   },
   {
     "id": 12,
     "titulo": "Sin techo ni ley",
     "titulo_original": "Sans toit ni loi",
     "anio": 1985,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2KFfwiPct1hwqi9dkKqoom0BenC.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2KFfwiPct1hwqi9dkKqoom0BenC.jpg",
+    "activa": true
   },
   {
     "id": 13,
