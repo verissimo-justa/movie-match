@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cam match</title>
     
-    <!-- FUENTES: Fraunces, Inter y Oswald -->
+    <!-- FUENTES CORREGIDAS (Fraunces en lugar de Alfa Slab One) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
 
-    <!-- LIBRERÍA: Hammer.js para gestos en celulares -->
-    <script src="./hammer.min.js"></script>
+    <!-- LIBRERÍAS -->
+    <script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -30,10 +30,10 @@
         h1 {
             font-family: 'Fraunces', serif !important;
             font-weight: 400 !important;
-            font-size: 2.5rem; /* Un poco más grande para que se note */
+            font-size: 2.5rem;
             margin-bottom: 0px;
             color: #6488b4; 
-            letter-spacing: -1px; /* Letras un poco más pegadas */
+            letter-spacing: -1px;
             text-align: center;
         }
         .subtitle {
@@ -107,7 +107,6 @@
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; color: #8c8c8c; }
         .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #8c8c8c; text-transform: uppercase; letter-spacing: -0.3px; }
         
-        /* Contenedor de resultados finales */
         .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.3rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
         .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.1rem; color: #333; max-height: 220px; overflow-y: auto; }
         .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
@@ -122,7 +121,6 @@
 </head>
 <body>
 
-    <!-- Pantalla de Login -->
     <div class="login-screen" id="loginScreen">
         <h1>cam match</h1>
         <div class="subtitle">pensamos el cine</div>
@@ -141,10 +139,11 @@
     </div>
 
     <script>
-        // Reemplaza con los datos de tu proyecto (Settings -> API)
+        // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w'; // Ojo: usa la "anon public", NO la service_role
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
         const container = document.getElementById('cardContainer');
         let usuarioActual = "";
         let peliculasElegidas = [];
@@ -165,13 +164,13 @@
                 
                 const peliculasReales = await respuesta.json();
                 
-                // 1. FILTRAMOS: Solo dejamos las que tengan activa: true
+                // Filtramos solo las activas
                 const peliculasActivas = peliculasReales.filter(pelicula => pelicula.activa === true);
                 
-                // 2. MEZCLAMOS: Usamos las películas filtradas
+                // Mezclamos
                 peliculasActivas.sort(() => Math.random() - 0.5);
                 
-                // 3. CARGAMOS
+                // Cargamos
                 cargarTarjetas(peliculasActivas);
             } catch (error) {
                 console.error("Error al cargar:", error);
@@ -190,8 +189,6 @@
                 card.style.zIndex = listaPeliculas.length - index; 
                 
                 const tituloOriginal = movie.titulo_original || movie.titulo;
-                
-                // EL TRUCO ESTÁ AQUÍ: Si no hay poster, usamos una imagen gris de relleno
                 const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
                 
                 card.innerHTML = `
@@ -252,13 +249,11 @@
         async function finalizarVotacion() {
             document.querySelector('.buttons').style.display = 'none';
             
-            // Enviar los votos a Supabase (si hay seleccionados)
             if (peliculasElegidas.length > 0) {
                 try {
-                    // Preparamos el array de objetos para insertar de una sola vez
                     const votosAEnviar = peliculasElegidas.map(p => ({
                         participante: usuarioActual,
-                        pelicula_id: p.id, // Asegúrate de guardar el ID en 'peliculasElegidas'
+                        pelicula_id: p.id,
                         pelicula_titulo: p.titulo
                     }));
         
@@ -274,7 +269,6 @@
                 }
             }
         
-            // Mostrar el resumen en pantalla (lo que ya tenías)
             let HTMLResultados = `
                 <div class='status-message'>
                     🍿 ¡Elegiste ${peliculasElegidas.length} películas!<br>
