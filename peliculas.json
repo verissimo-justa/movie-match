@@ -84,168 +84,192 @@
     "titulo": "Ciudadano Kane",
     "titulo_original": "Citizen Kane",
     "anio": 1941,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/w7V0bv38Z0q0DgHmMfcGM4WRNTv.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/w7V0bv38Z0q0DgHmMfcGM4WRNTv.jpg",
+    "activa": true
   },
   {
     "id": 12,
     "titulo": "Sin techo ni ley",
     "titulo_original": "Sans toit ni loi",
     "anio": 1985,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/a42VZYIhgHIyrlvhVpzvLtOAdmf.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/a42VZYIhgHIyrlvhVpzvLtOAdmf.jpg",
+    "activa": true
   },
   {
     "id": 13,
     "titulo": "El silencio de un hombre",
     "titulo_original": "Le Samouraï",
     "anio": 1967,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rjA2UW47qTIeuL6aNHTbUu6yTP6.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rjA2UW47qTIeuL6aNHTbUu6yTP6.jpg",
+    "activa": true
   },
   {
     "id": 14,
     "titulo": "Los ojos sin rostro",
     "titulo_original": "Les Yeux sans visage",
     "anio": 1960,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uV1rTX8m0tzbiO4WtcEJnwf02Oc.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uV1rTX8m0tzbiO4WtcEJnwf02Oc.jpg",
+    "activa": true
   },
   {
     "id": 15,
     "titulo": "Chungking Express",
     "titulo_original": "重慶森林",
     "anio": 1994,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nl246bqCp6lmRF4mHF293F9w42O.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nl246bqCp6lmRF4mHF293F9w42O.jpg",
+    "activa": true
   },
   {
     "id": 16,
     "titulo": "Amarcord",
     "titulo_original": "Amarcord",
     "anio": 1973,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/i2BL91OVOONviajAE0VlbMAyOm9.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/i2BL91OVOONviajAE0VlbMAyOm9.jpg",
+    "activa": true
   },
   {
     "id": 17,
     "titulo": "El conformista",
     "titulo_original": "Il conformista",
     "anio": 1970,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1fOtsLKzGAWJA41NmhRB9yNk0z1.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1fOtsLKzGAWJA41NmhRB9yNk0z1.jpg",
+    "activa": true
   },
   {
     "id": 18,
     "titulo": "Un asunto de familia",
     "titulo_original": "万引き家族",
     "anio": 2018,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7f8nFFOoifqHRbtCzgYVjOZ9XBl.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7f8nFFOoifqHRbtCzgYVjOZ9XBl.jpg",
+    "activa": true
   },
   {
     "id": 19,
     "titulo": "El manuscrito encontrado en Zaragoza",
     "titulo_original": "Rękopis znaleziony w Saragossie",
     "anio": 1965,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7FbveRzxtdn7zbZyjjZnT0FsxKI.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7FbveRzxtdn7zbZyjjZnT0FsxKI.jpg",
+    "activa": true
   },
   {
     "id": 20,
     "titulo": "El fotógrafo del pánico",
     "titulo_original": "Peeping Tom",
     "anio": 1960,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/9IJuvJ5khuoZyB7k2fLw4cgs3L2.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/9IJuvJ5khuoZyB7k2fLw4cgs3L2.jpg",
+    "activa": true
   },
   {
     "id": 21,
     "titulo": "Gritos y susurros",
     "titulo_original": "Viskningar och rop",
     "anio": 1972,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sr8qYAG8JP33goQC87Ym4d16njF.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sr8qYAG8JP33goQC87Ym4d16njF.jpg",
+    "activa": true
   },
   {
     "id": 22,
     "titulo": "Anatomía de un asesinato",
     "titulo_original": "Anatomy of a Murder",
     "anio": 1959,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2lHWDt5kQcd4yZ5yBPUuiEFYEXD.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2lHWDt5kQcd4yZ5yBPUuiEFYEXD.jpg",
+    "activa": true
   },
   {
     "id": 23,
     "titulo": "Jeanne Dielman, 23 quai du Commerce, 1080 Bruxelles",
     "titulo_original": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
     "anio": 1975,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b5cey5yKfPXZBwj2gTRREALUvzA.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b5cey5yKfPXZBwj2gTRREALUvzA.jpg",
+    "activa": true
   },
   {
     "id": 24,
     "titulo": "Poesía",
     "titulo_original": "시",
     "anio": 2010,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7sKXNd9WXzrncgMEGNpegl1Y2M8.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7sKXNd9WXzrncgMEGNpegl1Y2M8.jpg",
+    "activa": true
   },
   {
     "id": 25,
     "titulo": "Terciopelo azul",
     "titulo_original": "Blue Velvet",
     "anio": 1986,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rzcigN8ujeVJiEKGP3y3mJybvii.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rzcigN8ujeVJiEKGP3y3mJybvii.jpg",
+    "activa": true
   },
   {
     "id": 26,
     "titulo": "Network, un mundo implacable",
     "titulo_original": "Network",
     "anio": 1976,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/r8CrxsvFK8JIBUpIZX0rBmojsC9.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/r8CrxsvFK8JIBUpIZX0rBmojsC9.jpg",
+    "activa": true
   },
   {
     "id": 27,
     "titulo": "Buen trabajo",
     "titulo_original": "Beau Travail",
     "anio": 1999,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7aVQFvGkLnpA71mYoDkVkzSzBZM.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7aVQFvGkLnpA71mYoDkVkzSzBZM.jpg",
+    "activa": true
   },
   {
     "id": 28,
     "titulo": "El odio",
     "titulo_original": "La Haine",
     "anio": 1995,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cRhjRtGfUvm9pOVid2BrrNUnjR5.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cRhjRtGfUvm9pOVid2BrrNUnjR5.jpg",
+    "activa": true
   },
   {
     "id": 29,
     "titulo": "La mamá y la puta",
     "titulo_original": "La Maman et la Putain",
     "anio": 1973,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/wDbguEVHet9w8yRGcl0vVk01UrB.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/wDbguEVHet9w8yRGcl0vVk01UrB.jpg",
+    "activa": true
   },
   {
     "id": 30,
     "titulo": "La felicidad",
     "titulo_original": "Le Bonheur",
     "anio": 1965,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/mHYX8Jo6sNlQPX7yOHhBoFyHiEF.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/mHYX8Jo6sNlQPX7yOHhBoFyHiEF.jpg",
+    "activa": true
   },
   {
     "id": 31,
     "titulo": "Las diabólicas",
     "titulo_original": "Les Diaboliques",
     "anio": 1955,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eX2SM3UECXJgrGknXHdYS2veReS.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eX2SM3UECXJgrGknXHdYS2veReS.jpg",
+    "activa": true
   },
   {
     "id": 32,
     "titulo": "Bella de día",
     "titulo_original": "Belle de jour",
     "anio": 1967,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6LBPUWNYYtC4R4tTxLSsVG4qKPG.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6LBPUWNYYtC4R4tTxLSsVG4qKPG.jpg",
+    "activa": true
   },
   {
     "id": 33,
     "titulo": "Investigación sobre un ciudadano libre de toda sospecha",
     "titulo_original": "Indagine su un cittadino al di sopra di ogni sospetto",
     "anio": 1970,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5eUBcyilUy0sy6AcqNpjgXQX4A4.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5eUBcyilUy0sy6AcqNpjgXQX4A4.jpg",
+    "activa": true
   },
   {
     "id": 34,
     "titulo": "Días perfectos",
     "titulo_original": "PERFECT DAYS",
     "anio": 2023,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/efnvsuEdkdwiWR7WyQ2QgcGt8mM.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/efnvsuEdkdwiWR7WyQ2QgcGt8mM.jpg",
+    "activa": true
   },
   {
     "id": 35,
@@ -259,14 +283,16 @@
     "titulo": "Walkabout",
     "titulo_original": "Walkabout",
     "anio": 1971,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/24vooYt5StgtgcQObVr1GHuM5gy.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/24vooYt5StgtgcQObVr1GHuM5gy.jpg",
+    "activa": true
   },
   {
     "id": 37,
     "titulo": "Dos días, una noche",
     "titulo_original": "Deux jours, une nuit",
     "anio": 2014,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zTI4FYCp28I6SYsmQa0rSImtChu.jpg"
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zTI4FYCp28I6SYsmQa0rSImtChu.jpg",
+    "activa": true
   },
   {
     "id": 38,
