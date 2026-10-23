@@ -5,6 +5,7 @@
     "titulo_original": "기생충",
     "anio": 2019,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/4N55tgxDW0RRATyrZHbx0q9HUKv.jpg"
+    "activa": true
   },
   {
     "id": 2,
@@ -12,6 +13,7 @@
     "titulo_original": "12 Angry Men",
     "anio": 1957,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/t88XfoxO5cX3f0qaSxWsBS0Lc3.jpg"
+    "activa": true
   },
   {
     "id": 3,
@@ -19,6 +21,7 @@
     "titulo_original": "Sunset Boulevard",
     "anio": 1950,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sVILYytrnjsEXBcZyxHMJ5jP74t.jpg"
+    "activa": true
   },
   {
     "id": 4,
@@ -26,6 +29,7 @@
     "titulo_original": "PlayTime",
     "anio": 1967,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cVTaZoFmws0jRSXykK4ayrYTkij.jpg"
+    "activa": true
   },
   {
     "id": 5,
@@ -33,6 +37,7 @@
     "titulo_original": "Persona",
     "anio": 1966,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/pnJMAumh0gaZC02r9t5YmN9HR74.jpg"
+    "activa": true
   },
   {
     "id": 6,
@@ -40,6 +45,7 @@
     "titulo_original": "A Woman Under the Influence",
     "anio": 1974,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/xX9xyqocEh4OvkhGip9m9JjXNTe.jpg"
+    "activa": true
   },
   {
     "id": 7,
@@ -47,6 +53,7 @@
     "titulo_original": "Les Quatre Cents Coups",
     "anio": 1959,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1uqxcqhTNXZLyZoNKeqVkMVzuU4.jpg"
+    "activa": true
   },
   {
     "id": 8,
@@ -54,6 +61,7 @@
     "titulo_original": "Trois couleurs : Rouge",
     "anio": 1994,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/eePgjE6ZP381J77dUPVgJy9cIJ4.jpg"
+    "activa": true
   },
   {
     "id": 9,
@@ -61,6 +69,7 @@
     "titulo_original": "Marketa Lazarová",
     "anio": 1967,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/iAD1q8GOO1q1h6hRCXgslAxDHBY.jpg"
+    "activa": true
   },
   {
     "id": 10,
@@ -68,6 +77,7 @@
     "titulo_original": "Do the Right Thing",
     "anio": 1989,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fu5kXCAX9xcjpCSeEROYZ3iBdLb.jpg"
+    "activa": true
   },
   {
     "id": 11,
