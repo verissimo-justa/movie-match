@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados del Taller</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f7f2d4; }
+        h1 { color: #6488b4; }
+        .ranking { background: white; padding: 20px; border-radius: 8px; max-width: 600px; }
+        .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.2rem; }
+        .votos { font-weight: bold; color: #2ed573; }
+    </style>
+</head>
+<body>
+    <h1>Resultados del Taller</h1>
+    <div class="ranking" id="listaRanking">Cargando...</div>
+
+    <script>
+        const SUPABASE_URL = 'https://TU_PROYECTO.supabase.co';
+        const SUPABASE_KEY = 'TU_ANON_PUBLIC_KEY';
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function cargarRanking() {
+            // Consultamos todos los votos
+            const { data, error } = await _supabase
+                .from('votos_taller')
+                .select('pelicula_titulo');
+
+            if (error) {
+                document.getElementById('listaRanking').innerText = "Error al cargar.";
+                return;
+            }
+
+            // Contamos los votos manualmente (JS puro)
+            const conteo = {};
+            data.forEach(voto => {
+                const titulo = voto.pelicula_titulo;
+                conteo[titulo] = (conteo[titulo] || 0) + 1;
+            });
+
+            // Convertimos a array, ordenamos de mayor a menor y mostramos
+            const ranking = Object.entries(conteo).sort((a, b) => b[1] - a[1]);
+            
+            let html = '';
+            ranking.forEach(([titulo, votos]) => {
+                html += `<div class="item"><span>${titulo}</span> <span class="votos">${votos} votos</span></div>`;
+            });
+
+            if (ranking.length === 0) html = "Aún no hay votos.";
+            document.getElementById('listaRanking').innerHTML = html;
+        }
+
+        cargarRanking();
+    </script>
+</body>
+</html>
