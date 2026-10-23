@@ -357,13 +357,13 @@
   },
   {
     "id": 35,
-    "titulo": "Welt Am Draht",
-    "titulo_original": "",
+    "titulo": "El mundo conectado",
+    "titulo_original": "Welt Am Draht",
     "anio": 1973,
-    "poster": null,
-    "director": "",
-    "pais": "",
-    "duracion": 0
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/qRzRKMjxWx1ogpGy77mTCjU4bRt.jpg",
+    "director": "R. W. Fassbinder",
+    "pais": "RFA",
+    "duracion": 205
   },
   {
     "id": 36,
@@ -505,11 +505,194 @@
     "pais": "GB",
     "duracion": 116
   },
-  {
+    {
     "id": 50,
-    "titulo": "Suspense",
+    "titulo": "Los inocentes",
     "titulo_original": "The Innocents",
     "anio": 1961,
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/idqvLBmlEHUITMnQ0EJ6Yb5TpVw.jpg",
     "director": "Jack Clayton",
-    "p
+    "pais": "GB",
+    "duracion": 100
+  },
+  {
+    "id": 51,
+    "titulo": "4 meses, 3 semanas, 2 días",
+    "titulo_original": "4 luni, 3 săptămâni și 2 zile",
+    "anio": 2007,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/acEtvzFPeOQwbzRWncjRLenhnKV.jpg",
+    "director": "Cristian Mungiu",
+    "pais": "BE",
+    "duracion": 114
+  },
+  {
+    "id": 52,
+    "titulo": "Sala de profesores",
+    "titulo_original": "Das Lehrerzimmer",
+    "anio": 2023,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kWXA6PfQ0PpZpoCXoeBFRciRrUw.jpg",
+    "director": "İlker Çatak",
+    "pais": "DE",
+    "duracion": 98
+  },
+  {
+    "id": 53,
+    "titulo": "Zama",
+    "titulo_original": "",
+    "anio": 2017,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kpp9R6iYKSIXxfyW0feVYrk0jsg.jpg",
+    "director": "Lucrecia Martel",
+    "pais": "AR",
+    "duracion": 115
+  },
+  {
+    "id": 54,
+    "titulo": "El aura",
+    "titulo_original": "",
+    "anio": 2005,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/waaFS27AOSt2JvKMZyFi9m7uGKY.jpg",
+    "director": "Fabián Bielinsky",
+    "pais": "AR",
+    "duracion": 134
+  },
+  {
+    "id": 55,
+    "titulo": "Arrebato",
+    "titulo_original": "",
+    "anio": 1979,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rJlEhLIVsQHPi2uVM26VK0in9hG.jpg",
+    "director": "Iván Zulueta",
+    "pais": "ES",
+    "duracion": 110
+  },
+  {
+    "id": 56,
+    "titulo": "Teorema",
+    "titulo_original": "",
+    "anio": 1968,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/wftXxZPCduFbv9TsVRZfCy2qDsn.jpg",
+    "director": "Pier Paolo Pasolini",
+    "pais": "IT",
+    "duracion": 95
+  },
+  {
+    "id": 57,
+    "titulo": "Funeral Parade of Roses",
+    "titulo_original": "薔薇の葬列",
+    "anio": 1969,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7cRQ6rSGajW2soWDr3voEN2rgYO.jpg",
+    "director": "Toshio Matsumoto",
+    "pais": "JP",
+    "duracion": 105
+  },
+  {
+    "id": 58,
+    "titulo": "Fish Tank",
+    "titulo_original": "",
+    "anio": 2009,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/rI3MKBDsWzQHi9PWDAMKkgmYcff.jpg",
+    "director": "Andrea Arnold",
+    "pais": "NL",
+    "duracion": 123
+  },
+  {
+    "id": 59,
+    "titulo": "Los misterios del organismo",
+    "titulo_original": "W.R. - Misterije organizma",
+    "anio": 1971,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/k0TNEVnIUgMIQrkcBasprdZh5Bz.jpg",
+    "director": "Dušan Makavejev",
+    "pais": "DE",
+    "duracion": 85
+  },
+  {
+    "id": 60,
+    "titulo": "Bacurau",
+    "titulo_original": "",
+    "anio": 2019,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/tBa4zMGzZUco26XT3WfZZCwQ76i.jpg",
+    "director": "Kleber Mendonça Filho",
+    "pais": "BR",
+    "duracion": 131
+  },
+  {
+    "id": 61,
+    "titulo": "Una mujer fantástica",
+    "titulo_original": "",
+    "anio": 2017,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/x2yNruMR8bAJOIQ3wd7HR9qWjW3.jpg",
+    "director": "Sebastián Lelio",
+    "pais": "CL",
+    "duracion": 104
+  },
+  {
+    "id": 62,
+    "titulo": "Memoria",
+    "titulo_original": "",
+    "anio": 2021,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/mkJl2dVJnPgWAALCuIXJ61TlwHf.jpg",
+    "director": "Apichatpong Weerasethakul",
+    "pais": "CN",
+    "duracion": 136
+  },
+  {
+    "id": 63,
+    "titulo": "Primavera, verano, otoño, invierno... y primavera",
+    "titulo_original": "봄 여름 가을 겨울 그리고 봄",
+    "anio": 2003,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6SQQ5REuAz7k0FMQ9mSCT40T2LN.jpg",
+    "director": "Kim Ki-duk",
+    "pais": "KR",
+    "duracion": 103
+  },
+  {
+    "id": 64,
+    "titulo": "Los colonos",
+    "titulo_original": "",
+    "anio": 2023,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1IwpJK6AyUmdJRnphBQFBLwVfRd.jpg",
+    "director": "Felipe Gálvez",
+    "pais": "AR",
+    "duracion": 101
+  },
+  {
+    "id": 65,
+    "titulo": "Güeros",
+    "titulo_original": "",
+    "anio": 2014,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7JRxlC4CjaKeLN57mDK52uvkmIv.jpg",
+    "director": "Alonso Ruizpalacios",
+    "pais": "MX",
+    "duracion": 111
+  },
+  {
+    "id": 66,
+    "titulo": "Ghost World",
+    "titulo_original": "",
+    "anio": 2001,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uwKqnUPE4dSM0kKuMW0vXpURh2T.jpg",
+    "director": "Terry Zwigoff",
+    "pais": "GB",
+    "duracion": 111
+  },
+  {
+    "id": 67,
+    "titulo": "An Education",
+    "titulo_original": "",
+    "anio": 2009,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/gLIvvUdlocGjm8XVLxhWHAKWrRq.jpg",
+    "director": "Lone Scherfig",
+    "pais": "GB",
+    "duracion": 100
+  },
+  {
+    "id": 68,
+    "titulo": "La luz incidente",
+    "titulo_original": "",
+    "anio": 2015,
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4QxGvJO8.jpg",
+    "director": "Ariel Rotter",
+    "pais": "AR",
+    "duracion": 95
+  }
+]
