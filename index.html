@@ -103,7 +103,8 @@
             position: absolute;
             width: 100%; 
             height: 100%; 
-            background: #ffffff; /* O puedes usar #f7f2d4 para que sea transparente y se vea el fondo */
+            /* EL CAMBIO ESTÁ AQUÍ: Fondo blanco sólido */
+            background: #ffffff; 
             border-radius: 16px;
             overflow: hidden;
             display: flex;
@@ -112,21 +113,17 @@
             transform-origin: 50% 100%;
             transition: transform 0.2s ease, opacity 0.2s ease;
             border: 1px solid rgba(100, 136, 180, 0.15);
-            /* NUEVO: Espacio interno para que la imagen no toque los bordes */
             padding: 10px; 
-            /* Si pones padding, ajustamos el alto para que el contenido quepa igual */
-            height: calc(100% - 0px); 
         }
 
         .movie-card img { 
             width: 100%; 
-            /* Reducimos el alto de 310px a 270px para compensar el padding de la tarjeta */
             height: 270px; 
             object-fit: contain; 
-            background-color: #f7f2d4; /* El mismo color del fondo de la app */
+            /* EL CAMBIO ESTÁ AQUÍ: Fondo blanco para que se mezcle con la tarjeta */
+            background-color: #ffffff; 
             pointer-events: none; 
             display: block; 
-            /* NUEVO: Bordes redondeados directamente en la imagen */
             border-radius: 12px; 
         }
 
