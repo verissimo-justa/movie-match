@@ -174,7 +174,7 @@
             justify-content: space-between;
             gap: 6px;
             width: 100%;
-            margin-bottom: 2px;
+            margin-bottom: 0.25px;
         }
 
         .movie-title {
@@ -201,15 +201,26 @@
 
         .movie-original-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.75rem; /* Podés achicarlo a 0.7rem si querés */
             font-weight: 600;
             color: #8c8c8c;
             text-transform: uppercase;
             letter-spacing: -0.3px;
-            margin-top: 3px;
+            margin-top: 1px; /* Reducimos el margen superior */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        /* NUEVA CLASE PARA LA FICHA TÉCNICA */
+        .movie-details {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            color: #6488b4; /* El azul de la app, o podés usar un gris oscuro */
+            font-weight: 500;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
         
         .tinder-container.finalizado {
@@ -411,6 +422,20 @@
                 original.className = 'movie-original-title';
                 original.textContent = movie.titulo_original;
                 info.appendChild(original);
+            }
+
+            // NUEVO: Ficha técnica (Director, País, Duración)
+            if (movie.director || movie.pais || movie.duracion) {
+                const details = document.createElement('div');
+                details.className = 'movie-details';
+                
+                let partes = [];
+                if (movie.director) partes.push(movie.director);
+                if (movie.pais) partes.push(movie.pais);
+                if (movie.duracion) partes.push(`${movie.duracion} min`);
+                
+                details.textContent = partes.join(' · '); // Separado por un punto medio
+                info.appendChild(details);
             }
 
             card.appendChild(img);
