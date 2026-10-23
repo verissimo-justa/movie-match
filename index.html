@@ -233,12 +233,12 @@
             card.style.transform = `translate(${x}px, ${y}px) rotate(${x/10}deg)`;
             card.style.opacity = '0';
             
-        // Dentro de animarSalida, cuando esLike es true:
-        peliculasElegidas.push({
-            id: card.getAttribute('data-id'), // <-- Agregar esta línea
-            titulo: card.getAttribute('data-titulo'),
-            anio: card.getAttribute('data-anio')
-        });
+            if (esLike) {
+                peliculasElegidas.push({
+                    id: card.getAttribute('data-id'),
+                    titulo: card.getAttribute('data-titulo'),
+                    anio: card.getAttribute('data-anio')
+                });
             }
             
             setTimeout(() => {
