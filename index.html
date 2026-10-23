@@ -95,7 +95,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* Reducido un poco para compensar el ancho de la tarjeta */
+            gap: 10px;
             width: 100%;
             max-width: 420px;
         }
@@ -141,21 +141,17 @@
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(100, 136, 180, 0.15);
-            /* Margen simétrico: 10px arriba, 10px a los lados, 0 abajo */
             padding: 10px 10px 0px 10px; 
             transition: left 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
         }
 
         .movie-card img {
             width: 100%;
-            /* Le damos una altura fija para que todas las tarjetas midan lo mismo */
             height: 290px; 
-            /* cover hace que la imagen llene todo el espacio (recortando un poquito los bordes si es necesario) */
             object-fit: cover; 
             background-color: #ffffff;
             pointer-events: none;
             display: block;
-            /* Redondeo de las esquinas de la foto */
             border-radius: 14px; 
         }
 
@@ -201,22 +197,21 @@
 
         .movie-original-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 0.75rem; /* Podés achicarlo a 0.7rem si querés */
+            font-size: 0.75rem;
             font-weight: 600;
             color: #8c8c8c;
             text-transform: uppercase;
             letter-spacing: -0.3px;
-            margin-top: 1px; /* Reducimos el margen superior */
+            margin-top: 1px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* NUEVA CLASE PARA LA FICHA TÉCNICA */
         .movie-details {
             font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
-            color: #6488b4; /* El azul de la app, o podés usar un gris oscuro */
+            color: #6488b4;
             font-weight: 500;
             margin-top: 2px;
             text-transform: uppercase;
@@ -229,7 +224,6 @@
             background: transparent;
         }
 
-        /* La lista de películas elegidas (más larga) */
         .likes-list { 
             text-align: left; 
             background: white; 
@@ -241,15 +235,12 @@
             text-transform: uppercase; 
             font-size: 1rem; 
             color: #333; 
-            /* ACÁ LA HACEMOS MÁS LARGA: de 220px a 300px */
             max-height: 300px; 
             overflow-y: auto; 
-            /* Un pequeño padding extra abajo para que la flechita no tape el texto */
             padding-bottom: 25px; 
-            position: relative; /* Para posicionar la flechita */
+            position: relative;
         }
 
-        /* El ícono de la flechita hacia abajo */
         .flecha-abajo {
             position: absolute;
             bottom: 5px;
@@ -271,8 +262,8 @@
 
         .btn {
             border: none;
-            width: 60px; /* 55 + 10% */
-            height: 60px; /* 55 + 10% */
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -291,9 +282,7 @@
             background-color: rgba(100, 136, 180, 0.1);
         }
 
-        /* --- RESULTADOS --- */
         .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.2rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
-        .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1rem; color: #333; max-height: 220px; overflow-y: auto; }
         .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
         .likes-item span { color: #8c8c8c; }
         .likes-empty { text-align: center; color: #8c8c8c; padding: 20px; }
@@ -389,26 +378,22 @@
                 container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
             }
         }
-        
+
         // Función para abreviar el nombre del director
         function abreviarNombre(nombreCompleto) {
             if (!nombreCompleto) return "";
             
             return nombreCompleto.split(' ').map((palabra, index, array) => {
-                // Si la palabra empieza con mayúscula y no es la última, la abreviamos
                 if (palabra[0] === palabra[0].toUpperCase() && index < array.length - 1) {
-                    // Si la palabra tiene un guion (ej: Jean-Luc), abrevia ambos lados: J.-L.
                     if (palabra.includes('-')) {
                         return palabra.split('-').map(p => p[0] + '.').join('-');
                     }
-                    // Si es una palabra normal, saca la inicial y un punto
                     return palabra[0] + '.';
                 }
-                // La última palabra (el apellido) se deja completa
                 return palabra;
             }).join(' ');
         }
-        
+
         function crearTarjeta(movie) {
             const card = document.createElement('div');
             card.classList.add('movie-card');
@@ -443,30 +428,18 @@
                 info.appendChild(original);
             }
 
-            // NUEVO: Ficha técnica (Director, País, Duración)
             if (movie.director || movie.pais || movie.duracion) {
                 const details = document.createElement('div');
                 details.className = 'movie-details';
                 
                 let partes = [];
-                if (movie.director) partes.push(movie.director);
+                if (movie.director) partes.push(abreviarNombre(movie.director)); 
                 if (movie.pais) partes.push(movie.pais);
                 if (movie.duracion) partes.push(`${movie.duracion} min`);
-
-                            // NUEVO: Ficha técnica (Director, País, Duración)
-                if (movie.director || movie.pais || movie.duracion) {
-                    const details = document.createElement('div');
-                    details.className = 'movie-details';
-                    
-                    let partes = [];
-                    // ACÁ USAMOS LA FUNCIÓN: pasamos el director por el abreviador
-                    if (movie.director) partes.push(abreviarNombre(movie.director)); 
-                    if (movie.pais) partes.push(movie.pais);
-                    if (movie.duracion) partes.push(`${movie.duracion} min`);
-    
-                    details.textContent = partes.join(' · '); // Separado por un punto medio
-                    info.appendChild(details);
-                }
+                
+                details.textContent = partes.join(' · '); 
+                info.appendChild(details);
+            }
 
             card.appendChild(img);
             card.appendChild(info);
@@ -649,6 +622,8 @@
             flechaIzq.style.display = 'none';
             flechaDer.style.display = 'none';
 
+            // Le avisamos al contenedor que terminó para que quite la sombra
+            container.classList.add('finalizado');
             container.innerHTML = "";
             
             const msg = document.createElement('div');
@@ -674,6 +649,16 @@
                     item.appendChild(anio);
                     lista.appendChild(item);
                 });
+
+                // Agregamos la flechita hacia abajo
+                const flechaAbajo = document.createElement('div');
+                flechaAbajo.className = 'flecha-abajo';
+                flechaAbajo.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(90deg);">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                `;
+                lista.appendChild(flechaAbajo);
             }
             msg.appendChild(lista);
             container.appendChild(msg);
