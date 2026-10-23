@@ -82,26 +82,50 @@
         }
         .tinder-container {
             position: relative;
-            width: 320px;
-            height: 440px;
+            /* Ancho fijo en móvil de 260px */
+            width: 240px; 
+            /* Quitamos la altura fija de 440px. Al dejar que el contenido defina la altura, 
+               el contenedor no dejará espacios vacíos raros abajo. */
+            min-height: 400px; /* Un mínimo para que no colapse si tarda en cargar */
             perspective: 1000px;
+            /* Lo centramos por si acaso */
+            margin: 0 auto; 
         }
         .movie-card {
             position: absolute;
-            width: 100%; height: 100%;
+            /* En lugar de un ancho fijo, usamos 100% del contenedor padre que ahora achicaremos */
+            width: 100%; 
+            /* Quitamos el height: 100% para que la tarjeta crezca según la imagen */
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(100, 136, 180, 0.15); 
+            /* ELIMINADO: box-shadow (el sombreado azulado) */
             display: flex;
             flex-direction: column;
             cursor: grab;
             transform-origin: 50% 100%;
             transition: transform 0.2s ease, opacity 0.2s ease;
-            border: 1px solid rgba(100, 136, 180, 0.1);
+            border: 1px solid rgba(100, 136, 180, 0.1); /* Este bordecito sutil lo dejamos */
         }
-        .movie-card img { width: 100%; height: 75%; object-fit: cover; pointer-events: none; }
-        .movie-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; background: #ffffff; }
+
+        .movie-card img { 
+            width: 100%; 
+            /* CAMBIO CLAVE: height auto para que respete la proporción original */
+            height: auto; 
+            /* CAMBIO CLAVE: object-fit contain para que no se recorte nada */
+            object-fit: contain; 
+            pointer-events: none; 
+            display: block; /* Evita un pequeño espacio en blanco debajo de la imagen */
+        }
+
+        .movie-info { 
+            padding: 15px; 
+            /* Ya no necesita flex-grow porque la tarjeta se adapta al contenido */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-start; 
+            background: #ffffff; 
+        }
         .movie-title-row { display: flex; align-items: baseline; justify-content: flex-start; gap: 8px; width: 100%; margin-bottom: 2px; }
         .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: -0.3px; line-height: 1.1; }
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; color: #8c8c8c; }
@@ -112,11 +136,40 @@
         .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
         .likes-item span { color: #8c8c8c; }
         
-        .buttons { margin-top: 25px; display: flex; gap: 25px; }
-        .btn { border: none; width: 55px; height: 55px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.1s ease; }
-        .btn:active { transform: scale(0.9); }
-        .btn-no { background-color: #ffecef; color: #ff4757; border: 1px solid #ffccd2; }
-        .btn-yes { background-color: #e6f9ed; color: #2ed573; border: 1px solid #c2f0d5; }
+        .buttons { 
+            margin-top: 25px; 
+            display: flex; 
+            gap: 25px; 
+        }
+        
+        .btn { 
+            border: none; 
+            width: 65px; /* Un poco más grandes para que respiren los SVG */
+            height: 65px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            /* Quitamos el sombreado para que queden planos como los SVG */
+            box-shadow: none; 
+            background-color: transparent; /* Fondo transparente */
+            border: 2px solid rgba(100, 136, 180, 0.6); /* Borde con el color de la marca */
+            opacity: 0.6; /* Opacidad base del 60% */
+            transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease; 
+        }
+        
+        /* La animación al tocar (o mantener el mouse encima en compu) */
+        .btn:hover, .btn:active { 
+            transform: scale(1.2); /* Crece un 20% */
+            opacity: 1; /* Opacidad al 100% */
+            background-color: rgba(100, 136, 180, 0.1); /* Un fondito sutil para dar feedback */
+        }
+        
+        /* Ya no necesitamos los colores rojo y verde, pero dejamos las clases por si las usas */
+        .btn-no, .btn-yes { 
+            background-color: transparent; 
+        }
     </style>
 </head>
 <body>
@@ -134,10 +187,19 @@
     <div class="tinder-container" id="cardContainer"></div>
 
     <div class="buttons">
-        <button class="btn btn-no" id="rejectBtn">❌</button>
-        <button class="btn btn-yes" id="acceptBtn">💚</button>
+        <button class="btn btn-no" id="rejectBtn">
+            <svg viewBox="0 0 24 24" width="30" height="30" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <button class="btn btn-yes" id="acceptBtn">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="#6488b4" stroke="none">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+        </button>
     </div>
-
+    
     <script>
         // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
