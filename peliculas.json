@@ -18,7 +18,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg",
     "director": "Sidney Lumet",
     "pais": "US",
-    "duracion": 97
+    "duracion": 97,
+    "activa": true
   },
   {
     "id": 3,
@@ -28,7 +29,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
     "director": "Billy Wilder",
     "pais": "US",
-    "duracion": 110
+    "duracion": 110,
+    "activa": true
   },
   {
     "id": 4,
@@ -38,7 +40,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg",
     "director": "Jacques Tati",
     "pais": "FR",
-    "duracion": 115
+    "duracion": 115,
+    "activa": true
   },
   {
     "id": 5,
@@ -48,7 +51,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/cl0HEZT8UfzLqaMrYTvGNHOfPYj.jpg",
     "director": "Ingmar Bergman",
     "pais": "SE",
-    "duracion": 85
+    "duracion": 85,
+    "activa": true
   },
   {
     "id": 6,
@@ -58,7 +62,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/6EJ4JoTxnH1QmGTE9pPzgtW1cLW.jpg",
     "director": "John Cassavetes",
     "pais": "US",
-    "duracion": 155
+    "duracion": 155,
+    "activa": true
   },
   {
     "id": 7,
@@ -68,7 +73,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/12PuU23kkDLvTd0nb8hMlE3oShB.jpg",
     "director": "François Truffaut",
     "pais": "FR",
-    "duracion": 99
+    "duracion": 99,
+    "activa": true
   },
   {
     "id": 8,
@@ -78,7 +84,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/JHmsBiX1tjCKqAul1lzC20WcAW.jpg",
     "director": "Krzysztof Kieślowski",
     "pais": "FR",
-    "duracion": 100
+    "duracion": 100,
+    "activa": true
   },
   {
     "id": 9,
@@ -88,7 +95,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bBf0N1kNQGr6btlO9F66VAV1moz.jpg",
     "director": "František Vláčil",
     "pais": "XC",
-    "duracion": 166
+    "duracion": 166,
+    "activa": true
   },
   {
     "id": 10,
@@ -98,7 +106,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
     "director": "Spike Lee",
     "pais": "US",
-    "duracion": 120
+    "duracion": 120,
+    "activa": true
   },
   {
     "id": 11,
@@ -108,7 +117,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
     "director": "Orson Welles",
     "pais": "US",
-    "duracion": 119
+    "duracion": 119,
+    "activa": true
   },
   {
     "id": 12,
@@ -118,7 +128,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2KFfwiPct1hwqi9dkKqoom0BenC.jpg",
     "director": "Agnès Varda",
     "pais": "FR",
-    "duracion": 106
+    "duracion": 106,
+    "activa": true
   },
   {
     "id": 13,
@@ -128,7 +139,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5Fa6o5nfUPEatQ9b3OwEvdEdR7T.jpg",
     "director": "Jean-Pierre Melville",
     "pais": "FR",
-    "duracion": 105
+    "duracion": 105,
+    "activa": true
   },
   {
     "id": 14,
@@ -138,7 +150,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/8y7Z9Gvcq52uOlJlUWyn2epGGRd.jpg",
     "director": "Georges Franju",
     "pais": "FR",
-    "duracion": 84
+    "duracion": 84,
+    "activa": true
   },
   {
     "id": 15,
@@ -148,7 +161,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/43I9DcNoCzpyzK8JCkJYpHqHqGG.jpg",
     "director": "Wong Kar-wai",
     "pais": "HK",
-    "duracion": 102
+    "duracion": 102,
+    "activa": true
   },
   {
     "id": 16,
@@ -158,7 +172,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kS7i093sQpkLTawUEdgf4HVOHSc.jpg",
     "director": "Federico Fellini",
     "pais": "IT",
-    "duracion": 123
+    "duracion": 123,
+    "activa": true
   },
   {
     "id": 17,
