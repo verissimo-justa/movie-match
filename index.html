@@ -136,31 +136,34 @@
             width: 100%;
             height: 100%;
             background: #ffffff;
-            /* CAMBIO CLAVE: Un poco más de redondeo para acompañar la imagen */
-            border-radius: 18px; 
+            border-radius: 18px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(100, 136, 180, 0.15);
-            /* CAMBIO CLAVE: Padding uniforme de 10px en todos lados excepto abajo */
+            /* El padding es de 10px en los tres lados que pediste. 
+               Abajo no tiene padding porque el texto necesita su propio espacio */
             padding: 10px 10px 0px 10px; 
             transition: left 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
         }
 
         .movie-card img {
             width: 100%;
-            height: 297px; 
-            /* CAMBIO CLAVE: contain asegura que la imagen entre completa sin recortarse */
+            /* EL TRUCO: Le decimos que use el alto que necesite, 
+               pero como máximo 270px para no empujar los textos fuera de la tarjeta */
+            height: auto;
+            max-height: 270px; 
+            /* object-fit: contain asegura que la foto se vea entera sin recortes */
             object-fit: contain; 
             background-color: #ffffff;
             pointer-events: none;
             display: block;
-            /* CAMBIO CLAVE: Le damos el mismo redondeo que a la tarjeta para que sea simétrico */
+            /* Le damos el redondeo a la foto para que no choque con el borde de la tarjeta */
             border-radius: 14px; 
         }
 
         .movie-info {
-            /* Ajustamos el padding interno del texto para que respire bien */
+            /* Ajustamos el padding para que los textos no estén pegados a los bordes del póster */
             padding: 10px 5px 10px 5px; 
             display: flex;
             flex-direction: column;
