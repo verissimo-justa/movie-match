@@ -29,8 +29,10 @@
         }
         h1 {
             font-family: 'Fraunces', serif !important;
-            font-weight: 400 !important;
-            font-size: 2.5rem;
+            font-weight: 900 !important;
+            /* Achicamos de 2.5rem a 2rem */
+            font-size: 2rem; 
+            margin-top: -20px; /* Lo subimos un poco */
             margin-bottom: 0px;
             color: #6488b4; 
             letter-spacing: -1px;
@@ -38,10 +40,12 @@
         }
         .subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
+            /* Achicamos de 1.1rem a 0.95rem */
+            font-size: 0.95rem; 
             font-weight: 400;
             color: #222222;
-            margin-bottom: 25px;
+            /* Achicamos el margen de abajo de 25px a 15px */
+            margin-bottom: 15px; 
             letter-spacing: 0.5px;
             text-align: center;
         }
@@ -82,13 +86,11 @@
         }
         .tinder-container {
             position: relative;
-            /* Ancho fijo en móvil de 260px */
-            width: 240px; 
-            /* Quitamos la altura fija de 440px. Al dejar que el contenido defina la altura, 
-               el contenedor no dejará espacios vacíos raros abajo. */
-            min-height: 400px; /* Un mínimo para que no colapse si tarda en cargar */
+            /* Reducimos de 210px a 180px */
+            width: 180px; 
+            /* Reducimos la altura mínima para que no deje hueco abajo */
+            min-height: 320px; 
             perspective: 1000px;
-            /* Lo centramos por si acaso */
             margin: 0 auto; 
         }
         .movie-card {
@@ -119,34 +121,47 @@
         }
 
         .movie-info { 
-            padding: 15px; 
-            /* Ya no necesita flex-grow porque la tarjeta se adapta al contenido */
+            /* Achicamos el padding a 8px */
+            padding: 8px 10px; 
             display: flex; 
             flex-direction: column; 
             justify-content: flex-start; 
             background: #ffffff; 
         }
-        .movie-title-row { display: flex; align-items: baseline; justify-content: flex-start; gap: 8px; width: 100%; margin-bottom: 2px; }
+        .movie-title-row { 
+            display: flex; 
+            align-items: baseline; 
+            /* Cambiamos flex-start por space-between para separar el título del año */
+            justify-content: space-between; 
+            gap: 4px; /* Reducimos de 8px a 4px */
+            width: 100%; 
+            margin-bottom: 2px; 
+        }
         .movie-title { 
             font-family: 'Oswald', sans-serif; 
-            font-size: 1.1rem; /* Antes 1.4rem */
+            /* Reducimos de 1.1rem a 1rem */
+            font-size: 1rem; 
             font-weight: 600; 
             color: #000000; 
             text-transform: uppercase; 
             letter-spacing: -0.3px; 
             line-height: 1.1; 
+            flex: 1; 
+            word-break: break-word; 
         }
         
         .movie-year { 
             font-family: 'Oswald', sans-serif; 
-            font-size: 1rem; /* Antes 1.2rem */
+            /* Reducimos de 1rem a 0.9rem */
+            font-size: 0.9rem; 
             font-weight: 600; 
             color: #8c8c8c; 
         }
         
         .movie-original-title { 
             font-family: 'Oswald', sans-serif; 
-            font-size: 0.85rem; /* Antes 1.1rem */
+            /* Reducimos de 0.85rem a 0.75rem */
+            font-size: 0.75rem; 
             font-weight: 600; 
             color: #8c8c8c; 
             text-transform: uppercase; 
@@ -159,25 +174,34 @@
         .likes-item span { color: #8c8c8c; }
         
         .buttons { 
-            margin-top: 25px; 
+            /* Achicamos el margen de arriba de 25px a 15px */
+            margin-top: 15px; 
             display: flex; 
-            gap: 25px; 
+            /* Separación entre botones */
+            gap: 20px; 
+            /* Mismo ancho que la tarjeta para que queden alineados */
+            width: 180px; 
+            /* Los centramos */
+            justify-content: center; 
+            /* Aseguramos que estén por encima de las tarjetas */
+            position: relative; 
+            z-index: 9999; 
         }
         
         .btn { 
             border: none; 
-            width: 50px; 
-            height: 50px; 
+            /* Achicamos de 50px a 45px */
+            width: 45px; 
+            height: 45px; 
             border-radius: 50%; 
             cursor: pointer; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            /* Quitamos el sombreado para que queden planos como los SVG */
             box-shadow: none; 
-            background-color: transparent; /* Fondo transparente */
-            border: 2px solid rgba(100, 136, 180, 0.6); /* Borde con el color de la marca */
-            opacity: 0.6; /* Opacidad base del 60% */
+            background-color: transparent; 
+            border: 2px solid rgba(100, 136, 180, 0.6); 
+            opacity: 0.6; 
             transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease; 
         }
         
@@ -210,7 +234,7 @@
 
     <div class="buttons">
         <button class="btn btn-no" id="rejectBtn">
-            <svg viewBox="0 0 24 24" width="30" height="30" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
