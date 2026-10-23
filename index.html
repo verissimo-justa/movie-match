@@ -302,12 +302,14 @@
                 card.setAttribute('data-anio', movie.anio);
                 card.style.zIndex = listaPeliculas.length - index; 
                 
-                const tituloOriginal = movie.titulo_original || movie.titulo;
-                const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
+                // 1. Respetamos si viene vacío desde Python
+                const tituloOriginal = movie.titulo_original; 
                 
-                // Si el titulo_original está vacío, creamos la etiqueta con un display:none
+                // 2. Definimos si se muestra o se oculta (solo UNA VEZ)
                 const displayOriginal = tituloOriginal ? "block" : "none";
 
+                const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
+                
                 card.innerHTML = `
                     <img src="${urlPoster}" alt="${movie.titulo}">
                     <div class="movie-info">
@@ -315,9 +317,14 @@
                             <span class="movie-title">${movie.titulo}</span>
                             <span class="movie-year">${movie.anio}</span>
                         </div>
-                        <div class="movie-original-title" style="display: ${displayOriginal};">${tituloOriginal}</div>
+                        <div class="movie-original-title" style="display: ${displayOriginal};">${tituloOriginal || ''}</div>
                     </div>
                 `;
+                
+                container.appendChild(card);
+                configurarGesto(card);
+            });
+        }
 
         function configurarGesto(card) {
             const hamertime = new Hammer(card);
