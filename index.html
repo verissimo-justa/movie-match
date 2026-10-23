@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cam match</title>
-    
+
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +13,12 @@
     <!-- LIBRERÍAS -->
     <script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+
         body {
-            background-color: #f7f2d4; 
+            background-color: #f7f2d4;
             color: #333333;
             font-family: 'Inter', -apple-system, sans-serif;
             overflow: hidden;
@@ -27,26 +27,27 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            touch-action: pan-y; 
+            height: 100dvh; /* celulares: respeta la barra del navegador */
+            touch-action: pan-y;
         }
 
-        h1 {
+        h1, .login-title {
             font-family: 'Fraunces', serif !important;
             font-weight: 900 !important;
-            font-size: 2.2rem; 
+            font-size: 2.2rem;
             margin-top: 0px;
             margin-bottom: 0px;
-            color: #6488b4; 
+            color: #6488b4;
             letter-spacing: -1px;
             text-align: center;
         }
 
         .subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 1rem; 
+            font-size: 1rem;
             font-weight: 400;
             color: #222222;
-            margin-bottom: 20px; 
+            margin-bottom: 20px;
             letter-spacing: 0.5px;
             text-align: center;
         }
@@ -94,7 +95,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px; /* Espacio entre la flecha y la tarjeta */
+            gap: 15px;
             width: 100%;
             max-width: 400px;
         }
@@ -106,7 +107,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px; /* Para que sea fácil de tocar */
+            padding: 10px;
+            background: none;
+            border: none;
         }
 
         .flecha-lateral:active {
@@ -114,126 +117,131 @@
             transform: scale(1.2);
         }
 
-        /* Achicamos un poquito la tarjeta para que entren las flechas */
+        .flecha-lateral:focus-visible,
+        .btn:focus-visible {
+            outline: 2px solid #6488b4;
+            outline-offset: 2px;
+        }
+
         .tinder-container {
             position: relative;
-            width: 220px; 
-            height: 380px; /* Un poquito más baja para que quepa todo */
-            overflow: hidden; 
-            border-radius: 16px; 
-            margin-top: 15px; /* Lo separa del texto de arriba */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Una sombra suave para que resalte */
+            width: 220px;
+            height: 380px;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .movie-card {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%; 
-            height: 100%; 
-            background: #ffffff; 
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(100, 136, 180, 0.15);
-            padding: 10px; 
-            transition: left 0.3s ease, opacity 0.3s ease; 
+            padding: 10px;
+            transition: left 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .movie-card img { 
-            width: 100%; 
-            height: 270px; 
-            object-fit: contain; 
-            background-color: #ffffff; 
-            pointer-events: none; 
-            display: block; 
-            border-radius: 12px; 
+        .movie-card img {
+            width: 100%;
+            height: 270px;
+            object-fit: contain;
+            background-color: #ffffff;
+            pointer-events: none;
+            display: block;
+            border-radius: 12px;
         }
 
-        .movie-info { 
-            padding: 10px 5px 0px 5px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start; 
-            background: transparent; 
-            flex-grow: 1; 
+        .movie-info {
+            padding: 10px 5px 0px 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background: transparent;
+            flex-grow: 1;
         }
 
-        .movie-title-row { 
-            display: flex; 
-            align-items: baseline; 
-            justify-content: space-between; 
-            gap: 6px; 
-            width: 100%; 
-            margin-bottom: 2px; 
+        .movie-title-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 6px;
+            width: 100%;
+            margin-bottom: 2px;
         }
 
-        .movie-title { 
-            font-family: 'Oswald', sans-serif; 
-            font-size: 1.05rem; 
-            font-weight: 600; 
-            color: #000000; 
-            text-transform: uppercase; 
-            letter-spacing: -0.3px; 
-            line-height: 1.1; 
+        .movie-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: -0.3px;
+            line-height: 1.1;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             flex: 1;
         }
-        
-        .movie-year { 
-            font-family: 'Oswald', sans-serif; 
-            font-size: 0.95rem; 
-            font-weight: 600; 
-            color: #8c8c8c; 
+
+        .movie-year {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #8c8c8c;
         }
-        
-        .movie-original-title { 
-            font-family: 'Oswald', sans-serif; 
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            color: #8c8c8c; 
-            text-transform: uppercase; 
-            letter-spacing: -0.3px; 
+
+        .movie-original-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #8c8c8c;
+            text-transform: uppercase;
+            letter-spacing: -0.3px;
             margin-top: 2px;
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis; 
+            text-overflow: ellipsis;
         }
 
         /* --- BOTONES --- */
-        .buttons { 
-            margin-top: 15px; 
-            display: flex; 
-            gap: 25px; 
-            justify-content: center; 
-            position: relative; 
-            z-index: 10; 
+        .buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
         }
-        
-        .btn { 
-            border: none; 
-            width: 55px; 
-            height: 55px; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            box-shadow: none; 
-            background-color: transparent; 
-            border: 2px solid rgba(100, 136, 180, 0.6); 
-            opacity: 0.6; 
-            transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease; 
+
+        .btn {
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            background-color: transparent;
+            border: 2px solid rgba(100, 136, 180, 0.6);
+            opacity: 0.6;
+            transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
         }
-        
-        .btn:hover, .btn:active { 
-            transform: scale(1.2); 
-            opacity: 1; 
-            background-color: rgba(100, 136, 180, 0.1); 
+
+        .btn:hover, .btn:active {
+            transform: scale(1.2);
+            opacity: 1;
+            background-color: rgba(100, 136, 180, 0.1);
         }
 
         /* --- RESULTADOS --- */
@@ -241,15 +249,18 @@
         .likes-list { text-align: left; background: white; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1rem; color: #333; max-height: 220px; overflow-y: auto; }
         .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
         .likes-item span { color: #8c8c8c; }
+        .likes-empty { text-align: center; color: #8c8c8c; padding: 20px; }
+        .aviso-error { margin-top: 12px; font-size: 0.95rem; color: #b04a4a; font-weight: 500; }
+        .aviso-error button { margin-top: 8px; padding: 8px 18px; font-size: 0.95rem; background-color: #6488b4; color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <!-- Pantalla de Login -->
     <div class="login-screen" id="loginScreen">
-        <h1>cam match</h1>
+        <div class="login-title">cam match</div>
         <div class="subtitle">pensamos el cine</div>
-        <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15">
+        <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15" aria-label="Tu nombre o alias" autocomplete="off">
         <button id="loginBtn">Ingresar</button>
     </div>
 
@@ -259,39 +270,36 @@
 
     <!-- Contenedor con las flechas laterales -->
     <div class="carrusel-wrapper">
-        <!-- Flecha Izquierda -->
-        <div class="flecha-lateral" id="flechaIzq">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" class="flecha-lateral" id="flechaIzq" aria-label="Película anterior">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-        </div>
+        </button>
 
-        <!-- La caja donde van las tarjetas -->
         <div class="tinder-container" id="cardContainer"></div>
 
-        <!-- Flecha Derecha -->
-        <div class="flecha-lateral" id="flechaDer">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" class="flecha-lateral" id="flechaDer" aria-label="Película siguiente">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
-        </div>
+        </button>
     </div>
 
-    <!-- Los botones de IN / OUT -->
+    <!-- Botones OUT / IN -->
     <div class="buttons">
-        <button class="btn btn-no" id="rejectBtn">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" class="btn btn-no" id="rejectBtn" aria-label="No me interesa">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
-        <button class="btn btn-yes" id="acceptBtn">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="#6488b4" stroke="none">
+        <button type="button" class="btn btn-yes" id="acceptBtn" aria-label="Me interesa">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="#6488b4" stroke="none" aria-hidden="true">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
         </button>
     </div>
-    
+
     <script>
         // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
@@ -299,153 +307,215 @@
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         const container = document.getElementById('cardContainer');
+        const subtitulo = document.querySelector('body > .subtitle');
+        const flechaIzq = document.getElementById('flechaIzq');
+        const flechaDer = document.getElementById('flechaDer');
+
         let usuarioActual = "";
         let peliculasElegidas = [];
+        let votosEnCurso = [];      // promesas de guardado pendientes
+        let votosFallidos = [];     // votos que no se pudieron guardar
         let tarjetaActualIndex = 0;
+        let procesando = false;     // evita doble clic mientras se anima la salida
+        window.listaPeliculas = [];
 
-        document.getElementById('loginBtn').addEventListener('click', () => {
+        // ---------- LOGIN ----------
+        function ingresar() {
             const nombre = document.getElementById('usernameInput').value.trim();
-            if (nombre) {
-                usuarioActual = nombre;
-                document.getElementById('loginScreen').style.display = 'none';
-                inicializarApp();
-            }
+            if (!nombre) return;
+            usuarioActual = nombre;
+            document.getElementById('loginScreen').style.display = 'none';
+            inicializarApp();
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', ingresar);
+        document.getElementById('usernameInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') ingresar();
         });
 
+        // ---------- CARGA DE PELÍCULAS ----------
         async function inicializarApp() {
             try {
                 const respuesta = await fetch('./peliculas.json');
                 if (!respuesta.ok) throw new Error("No se encontró el archivo JSON");
-                
+
                 const peliculasReales = await respuesta.json();
-                const peliculasActivas = peliculasReales.filter(pelicula => pelicula.activa === true);
+                const peliculasActivas = peliculasReales.filter(p =>
+                    p.activa === true || p.activa === 'true' || p.activa === 1
+                );
                 peliculasActivas.sort(() => Math.random() - 0.5);
-                
+
                 cargarTarjetas(peliculasActivas);
             } catch (error) {
                 console.error("Error al cargar:", error);
-                container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
+                container.innerHTML = "";
+                const msg = document.createElement('div');
+                msg.className = 'status-message';
+                msg.textContent = 'Error al cargar las películas.';
+                container.appendChild(msg);
             }
         }
 
+        function crearTarjeta(movie) {
+            const card = document.createElement('div');
+            card.classList.add('movie-card');
+            card.setAttribute('data-id', movie.id);
+
+            const img = document.createElement('img');
+            img.src = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
+            img.alt = movie.titulo || '';
+
+            const info = document.createElement('div');
+            info.className = 'movie-info';
+
+            const row = document.createElement('div');
+            row.className = 'movie-title-row';
+
+            const titulo = document.createElement('span');
+            titulo.className = 'movie-title';
+            titulo.textContent = movie.titulo;
+
+            const anio = document.createElement('span');
+            anio.className = 'movie-year';
+            anio.textContent = movie.anio;
+
+            row.appendChild(titulo);
+            row.appendChild(anio);
+            info.appendChild(row);
+
+            if (movie.titulo_original) {
+                const original = document.createElement('div');
+                original.className = 'movie-original-title';
+                original.textContent = movie.titulo_original;
+                info.appendChild(original);
+            }
+
+            card.appendChild(img);
+            card.appendChild(info);
+            return card;
+        }
+
         function cargarTarjetas(listaPeliculas) {
-            container.innerHTML = ""; 
-            window.listaPeliculas = listaPeliculas; 
+            container.innerHTML = "";
+            window.listaPeliculas = listaPeliculas;
             tarjetaActualIndex = 0;
 
-            listaPeliculas.forEach((movie, index) => {
-                const card = document.createElement('div');
-                card.classList.add('movie-card');
-                card.setAttribute('data-id', movie.id);
-                card.setAttribute('data-titulo', movie.titulo);
-                card.setAttribute('data-anio', movie.anio);
-                
-                const tituloOriginal = movie.titulo_original; 
-                const displayOriginal = tituloOriginal ? "block" : "none";
-                const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
-                
-                card.innerHTML = `
-                    <img src="${urlPoster}" alt="${movie.titulo}">
-                    <div class="movie-info">
-                        <div class="movie-title-row">
-                            <span class="movie-title">${movie.titulo}</span>
-                            <span class="movie-year">${movie.anio}</span>
-                        </div>
-                        <div class="movie-original-title" style="display: ${displayOriginal};">${tituloOriginal || ''}</div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
+            if (listaPeliculas.length === 0) {
+                finalizarVotacion();
+                return;
+            }
+
+            listaPeliculas.forEach(movie => container.appendChild(crearTarjeta(movie)));
 
             actualizarCarrusel();
             configurarGestosCarrusel();
         }
 
+        // ---------- CARRUSEL ----------
         function actualizarCarrusel() {
-            // Calculamos el desplazamiento en porcentaje
+            const total = window.listaPeliculas.length;
+            if (total === 0) return;
+
             const offset = -(tarjetaActualIndex * 100);
             const tarjetas = container.querySelectorAll('.movie-card');
-            
+
             tarjetas.forEach((card, index) => {
-                // Movemos cada tarjeta a su posición
                 card.style.left = `${(index * 100) + offset}%`;
             });
 
-            const subtitulo = document.querySelector('.subtitle');
-            if(subtitulo && window.listaPeliculas.length > 0) {
-                subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${window.listaPeliculas.length}`;
+            if (subtitulo) {
+                subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${total}`;
                 subtitulo.style.fontWeight = "bold";
                 subtitulo.style.color = "#6488b4";
             }
 
-            document.getElementById('flechaIzq').style.opacity = tarjetaActualIndex === 0 ? "0.1" : "0.5";
-            document.getElementById('flechaDer').style.opacity = tarjetaActualIndex === window.listaPeliculas.length - 1 ? "0.1" : "0.5";
+            flechaIzq.style.opacity = tarjetaActualIndex === 0 ? "0.1" : "0.5";
+            flechaDer.style.opacity = tarjetaActualIndex === total - 1 ? "0.1" : "0.5";
+        }
+
+        function irAnterior() {
+            if (procesando) return;
+            if (tarjetaActualIndex > 0) { tarjetaActualIndex--; actualizarCarrusel(); }
+        }
+
+        function irSiguiente() {
+            if (procesando) return;
+            if (tarjetaActualIndex < window.listaPeliculas.length - 1) { tarjetaActualIndex++; actualizarCarrusel(); }
         }
 
         function configurarGestosCarrusel() {
             const hamertime = new Hammer(container, { inputClass: Hammer.TouchMouseInput });
-            
+            hamertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+
             hamertime.on('pan', (event) => {
+                if (procesando || window.listaPeliculas.length === 0) return;
                 // Feedback visual mientras arrastra
-                const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.2); 
+                const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.2);
                 const tarjetas = container.querySelectorAll('.movie-card');
                 tarjetas.forEach((card, index) => {
-                    card.style.transition = 'none'; // Quitamos transición al arrastrar
+                    card.style.transition = 'none'; // sin transición mientras arrastra
                     card.style.left = `${(index * 100) + offset}%`;
                 });
             });
 
             hamertime.on('panend', (event) => {
+                if (window.listaPeliculas.length === 0) return;
                 const tarjetas = container.querySelectorAll('.movie-card');
-                tarjetas.forEach(card => card.style.transition = 'left 0.3s ease');
+                tarjetas.forEach(card => card.style.transition = ''); // vuelve al valor del CSS
 
-                if (event.deltaX > 40) {
-                    if (tarjetaActualIndex > 0) tarjetaActualIndex--;
-                    actualizarCarrusel();
-                } else if (event.deltaX < -40) {
-                    if (tarjetaActualIndex < window.listaPeliculas.length - 1) tarjetaActualIndex++;
-                    actualizarCarrusel();
-                } else {
-                    actualizarCarrusel();
+                if (!procesando) {
+                    if (event.deltaX > 40) {
+                        if (tarjetaActualIndex > 0) tarjetaActualIndex--;
+                    } else if (event.deltaX < -40) {
+                        if (tarjetaActualIndex < window.listaPeliculas.length - 1) tarjetaActualIndex++;
+                    }
                 }
+                actualizarCarrusel();
             });
 
-            document.getElementById('flechaIzq').onclick = () => {
-                if (tarjetaActualIndex > 0) { tarjetaActualIndex--; actualizarCarrusel(); }
-            };
-            document.getElementById('flechaDer').onclick = () => {
-                if (tarjetaActualIndex < window.listaPeliculas.length - 1) { tarjetaActualIndex++; actualizarCarrusel(); }
-            };
+            flechaIzq.onclick = irAnterior;
+            flechaDer.onclick = irSiguiente;
         }
-            });
 
-            document.getElementById('flechaIzq').onclick = () => {
-                if (tarjetaActualIndex > 0) { tarjetaActualIndex--; actualizarCarrusel(); }
-            };
-            document.getElementById('flechaDer').onclick = () => {
-                if (tarjetaActualIndex < window.listaPeliculas.length - 1) { tarjetaActualIndex++; actualizarCarrusel(); }
-            };
+        // ---------- VOTOS ----------
+        async function guardarVoto(p) {
+            try {
+                const { error } = await _supabase
+                    .from('votos_taller')
+                    .insert({
+                        participante: usuarioActual,
+                        pelicula_id: p.id,
+                        pelicula_titulo: p.titulo
+                    });
+
+                // 23505 = ya existía ese voto (restricción única): no es un problema
+                if (error && error.code !== '23505') {
+                    console.error("Error al guardar voto:", error);
+                    votosFallidos.push(p);
+                }
+            } catch (err) {
+                console.error("Error de conexión:", err);
+                votosFallidos.push(p);
+            }
         }
 
         function decidirPelicula(esLike) {
-            if (window.listaPeliculas.length === 0) return;
+            if (procesando || window.listaPeliculas.length === 0) return;
+            procesando = true;
 
             const peliculaActual = window.listaPeliculas[tarjetaActualIndex];
             const tarjetas = container.querySelectorAll('.movie-card');
             const tarjetaDOM = tarjetas[tarjetaActualIndex];
 
             if (esLike) {
-                peliculasElegidas.push({
-                    id: peliculaActual.id,
-                    titulo: peliculaActual.titulo,
-                    anio: peliculaActual.anio
-                });
-                tarjetaDOM.style.transform = `translateX(100%) rotate(15deg)`;
-                tarjetaDOM.style.opacity = '0';
+                const voto = { id: peliculaActual.id, titulo: peliculaActual.titulo, anio: peliculaActual.anio };
+                peliculasElegidas.push(voto);
+                votosEnCurso.push(guardarVoto(voto)); // se guarda en el momento
+                tarjetaDOM.style.transform = 'translateX(100%) rotate(15deg)';
             } else {
-                tarjetaDOM.style.transform = `translateX(-100%) rotate(-15deg)`;
-                tarjetaDOM.style.opacity = '0';
+                tarjetaDOM.style.transform = 'translateX(-100%) rotate(-15deg)';
             }
+            tarjetaDOM.style.opacity = '0';
 
             setTimeout(() => {
                 tarjetaDOM.remove();
@@ -456,60 +526,93 @@
                 }
 
                 if (window.listaPeliculas.length === 0) {
+                    if (subtitulo) {
+                        subtitulo.innerText = "pensamos el cine";
+                        subtitulo.style.fontWeight = "400";
+                        subtitulo.style.color = "#222222";
+                    }
                     finalizarVotacion();
-                    document.querySelector('.subtitle').innerText = "pensamos el cine";
-                    document.querySelector('.subtitle').style.fontWeight = "400";
-                    document.querySelector('.subtitle').style.color = "#222222";
                 } else {
-                    const tarjetasRestantes = container.querySelectorAll('.movie-card');
-                    tarjetasRestantes.forEach((card, idx) => {
-                        card.style.left = `${idx * 100}%`; // Solo left, sin transform
-                        card.style.opacity = '1';
-                    });
                     actualizarCarrusel();
                 }
+                procesando = false;
             }, 300);
         }
 
+        // ---------- RESULTADOS ----------
         async function finalizarVotacion() {
             document.querySelector('.buttons').style.display = 'none';
-            
-            if (peliculasElegidas.length > 0) {
-                try {
-                    const votosAEnviar = peliculasElegidas.map(p => ({
-                        participante: usuarioActual,
-                        pelicula_id: p.id,
-                        pelicula_titulo: p.titulo
-                    }));
-        
-                    const { error } = await _supabase
-                        .from('votos_taller')
-                        .insert(votosAEnviar);
-        
-                    if (error) console.error("Error al guardar votos:", error);
-                    else console.log("Votos guardados exitosamente");
-                    
-                } catch (err) {
-                    console.error("Error de conexión:", err);
-                }
+            flechaIzq.style.display = 'none';
+            flechaDer.style.display = 'none';
+
+            container.innerHTML = "";
+            const cargando = document.createElement('div');
+            cargando.className = 'status-message';
+            cargando.textContent = 'Guardando tus votos…';
+            container.appendChild(cargando);
+
+            await Promise.all(votosEnCurso);
+            votosEnCurso = [];
+
+            // un reintento automático para los que fallaron
+            if (votosFallidos.length > 0) {
+                const reintentar = votosFallidos.splice(0);
+                await Promise.all(reintentar.map(guardarVoto));
             }
-        
-            let HTMLResultados = `
-                <div class='status-message'>
-                    🍿 ¡Elegiste ${peliculasElegidas.length} películas!<br>
-                    <div class='likes-list'>
-            `;
-            
-            if(peliculasElegidas.length === 0) {
-                HTMLResultados += "<div style='text-align:center;color:#8c8c8c;padding:20px;'>No seleccionaste ninguna película.</div>";
+
+            mostrarResultados();
+        }
+
+        function mostrarResultados() {
+            container.innerHTML = "";
+
+            const msg = document.createElement('div');
+            msg.className = 'status-message';
+            msg.appendChild(document.createTextNode(`🍿 ¡Elegiste ${peliculasElegidas.length} películas!`));
+            msg.appendChild(document.createElement('br'));
+
+            const lista = document.createElement('div');
+            lista.className = 'likes-list';
+
+            if (peliculasElegidas.length === 0) {
+                const vacio = document.createElement('div');
+                vacio.className = 'likes-empty';
+                vacio.textContent = 'No seleccionaste ninguna película.';
+                lista.appendChild(vacio);
             } else {
                 peliculasElegidas.forEach(p => {
-                    HTMLResultados += `<div class='likes-item'>${p.titulo} <span>${p.anio}</span></div>`;
+                    const item = document.createElement('div');
+                    item.className = 'likes-item';
+                    item.appendChild(document.createTextNode(p.titulo + ' '));
+                    const anio = document.createElement('span');
+                    anio.textContent = p.anio;
+                    item.appendChild(anio);
+                    lista.appendChild(item);
                 });
             }
-            
-            HTMLResultados += `</div></div>`;
-            container.innerHTML = HTMLResultados;
+            msg.appendChild(lista);
+
+            if (votosFallidos.length > 0) {
+                const aviso = document.createElement('div');
+                aviso.className = 'aviso-error';
+                aviso.textContent = `No se pudieron guardar ${votosFallidos.length} voto(s). Revisá tu conexión e intentá de nuevo.`;
+                aviso.appendChild(document.createElement('br'));
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = 'Reintentar';
+                btn.addEventListener('click', async () => {
+                    btn.disabled = true;
+                    btn.textContent = 'Guardando…';
+                    const reintentar = votosFallidos.splice(0);
+                    await Promise.all(reintentar.map(guardarVoto));
+                    mostrarResultados();
+                });
+                aviso.appendChild(btn);
+                msg.appendChild(aviso);
+            }
+
+            container.appendChild(msg);
         }
 
         document.getElementById('rejectBtn').addEventListener('click', () => decidirPelicula(false));
