@@ -27,7 +27,6 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            /* Evita que el usuario haga zoom sin querer en el celular */
             touch-action: pan-y; 
         }
 
@@ -93,34 +92,33 @@
         /* --- CONTENEDOR DE TARJETAS --- */
         .tinder-container {
             position: relative;
-            width: 240px;  /* Ancho de la tarjeta */
-            height: 390px; /* Altura exacta para que no se desborde ni pise los botones */
-            perspective: 1000px;
+            width: 240px;  
+            height: 400px; 
+            overflow: hidden; 
             margin: 0 auto; 
+            border-radius: 16px; 
         }
 
         .movie-card {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%; 
             height: 100%; 
-            /* EL CAMBIO ESTÁ AQUÍ: Fondo blanco sólido */
             background: #ffffff; 
             border-radius: 16px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            cursor: grab;
-            transform-origin: 50% 100%;
-            transition: transform 0.2s ease, opacity 0.2s ease;
             border: 1px solid rgba(100, 136, 180, 0.15);
             padding: 10px; 
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .movie-card img { 
             width: 100%; 
             height: 270px; 
             object-fit: contain; 
-            /* EL CAMBIO ESTÁ AQUÍ: Fondo blanco para que se mezcle con la tarjeta */
             background-color: #ffffff; 
             pointer-events: none; 
             display: block; 
@@ -128,12 +126,10 @@
         }
 
         .movie-info { 
-            /* Le damos un poco de espacio arriba para separar la foto del texto */
             padding: 10px 5px 0px 5px; 
             display: flex; 
             flex-direction: column; 
             justify-content: flex-start; 
-            /* CAMBIO: Transparente en lugar de blanco */
             background: transparent; 
             flex-grow: 1; 
         }
@@ -155,7 +151,6 @@
             text-transform: uppercase; 
             letter-spacing: -0.3px; 
             line-height: 1.1; 
-            /* EL TRUCO PARA TÍTULOS LARGOS: corta a las 2 líneas y pone "..." */
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -180,12 +175,12 @@
             margin-top: 2px;
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis; /* Corta el texto original si es muy largo */
+            text-overflow: ellipsis; 
         }
 
         /* --- BOTONES --- */
         .buttons { 
-            margin-top: 25px; /* Separación de la tarjeta */
+            margin-top: 15px; /* Achicado para que entre mejor con el texto del subtítulo */
             display: flex; 
             gap: 25px; 
             justify-content: center; 
@@ -232,20 +227,19 @@
     </div>
 
     <h1>cam match</h1>
+    <!-- Este subtítulo es el que va a cambiar a "Película 1 de X" -->
     <div class="subtitle">pensamos el cine</div>
 
     <div class="tinder-container" id="cardContainer"></div>
 
     <div class="buttons">
         <button class="btn btn-no" id="rejectBtn">
-            <!-- Ícono X -->
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
         <button class="btn btn-yes" id="acceptBtn">
-            <!-- Ícono Corazón (un poco más grande para equiparar visualmente) -->
             <svg viewBox="0 0 24 24" width="28" height="28" fill="#6488b4" stroke="none">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
@@ -253,7 +247,6 @@
     </div>
     
     <script>
-        // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -277,14 +270,9 @@
                 if (!respuesta.ok) throw new Error("No se encontró el archivo JSON");
                 
                 const peliculasReales = await respuesta.json();
-                
-                // Filtramos solo las activas
                 const peliculasActivas = peliculasReales.filter(pelicula => pelicula.activa === true);
-                
-                // Mezclamos
                 peliculasActivas.sort(() => Math.random() - 0.5);
                 
-                // Cargamos
                 cargarTarjetas(peliculasActivas);
             } catch (error) {
                 console.error("Error al cargar:", error);
@@ -292,22 +280,22 @@
             }
         }
 
+        let tarjetaActualIndex = 0;
+
         function cargarTarjetas(listaPeliculas) {
             container.innerHTML = ""; 
+            window.listaPeliculas = listaPeliculas; 
+
             listaPeliculas.forEach((movie, index) => {
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
                 card.setAttribute('data-id', movie.id);
                 card.setAttribute('data-titulo', movie.titulo);
                 card.setAttribute('data-anio', movie.anio);
-                card.style.zIndex = listaPeliculas.length - index; 
+                card.style.left = `${index * 100}%`; 
                 
-                // 1. Respetamos si viene vacío desde Python
                 const tituloOriginal = movie.titulo_original; 
-                
-                // 2. Definimos si se muestra o se oculta (solo UNA VEZ)
                 const displayOriginal = tituloOriginal ? "block" : "none";
-
                 const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
                 
                 card.innerHTML = `
@@ -320,48 +308,99 @@
                         <div class="movie-original-title" style="display: ${displayOriginal};">${tituloOriginal || ''}</div>
                     </div>
                 `;
-                
                 container.appendChild(card);
-                configurarGesto(card);
             });
+
+            actualizarCarrusel();
+            configurarGestosCarrusel();
         }
 
-        function configurarGesto(card) {
-            const hamertime = new Hammer(card);
-            hamertime.on('pan', (event) => {
-                card.style.transition = 'none';
-                let rotation = event.deltaX / 15; // Un poco menos de rotación para que sea sutil
-                card.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotation}deg)`;
+        function actualizarCarrusel() {
+            const offset = -(tarjetaActualIndex * 100);
+            const tarjetas = container.querySelectorAll('.movie-card');
+            
+            tarjetas.forEach(card => {
+                card.style.transform = `translateX(${offset}%)`;
             });
 
+            // Actualizamos el subtítulo con el indicador
+            const subtitulo = document.querySelector('.subtitle');
+            if(subtitulo && window.listaPeliculas.length > 0) {
+                subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${window.listaPeliculas.length}`;
+                subtitulo.style.fontWeight = "bold";
+                subtitulo.style.color = "#6488b4";
+            }
+        }
+
+        function configurarGestosCarrusel() {
+            const hamertime = new Hammer(container);
+            
             hamertime.on('panend', (event) => {
-                card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-                if (event.deltaX > 100) { // Reduje un poco la distancia para que sea más fácil deslizar
-                    animarSalida(card, 1000, event.deltaY, true);
-                } else if (event.deltaX < -100) {
-                    animarSalida(card, -1000, event.deltaY, false);
-                } else {
-                    card.style.transform = 'translate(0px, 0px) rotate(0deg)';
+                if (event.deltaX > 50) {
+                    if (tarjetaActualIndex > 0) {
+                        tarjetaActualIndex--;
+                        actualizarCarrusel();
+                    }
+                } else if (event.deltaX < -50) {
+                    if (tarjetaActualIndex < window.listaPeliculas.length - 1) {
+                        tarjetaActualIndex++;
+                        actualizarCarrusel();
+                    }
                 }
             });
+
+            hamertime.on('pan', (event) => {
+                const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.4);
+                const tarjetas = container.querySelectorAll('.movie-card');
+                tarjetas.forEach(card => {
+                    card.style.transition = 'none';
+                    card.style.transform = `translateX(${offset}%)`;
+                });
+            });
         }
 
-        function animarSalida(card, x, y, esLike) {
-            card.style.transform = `translate(${x}px, ${y}px) rotate(${x/10}deg)`;
-            card.style.opacity = '0';
-            
+        function decidirPelicula(esLike) {
+            if (window.listaPeliculas.length === 0) return;
+
+            const peliculaActual = window.listaPeliculas[tarjetaActualIndex];
+            const tarjetas = container.querySelectorAll('.movie-card');
+            const tarjetaDOM = tarjetas[tarjetaActualIndex];
+
             if (esLike) {
                 peliculasElegidas.push({
-                    id: card.getAttribute('data-id'),
-                    titulo: card.getAttribute('data-titulo'),
-                    anio: card.getAttribute('data-anio')
+                    id: peliculaActual.id,
+                    titulo: peliculaActual.titulo,
+                    anio: peliculaActual.anio
                 });
+                tarjetaDOM.style.transform = `translateX(100%) rotate(15deg)`;
+                tarjetaDOM.style.opacity = '0';
+            } else {
+                tarjetaDOM.style.transform = `translateX(-100%) rotate(-15deg)`;
+                tarjetaDOM.style.opacity = '0';
             }
-            
+
             setTimeout(() => {
-                card.remove();
-                if (container.children.length === 0) {
+                tarjetaDOM.remove();
+                window.listaPeliculas.splice(tarjetaActualIndex, 1);
+
+                if (tarjetaActualIndex >= window.listaPeliculas.length && tarjetaActualIndex > 0) {
+                    tarjetaActualIndex--;
+                }
+
+                if (window.listaPeliculas.length === 0) {
                     finalizarVotacion();
+                    // Restauramos el subtítulo original
+                    document.querySelector('.subtitle').innerText = "pensamos el cine";
+                    document.querySelector('.subtitle').style.fontWeight = "400";
+                    document.querySelector('.subtitle').style.color = "#222222";
+                } else {
+                    const tarjetasRestantes = container.querySelectorAll('.movie-card');
+                    tarjetasRestantes.forEach((card, idx) => {
+                        card.style.left = `${idx * 100}%`;
+                        card.style.transform = 'none';
+                        card.style.opacity = '1';
+                    });
+                    actualizarCarrusel();
                 }
             }, 300);
         }
@@ -407,15 +446,8 @@
             container.innerHTML = HTMLResultados;
         }
 
-        document.getElementById('rejectBtn').addEventListener('click', () => {
-            const tarjetaActual = container.querySelector('.movie-card');
-            if (tarjetaActual) animarSalida(tarjetaActual, -1000, 0, false);
-        });
-
-        document.getElementById('acceptBtn').addEventListener('click', () => {
-            const tarjetaActual = container.querySelector('.movie-card');
-            if (tarjetaActual) animarSalida(tarjetaActual, 1000, 0, true);
-        });
+        document.getElementById('rejectBtn').addEventListener('click', () => decidirPelicula(false));
+        document.getElementById('acceptBtn').addEventListener('click', () => decidirPelicula(true));
     </script>
 </body>
 </html>
