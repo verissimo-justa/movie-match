@@ -410,18 +410,34 @@
                 subtitulo.style.color = "#6488b4";
             }
 
-            flechaIzq.style.opacity = tarjetaActualIndex === 0 ? "0.1" : "0.5";
-            flechaDer.style.opacity = tarjetaActualIndex === total - 1 ? "0.1" : "0.5";
+            flechaIzq.style.opacity = "0.5";
+            flechaDer.style.opacity = "0.5";
         }
 
         function irAnterior() {
             if (procesando) return;
-            if (tarjetaActualIndex > 0) { tarjetaActualIndex--; actualizarCarrusel(); }
+            const total = window.listaPeliculas.length;
+            if (total === 0) return;
+
+            if (tarjetaActualIndex > 0) {
+                tarjetaActualIndex--;
+            } else {
+                tarjetaActualIndex = total - 1; // Salta a la última
+            }
+            actualizarCarrusel();
         }
 
         function irSiguiente() {
             if (procesando) return;
-            if (tarjetaActualIndex < window.listaPeliculas.length - 1) { tarjetaActualIndex++; actualizarCarrusel(); }
+            const total = window.listaPeliculas.length;
+            if (total === 0) return;
+
+            if (tarjetaActualIndex < total - 1) {
+                tarjetaActualIndex++;
+            } else {
+                tarjetaActualIndex = 0; // Salta a la primera
+            }
+            actualizarCarrusel();
         }
 
         function configurarGestosCarrusel() {
@@ -443,11 +459,23 @@
                 const tarjetas = container.querySelectorAll('.movie-card');
                 tarjetas.forEach(card => card.style.transition = '');
 
+                const total = window.listaPeliculas.length;
+
                 if (!procesando) {
                     if (event.deltaX > 40) {
-                        if (tarjetaActualIndex > 0) tarjetaActualIndex--;
+                        // Deslizó a la derecha (película anterior)
+                        if (tarjetaActualIndex > 0) {
+                            tarjetaActualIndex--;
+                        } else {
+                            tarjetaActualIndex = total - 1; // Salta al final
+                        }
                     } else if (event.deltaX < -40) {
-                        if (tarjetaActualIndex < window.listaPeliculas.length - 1) tarjetaActualIndex++;
+                        // Deslizó a la izquierda (película siguiente)
+                        if (tarjetaActualIndex < total - 1) {
+                            tarjetaActualIndex++;
+                        } else {
+                            tarjetaActualIndex = 0; // Salta al principio
+                        }
                     }
                 }
                 actualizarCarrusel();
