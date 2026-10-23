@@ -27,7 +27,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            height: 100dvh; /* celulares: respeta la barra del navegador */
+            height: 100dvh;
             touch-action: pan-y;
         }
 
@@ -117,12 +117,6 @@
             transform: scale(1.2);
         }
 
-        .flecha-lateral:focus-visible,
-        .btn:focus-visible {
-            outline: 2px solid #6488b4;
-            outline-offset: 2px;
-        }
-
         .tinder-container {
             position: relative;
             width: 220px;
@@ -131,6 +125,7 @@
             border-radius: 16px;
             margin-top: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background: transparent; /* Asegura que el fondo sea transparente */
         }
 
         .movie-card {
@@ -250,8 +245,6 @@
         .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
         .likes-item span { color: #8c8c8c; }
         .likes-empty { text-align: center; color: #8c8c8c; padding: 20px; }
-        .aviso-error { margin-top: 12px; font-size: 0.95rem; color: #b04a4a; font-weight: 500; }
-        .aviso-error button { margin-top: 8px; padding: 8px 18px; font-size: 0.95rem; background-color: #6488b4; color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -301,7 +294,6 @@
     </div>
 
     <script>
-        // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -313,13 +305,10 @@
 
         let usuarioActual = "";
         let peliculasElegidas = [];
-        let votosEnCurso = [];      // promesas de guardado pendientes
-        let votosFallidos = [];     // votos que no se pudieron guardar
         let tarjetaActualIndex = 0;
-        let procesando = false;     // evita doble clic mientras se anima la salida
+        let procesando = false;
         window.listaPeliculas = [];
 
-        // ---------- LOGIN ----------
         function ingresar() {
             const nombre = document.getElementById('usernameInput').value.trim();
             if (!nombre) return;
@@ -333,26 +322,19 @@
             if (e.key === 'Enter') ingresar();
         });
 
-        // ---------- CARGA DE PELÍCULAS ----------
         async function inicializarApp() {
             try {
                 const respuesta = await fetch('./peliculas.json');
                 if (!respuesta.ok) throw new Error("No se encontró el archivo JSON");
 
                 const peliculasReales = await respuesta.json();
-                const peliculasActivas = peliculasReales.filter(p =>
-                    p.activa === true || p.activa === 'true' || p.activa === 1
-                );
+                const peliculasActivas = peliculasReales.filter(p => p.activa === true);
                 peliculasActivas.sort(() => Math.random() - 0.5);
 
                 cargarTarjetas(peliculasActivas);
             } catch (error) {
                 console.error("Error al cargar:", error);
-                container.innerHTML = "";
-                const msg = document.createElement('div');
-                msg.className = 'status-message';
-                msg.textContent = 'Error al cargar las películas.';
-                container.appendChild(msg);
+                container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
             }
         }
 
@@ -383,7 +365,7 @@
             row.appendChild(anio);
             info.appendChild(row);
 
-            if (movie.titulo_original) {
+            if (movie.titulo_original && movie.titulo_original.trim() !== "") {
                 const original = document.createElement('div');
                 original.className = 'movie-original-title';
                 original.textContent = movie.titulo_original;
@@ -411,7 +393,6 @@
             configurarGestosCarrusel();
         }
 
-        // ---------- CARRUSEL ----------
         function actualizarCarrusel() {
             const total = window.listaPeliculas.length;
             if (total === 0) return;
@@ -449,11 +430,10 @@
 
             hamertime.on('pan', (event) => {
                 if (procesando || window.listaPeliculas.length === 0) return;
-                // Feedback visual mientras arrastra
                 const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.2);
                 const tarjetas = container.querySelectorAll('.movie-card');
                 tarjetas.forEach((card, index) => {
-                    card.style.transition = 'none'; // sin transición mientras arrastra
+                    card.style.transition = 'none';
                     card.style.left = `${(index * 100) + offset}%`;
                 });
             });
@@ -461,7 +441,7 @@
             hamertime.on('panend', (event) => {
                 if (window.listaPeliculas.length === 0) return;
                 const tarjetas = container.querySelectorAll('.movie-card');
-                tarjetas.forEach(card => card.style.transition = ''); // vuelve al valor del CSS
+                tarjetas.forEach(card => card.style.transition = '');
 
                 if (!procesando) {
                     if (event.deltaX > 40) {
@@ -477,25 +457,17 @@
             flechaDer.onclick = irSiguiente;
         }
 
-        // ---------- VOTOS ----------
         async function guardarVoto(p) {
             try {
-                const { error } = await _supabase
+                await _supabase
                     .from('votos_taller')
                     .insert({
                         participante: usuarioActual,
                         pelicula_id: p.id,
                         pelicula_titulo: p.titulo
                     });
-
-                // 23505 = ya existía ese voto (restricción única): no es un problema
-                if (error && error.code !== '23505') {
-                    console.error("Error al guardar voto:", error);
-                    votosFallidos.push(p);
-                }
             } catch (err) {
                 console.error("Error de conexión:", err);
-                votosFallidos.push(p);
             }
         }
 
@@ -510,7 +482,7 @@
             if (esLike) {
                 const voto = { id: peliculaActual.id, titulo: peliculaActual.titulo, anio: peliculaActual.anio };
                 peliculasElegidas.push(voto);
-                votosEnCurso.push(guardarVoto(voto)); // se guarda en el momento
+                guardarVoto(voto); 
                 tarjetaDOM.style.transform = 'translateX(100%) rotate(15deg)';
             } else {
                 tarjetaDOM.style.transform = 'translateX(-100%) rotate(-15deg)';
@@ -533,16 +505,13 @@
                     }
                     finalizarVotacion();
                 } else {
-                    // 👇 ACÁ ESTÁ EL ARREGLO 👇
-                    // Reacomodamos las tarjetas restantes para que no queden huecos
                     const tarjetasRestantes = container.querySelectorAll('.movie-card');
                     tarjetasRestantes.forEach((card, idx) => {
                         card.style.left = `${idx * 100}%`;
                         card.style.transform = 'none';
                         card.style.opacity = '1';
-                        card.style.transition = 'none'; // Desactivamos transición para que no salten
+                        card.style.transition = 'none';
                     });
-                    // Reactivamos la transición
                     setTimeout(() => {
                         tarjetasRestantes.forEach(card => card.style.transition = '');
                     }, 50);
@@ -552,33 +521,14 @@
                 procesando = false;
             }, 300);
         }
-        // ---------- RESULTADOS ----------
-        async function finalizarVotacion() {
+
+        function finalizarVotacion() {
             document.querySelector('.buttons').style.display = 'none';
             flechaIzq.style.display = 'none';
             flechaDer.style.display = 'none';
 
             container.innerHTML = "";
-            const cargando = document.createElement('div');
-            cargando.className = 'status-message';
-            cargando.textContent = 'Guardando tus votos…';
-            container.appendChild(cargando);
-
-            await Promise.all(votosEnCurso);
-            votosEnCurso = [];
-
-            // un reintento automático para los que fallaron
-            if (votosFallidos.length > 0) {
-                const reintentar = votosFallidos.splice(0);
-                await Promise.all(reintentar.map(guardarVoto));
-            }
-
-            mostrarResultados();
-        }
-
-        function mostrarResultados() {
-            container.innerHTML = "";
-
+            
             const msg = document.createElement('div');
             msg.className = 'status-message';
             msg.appendChild(document.createTextNode(`🍿 ¡Elegiste ${peliculasElegidas.length} películas!`));
@@ -604,27 +554,6 @@
                 });
             }
             msg.appendChild(lista);
-
-            if (votosFallidos.length > 0) {
-                const aviso = document.createElement('div');
-                aviso.className = 'aviso-error';
-                aviso.textContent = `No se pudieron guardar ${votosFallidos.length} voto(s). Revisá tu conexión e intentá de nuevo.`;
-                aviso.appendChild(document.createElement('br'));
-
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.textContent = 'Reintentar';
-                btn.addEventListener('click', async () => {
-                    btn.disabled = true;
-                    btn.textContent = 'Guardando…';
-                    const reintentar = votosFallidos.splice(0);
-                    await Promise.all(reintentar.map(guardarVoto));
-                    mostrarResultados();
-                });
-                aviso.appendChild(btn);
-                msg.appendChild(aviso);
-            }
-
             container.appendChild(msg);
         }
 
