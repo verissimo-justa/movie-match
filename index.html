@@ -533,12 +533,25 @@
                     }
                     finalizarVotacion();
                 } else {
+                    // 👇 ACÁ ESTÁ EL ARREGLO 👇
+                    // Reacomodamos las tarjetas restantes para que no queden huecos
+                    const tarjetasRestantes = container.querySelectorAll('.movie-card');
+                    tarjetasRestantes.forEach((card, idx) => {
+                        card.style.left = `${idx * 100}%`;
+                        card.style.transform = 'none';
+                        card.style.opacity = '1';
+                        card.style.transition = 'none'; // Desactivamos transición para que no salten
+                    });
+                    // Reactivamos la transición
+                    setTimeout(() => {
+                        tarjetasRestantes.forEach(card => card.style.transition = '');
+                    }, 50);
+                    
                     actualizarCarrusel();
                 }
                 procesando = false;
             }, 300);
         }
-
         // ---------- RESULTADOS ----------
         async function finalizarVotacion() {
             document.querySelector('.buttons').style.display = 'none';
