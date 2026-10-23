@@ -158,52 +158,56 @@
             }
         });
 
-async function inicializarApp() {
-    try {
-        // Usamos ruta relativa para asegurar que la encuentre
-        const respuesta = await fetch('./peliculas.json'); 
-        if (!respuesta.ok) {
-            throw new Error(`No se pudo cargar el JSON. Código: ${respuesta.status}`);
+        async function inicializarApp() {
+            try {
+                const respuesta = await fetch('./peliculas.json');
+                if (!respuesta.ok) throw new Error("No se encontró el archivo JSON");
+                
+                const peliculasReales = await respuesta.json();
+                
+                // 1. FILTRAMOS: Solo dejamos las que tengan activa: true
+                const peliculasActivas = peliculasReales.filter(pelicula => pelicula.activa === true);
+                
+                // 2. MEZCLAMOS: Usamos las películas filtradas
+                peliculasActivas.sort(() => Math.random() - 0.5);
+                
+                // 3. CARGAMOS
+                cargarTarjetas(peliculasActivas);
+            } catch (error) {
+                console.error("Error al cargar:", error);
+                container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
+            }
         }
-        const peliculasReales = await respuesta.json();
-        
-        peliculasReales.sort(() => Math.random() - 0.5);
-        cargarTarjetas(peliculasReales);
-    } catch (error) {
-        console.error("Error crítico:", error);
-        container.innerHTML = `<div class='status-message'>Error al cargar.<br><br><small style="font-size:12px;color:#333">${error.message}</small></div>`;
-    }
-}
 
-function cargarTarjetas(listaPeliculas) {
-    container.innerHTML = ""; 
-    listaPeliculas.forEach((movie, index) => {
-        const card = document.createElement('div');
-        card.classList.add('movie-card');
-        card.setAttribute('data-id', movie.id);
-        card.setAttribute('data-titulo', movie.titulo);
-        card.setAttribute('data-anio', movie.anio);
-        card.style.zIndex = listaPeliculas.length - index; 
-        
-        const tituloOriginal = movie.titulo_original || movie.titulo;
-        
-        // EL TRUCO ESTÁ AQUÍ: Si no hay poster, usamos una imagen gris de relleno
-        const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
-        
-        card.innerHTML = `
-            <img src="${urlPoster}" alt="${movie.titulo}">
-            <div class="movie-info">
-                <div class="movie-title-row">
-                    <span class="movie-title">${movie.titulo}</span>
-                    <span class="movie-year">${movie.anio}</span>
-                </div>
-                <div class="movie-original-title">${tituloOriginal}</div>
-            </div>
-        `;
-        container.appendChild(card);
-        configurarGesto(card);
-    });
-}
+        function cargarTarjetas(listaPeliculas) {
+            container.innerHTML = ""; 
+            listaPeliculas.forEach((movie, index) => {
+                const card = document.createElement('div');
+                card.classList.add('movie-card');
+                card.setAttribute('data-id', movie.id);
+                card.setAttribute('data-titulo', movie.titulo);
+                card.setAttribute('data-anio', movie.anio);
+                card.style.zIndex = listaPeliculas.length - index; 
+                
+                const tituloOriginal = movie.titulo_original || movie.titulo;
+                
+                // EL TRUCO ESTÁ AQUÍ: Si no hay poster, usamos una imagen gris de relleno
+                const urlPoster = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
+                
+                card.innerHTML = `
+                    <img src="${urlPoster}" alt="${movie.titulo}">
+                    <div class="movie-info">
+                        <div class="movie-title-row">
+                            <span class="movie-title">${movie.titulo}</span>
+                            <span class="movie-year">${movie.anio}</span>
+                        </div>
+                        <div class="movie-original-title">${tituloOriginal}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+                configurarGesto(card);
+            });
+        }
 
         function configurarGesto(card) {
             const hamertime = new Hammer(card);
