@@ -12,6 +12,7 @@
 
     <!-- LIBRERÍA: Hammer.js para gestos en celulares -->
     <script src="./hammer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -140,6 +141,10 @@
     </div>
 
     <script>
+        // Reemplaza con los datos de tu proyecto (Settings -> API)
+        const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w'; // Ojo: usa la "anon public", NO la service_role
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         const container = document.getElementById('cardContainer');
         let usuarioActual = "";
         let peliculasElegidas = [];
@@ -224,11 +229,12 @@ function cargarTarjetas(listaPeliculas) {
             card.style.transform = `translate(${x}px, ${y}px) rotate(${x/10}deg)`;
             card.style.opacity = '0';
             
-            if (esLike) {
-                peliculasElegidas.push({
-                    titulo: card.getAttribute('data-titulo'),
-                    anio: card.getAttribute('data-anio')
-                });
+        // Dentro de animarSalida, cuando esLike es true:
+        peliculasElegidas.push({
+            id: card.getAttribute('data-id'), // <-- Agregar esta línea
+            titulo: card.getAttribute('data-titulo'),
+            anio: card.getAttribute('data-anio')
+        });
             }
             
             setTimeout(() => {
@@ -239,9 +245,32 @@ function cargarTarjetas(listaPeliculas) {
             }, 300);
         }
 
-        function finalizarVotacion() {
+        async function finalizarVotacion() {
             document.querySelector('.buttons').style.display = 'none';
             
+            // Enviar los votos a Supabase (si hay seleccionados)
+            if (peliculasElegidas.length > 0) {
+                try {
+                    // Preparamos el array de objetos para insertar de una sola vez
+                    const votosAEnviar = peliculasElegidas.map(p => ({
+                        participante: usuarioActual,
+                        pelicula_id: p.id, // Asegúrate de guardar el ID en 'peliculasElegidas'
+                        pelicula_titulo: p.titulo
+                    }));
+        
+                    const { error } = await _supabase
+                        .from('votos_taller')
+                        .insert(votosAEnviar);
+        
+                    if (error) console.error("Error al guardar votos:", error);
+                    else console.log("Votos guardados exitosamente");
+                    
+                } catch (err) {
+                    console.error("Error de conexión:", err);
+                }
+            }
+        
+            // Mostrar el resumen en pantalla (lo que ya tenías)
             let HTMLResultados = `
                 <div class='status-message'>
                     🍿 ¡Elegiste ${peliculasElegidas.length} películas!<br>
