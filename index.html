@@ -92,9 +92,12 @@
             border-radius: 16px;
             padding: 15px;
             box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
-            border: 2px solid transparent;
+            border: 2px solid transparent; /* Borde base transparente */
             cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        opacity 0.4s ease, 
+                        box-shadow 0.4s ease,
+                        border-color 0.3s ease;
             width: 100%;
             max-width: 380px;
             position: relative;
@@ -106,35 +109,38 @@
             transform: scale(1.02);
         }
 
-        /* Animaciones de selección */
+        /* Clases de animación */
         .movie-card.perdedora {
             transform: scale(0.8);
             opacity: 0;
             pointer-events: none;
         }
 
+        /* Tarjeta centrada: Mantenemos su tamaño, pero la fijamos al centro */
         .movie-card.ganadora-centrada {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.1);
+            width: 380px; /* Forzamos el ancho para que no se estire */
+            max-width: 90vw;
+            transform: translate(-50%, -50%) scale(1.05);
             z-index: 100;
             box-shadow: 0 20px 40px rgba(100, 136, 180, 0.4);
             border-color: #6488b4;
             pointer-events: none;
             margin: 0;
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición más suave */
         }
 
         .movie-card.salida-derecha {
-            transform: translate(150%, -50%) rotate(15deg) scale(1.1);
+            transform: translate(100vw, -50%) rotate(15deg) scale(1.05);
             opacity: 0;
         }
         .movie-card.salida-izquierda {
-            transform: translate(-250%, -50%) rotate(-15deg) scale(1.1);
+            transform: translate(-150vw, -50%) rotate(-15deg) scale(1.05);
             opacity: 0;
         }
 
-        /* Estilos de la foto */
         .movie-card .poster {
             width: 110px;
             height: 160px;
@@ -143,7 +149,6 @@
             flex-shrink: 0;
         }
 
-        /* Datos de la película */
         .movie-info {
             display: flex;
             flex-direction: column;
@@ -158,95 +163,67 @@
             .movie-card:nth-child(2) .movie-info { text-align: right; }
         }
 
-        /* Tipografías internas */
         .movie-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 4px;
-            order: 1; 
+            font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600;
+            text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; 
         }
         .movie-original-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.8rem;
-            color: #8c8c8c;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            order: 2; 
+            font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c;
+            text-transform: uppercase; margin-bottom: 4px; order: 2; 
         }
         .movie-year {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            color: #8c8c8c;
-            margin-bottom: 6px;
-            order: 3; 
+            font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c;
+            margin-bottom: 6px; order: 3; 
         }
         .movie-details {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            color: #6488b4;
-            text-transform: uppercase;
-            font-weight: 600;
-            line-height: 1.3;
-            order: 4; 
+            font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #6488b4;
+            text-transform: uppercase; font-weight: 600; line-height: 1.3; order: 4; 
         }
 
-        /* El "VS" entre las películas */
         .vs-badge {
-            font-family: 'Fraunces', serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: #6488b4;
-            opacity: 0.3;
-            background: white;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem;
+            color: #6488b4; opacity: 0.3; background: white;
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;
         }
 
         /* --- ANIMACIONES FULLSCREEN (RONDA Y GRILLA) --- */
         .ronda-overlay, .grilla-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #f7f2d4;
-            z-index: 5000;
-            opacity: 0;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background-color: #f7f2d4; z-index: 5000; opacity: 0; pointer-events: none;
             transition: opacity 0.8s ease;
         }
 
         .ronda-overlay.active, .grilla-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+            opacity: 1; pointer-events: auto;
         }
 
         .ronda-texto {
-            font-family: 'Oswald', sans-serif;
-            font-weight: 600;
-            font-size: 3.5rem; /* 10-20% menor a 4rem */
-            color: rgba(150, 150, 150, 0.7); /* Gris más suave */
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: -1px;
+            font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 3.5rem;
+            color: rgba(150, 150, 150, 0.7); text-align: center;
+            text-transform: uppercase; letter-spacing: -1px;
         }
 
+        /* Grilla flexible que se centra si hay pocos elementos */
         .grilla-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
             gap: 15px;
-            max-width: 400px;
+            max-width: 600px;
             width: 90%;
+        }
+
+        /* Para darle el tamaño de miniaturas a cada póster */
+        .grilla-item {
+            width: 70px; 
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 600px) {
+            .grilla-item { width: 100px; } /* Más grandes en pantallas grandes */
         }
 
         .grilla-item img {
@@ -259,55 +236,28 @@
 
         /* --- PANTALLA FINAL --- */
         .resultados-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 500px;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 20px; width: 100%; max-width: 500px;
         }
         
-        .trofeo {
-            font-size: 3.5rem;
-            margin-bottom: 5px;
-        }
+        .trofeo { font-size: 3.5rem; margin-bottom: 5px; }
 
         .ganadora-texto {
-            font-family: 'Fraunces', serif;
-            color: #6488b4;
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.1;
+            font-family: 'Fraunces', serif; color: #6488b4; font-size: 2.2rem;
+            font-weight: 900; margin-bottom: 20px; line-height: 1.1;
         }
 
-        /* Ficha grande de la ganadora */
         .ficha-ganadora {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
+            background: white; border-radius: 16px; padding: 15px;
             box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
-            width: 240px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 240px; display: flex; flex-direction: column; align-items: center;
         }
         
         .ficha-ganadora img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            width: 100%; height: auto; border-radius: 10px; margin-bottom: 12px;
         }
 
-        .ficha-ganadora .movie-info {
-            text-align: center;
-            padding: 0;
-            width: 100%;
-        }
-
+        .ficha-ganadora .movie-info { text-align: center; padding: 0; width: 100%; }
         .ficha-ganadora .movie-title { font-size: 1.3rem; margin-bottom: 2px; }
         .ficha-ganadora .movie-original-title { font-size: 0.85rem; margin-bottom: 4px; }
         .ficha-ganadora .movie-year { font-size: 1.1rem; margin-bottom: 6px; }
@@ -383,21 +333,18 @@
     </div>
 
     <script>
-        // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let usuarioActual = "";
         let peliculasTodas = [];
-        
         let rondaActual = 1;
         let crucesPendientes = [];
         let cruceActualIndex = 0;
         let ganadorasRonda = [];
         let turnoSalida = 1;
 
-        // Elementos del DOM
         const loginScreen = document.getElementById('loginScreen');
         const headerTorneo = document.getElementById('headerTorneo');
         const matchContainer = document.getElementById('matchContainer');
@@ -435,7 +382,6 @@
                     return;
                 }
 
-                // Iniciamos la secuencia de Ronda 1
                 iniciarRonda(peliculasTodas);
             } catch (error) {
                 console.error("Error al cargar:", error);
@@ -443,40 +389,33 @@
             }
         }
 
-        // Secuencia de inicio de ronda: Espera -> RONDA X -> Grilla -> Cruces
         function iniciarRonda(peliculas) {
             matchContainer.style.opacity = 0;
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // 1. Medio segundo de espera antes del fade in
             setTimeout(() => {
-                // 2. Fade in RONDA X
                 rondaTexto.innerText = `RONDA ${rondaActual}`;
                 rondaOverlay.classList.add('active');
 
-                // 3. Espera 2s, fade out RONDA X
                 setTimeout(() => {
                     rondaOverlay.classList.remove('active');
 
-                    // 4. Espera que termine el fade out (1s) y muestra la grilla
                     setTimeout(() => {
                         armarGrilla(peliculas);
                         grillaOverlay.classList.add('active');
 
-                        // 5. Espera 2.5s, fade out grilla
                         setTimeout(() => {
                             grillaOverlay.classList.remove('active');
 
-                            // 6. Espera el fade out y arranca el primer cruce
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
                                 armarRonda(peliculas);
                             }, 1000);
 
-                        }, 2500);
+                        }, 2000); // Grilla visible 2s
                     }, 1000);
-                }, 2000);
+                }, 2000); // Ronda visible 2s
             }, 500);
         }
 
@@ -520,8 +459,12 @@
             const A = cruce.peliculaA;
             const B = cruce.peliculaB;
 
-            document.getElementById('cardA').className = 'movie-card';
-            document.getElementById('cardB').className = 'movie-card';
+            // Limpiamos las clases de estado anteriores (bordes, centrado, etc)
+            const cardA = document.getElementById('cardA');
+            const cardB = document.getElementById('cardB');
+            cardA.className = 'movie-card';
+            cardB.className = 'movie-card';
+            
             vsBadge.style.opacity = 0.3;
             vsBadge.style.transform = 'scale(1)';
 
@@ -549,7 +492,7 @@
         }
 
         async function seleccionarGanadora(opcion) {
-            if (document.querySelector('.ganadora-centrada')) return; // Evitar doble clic
+            if (document.querySelector('.ganadora-centrada')) return; 
 
             const cruce = crucesPendientes[cruceActualIndex];
             const ganadora = opcion === 'A' ? cruce.peliculaA : cruce.peliculaB;
@@ -557,17 +500,14 @@
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
             const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
 
-            // La perdedora desaparece
+            // 1. Perdedora se va
             cardPerdedora.classList.add('perdedora');
             vsBadge.style.opacity = 0;
             vsBadge.style.transform = 'scale(0)';
             
-            // La ganadora se centra (la clase fixed hace que vuele al medio)
-            setTimeout(() => {
-                cardGanadora.classList.add('ganadora-centrada');
-            }, 100);
+            // 2. Ganadora vuela al centro
+            cardGanadora.classList.add('ganadora-centrada');
 
-            // Guardar voto
             _supabase.from('votos_torneo').insert({
                 participante: usuarioActual,
                 ronda: rondaActual,
@@ -583,15 +523,15 @@
 
             ganadorasRonda.push(ganadora);
 
-            // Esperar 1.5s centrada, luego hacerla volar
             setTimeout(() => {
                 const claseSalida = turnoSalida === 1 ? 'salida-derecha' : 'salida-izquierda';
                 cardGanadora.classList.add(claseSalida);
                 turnoSalida *= -1;
 
                 setTimeout(() => {
+                    // Restauramos las tarjetas
                     cardPerdedora.classList.remove('perdedora');
-                    cardGanadora.className = 'movie-card'; // Resetea todo (incluido fixed)
+                    cardGanadora.classList.remove('ganadora-centrada', 'salida-derecha', 'salida-izquierda');
                     
                     cruceActualIndex++;
                     if (cruceActualIndex < crucesPendientes.length) {
@@ -604,8 +544,8 @@
                             iniciarRonda(ganadorasRonda);
                         }
                     }
-                }, 800); // Tiempo de vuelo
-            }, 1500); // Tiempo centrada
+                }, 800); 
+            }, 1500); 
         }
 
         function finalizarTorneo(ganadoraFinal) {
