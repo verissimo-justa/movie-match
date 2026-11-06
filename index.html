@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cam match</title>
+    <title>cam match - Torneo</title>
 
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Inter:wght@400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
 
     <!-- LIBRERÍAS -->
-    <script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -28,363 +27,326 @@
             justify-content: center;
             height: 100vh;
             height: 100dvh;
-            touch-action: pan-y;
+            width: 100vw;
         }
 
-        h1, .login-title {
+        /* Pantalla de Login */
+        .login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #f7f2d4; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .login-screen input {
+            padding: 12px 20px; font-size: 1.1rem; border: 2px solid #6488b4;
+            border-radius: 8px; margin-bottom: 15px; width: 260px; outline: none; text-align: center;
+        }
+        .login-screen button {
+            padding: 12px 30px; font-size: 1.1rem; background-color: #6488b4; color: white;
+            border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+        }
+
+        /* Título superior */
+        .header-torneo {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            z-index: 10;
+        }
+        .header-torneo h1 {
             font-family: 'Fraunces', serif !important;
             font-weight: 900 !important;
-            font-size: 2.2rem;
-            margin-top: 0px;
-            margin-bottom: 0px;
+            font-size: 2rem;
             color: #6488b4;
-            letter-spacing: -1px;
-            text-align: center;
         }
-
-        .subtitle {
-            font-family: 'Inter', sans-serif;
+        .header-torneo p {
             font-size: 1rem;
-            font-weight: 400;
-            color: #222222;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-            text-align: center;
-        }
-
-        .login-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #f7f2d4;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-screen input {
-            padding: 12px 20px;
-            font-size: 1.1rem;
-            border: 2px solid #6488b4;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            width: 260px;
-            outline: none;
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #333333;
-            text-align: center;
-        }
-
-        .login-screen button {
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            background-color: #6488b4;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
             font-weight: bold;
+            color: rgba(120, 120, 120, 0.8);
         }
 
-        /* --- CARRUSEL WRAPPER Y FLECHAS --- */
-        .carrusel-wrapper {
+        /* Contenedor de los cruces (VS) */
+        .match-container {
             display: flex;
-            align-items: center;
+            flex-direction: column; /* En vertical, uno arriba del otro */
             justify-content: center;
-            gap: 10px;
+            align-items: center;
+            gap: 20px;
             width: 100%;
-            max-width: 420px;
-        }
-
-        .flecha-lateral {
-            cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.2s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            max-width: 900px;
             padding: 10px;
-            background: none;
-            border: none;
-        }
-
-        .flecha-lateral:active {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-        /* --- TARJETA +10% --- */
-        .tinder-container {
-            position: relative;
-            width: 242px; 
-            height: 418px; 
-            overflow: hidden;
-            border-radius: 18px;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            background: transparent;
-        }
-
-        .movie-card {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            border-radius: 18px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(100, 136, 180, 0.15);
-            padding: 10px 10px 0px 10px; 
-            transition: left 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: 290px; 
-            object-fit: cover; 
-            background-color: #ffffff;
-            pointer-events: none;
-            display: block;
-            border-radius: 14px; 
-        }
-
-        .movie-info {
-            padding: 10px 5px 10px 5px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            background: transparent;
             flex-grow: 1;
         }
 
-        .movie-title-row {
+        /* Si la pantalla está horizontal (o es compu), ponemos los pósters uno al lado del otro */
+        @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
+            .match-container {
+                flex-direction: row;
+                gap: 60px;
+            }
+        }
+
+        /* Tarjeta de Película */
+        .movie-card {
             display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 6px;
+            flex-direction: row;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             width: 100%;
-            margin-bottom: 0.25px;
-        }
-
-        .movie-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #000000;
-            text-transform: uppercase;
-            letter-spacing: -0.3px;
-            line-height: 1.1;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            flex: 1;
-        }
-
-        .movie-year {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #8c8c8c;
-        }
-
-        .movie-original-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #8c8c8c;
-            text-transform: uppercase;
-            letter-spacing: -0.3px;
-            margin-top: 1px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .movie-details {
-            font-family: 'Inter', sans-serif;
-            /* 1. Subimos el tamaño de 0.65rem a 0.85rem (aprox +30%) */
-            font-size: 0.85rem; 
-            color: #6488b4; 
-            font-weight: 500;
-            /* 2. Le damos más aire con respecto al título original */
-            margin-top: 7px; 
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        
-        .tinder-container.finalizado {
-            box-shadow: none;
-            border: none;
-            background: transparent;
-        }
-
-        .likes-list { 
-            text-align: left; 
-            background: white; 
-            padding: 15px; 
-            border-radius: 12px; 
-            margin-top: 15px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-            font-family: 'Oswald', sans-serif; 
-            text-transform: uppercase; 
-            font-size: 1rem; 
-            color: #333; 
-            max-height: 300px; 
-            overflow-y: auto; 
-            padding-bottom: 25px; 
+            max-width: 380px;
             position: relative;
         }
 
-        .flecha-abajo {
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.5;
+        .movie-card:hover {
+            border-color: #6488b4;
+            transform: scale(1.02);
+        }
+
+        /* Cuando una es eliminada */
+        .movie-card.perdedora {
+            transform: scale(0);
+            opacity: 0;
             pointer-events: none;
         }
 
-        /* --- BOTONES +10% --- */
-        .buttons {
-            margin-top: 15px;
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
+        /* Estilos de la foto */
+        .movie-card .poster {
+            width: 110px; /* Un poco más chico para que quepa bien en celular */
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
         }
 
-        .btn {
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
+        /* Datos de la película */
+        .movie-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 15px;
+            flex-grow: 1;
+        }
+
+        /* Para la película de la izquierda, los datos van a la derecha del póster
+           Para la de la derecha, los datos van a la izquierda */
+        @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
+            .movie-card:nth-child(1) .movie-info {
+                text-align: left;
+            }
+            .movie-card:nth-child(2) {
+                flex-direction: row-reverse; /* Póster a la derecha, datos a la izquierda */
+            }
+            .movie-card:nth-child(2) .movie-info {
+                text-align: right;
+            }
+        }
+
+        /* Tipografías internas */
+        .movie-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+        .movie-year {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: #8c8c8c;
+            margin-bottom: 4px;
+        }
+        .movie-original-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            color: #8c8c8c;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .movie-details {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #6488b4;
+            text-transform: uppercase;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* El "VS" entre las películas */
+        .vs-badge {
+            font-family: 'Fraunces', serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #6488b4;
+            opacity: 0.3;
+            background: white;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: none;
-            background-color: transparent;
-            border: 2px solid rgba(100, 136, 180, 0.6);
-            opacity: 0.6;
-            transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
+            .vs-badge {
+                margin: 0;
+            }
         }
 
-        .btn:hover, .btn:active {
-            transform: scale(1.2);
-            opacity: 1;
-            background-color: rgba(100, 136, 180, 0.1);
+        /* Pantalla de Resultados */
+        .resultados-screen {
+            display: none; /* Oculto por defecto */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
         }
-
-        .status-message { text-align: center; padding: 10px; color: #6488b4; font-weight: 700; font-size: 1.2rem; font-family: 'Inter', sans-serif; width: 100%; max-height: 100%; overflow-y: auto; }
-        .likes-item { padding: 6px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
-        .likes-item span { color: #8c8c8c; }
-        .likes-empty { text-align: center; color: #8c8c8c; padding: 20px; }
+        .resultados-screen h2 {
+            font-family: 'Fraunces', serif;
+            color: #6488b4;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .resultados-list {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-height: 60vh;
+            overflow-y: auto;
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+        }
+        .resultados-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
 
     <!-- Pantalla de Login -->
     <div class="login-screen" id="loginScreen">
-        <div class="login-title">cam match</div>
-        <div class="subtitle">pensamos el cine</div>
-        <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15" aria-label="Tu nombre o alias" autocomplete="off">
+        <h1 style="font-family: 'Fraunces'; font-size: 2.5rem; color: #6488b4;">cam match</h1>
+        <div style="margin-bottom: 20px; font-size: 1.1rem;">torneo de cine</div>
+        <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15" autocomplete="off">
         <button id="loginBtn">Ingresar</button>
     </div>
 
-    <!-- Título y subtítulo -->
-    <h1>cam match</h1>
-    <div class="subtitle">pensamos el cine</div>
-
-    <!-- Contenedor con las flechas laterales -->
-    <div class="carrusel-wrapper">
-        <button type="button" class="flecha-lateral" id="flechaIzq" aria-label="Película anterior">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-
-        <div class="tinder-container" id="cardContainer"></div>
-
-        <button type="button" class="flecha-lateral" id="flechaDer" aria-label="Película siguiente">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
+    <!-- Encabezado del torneo -->
+    <div class="header-torneo" id="headerTorneo" style="display: none;">
+        <h1>cam match</h1>
+        <p id="textoRonda">Ronda 1</p>
     </div>
 
-    <!-- Botones OUT / IN -->
-    <div class="buttons">
-        <button type="button" class="btn btn-no" id="rejectBtn" aria-label="No me interesa">
-            <svg viewBox="0 0 24 24" width="26" height="26" stroke="#6488b4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-        <button type="button" class="btn btn-yes" id="acceptBtn" aria-label="Me interesa">
-            <svg viewBox="0 0 24 24" width="30" height="30" fill="#6488b4" stroke="none" aria-hidden="true">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-        </button>
+    <!-- Contenedor del Match (VS) -->
+    <div class="match-container" id="matchContainer" style="display: none;">
+        <div class="movie-card" id="cardA" onclick="seleccionarGanadora('A')">
+            <img class="poster" id="posterA" src="" alt="">
+            <div class="movie-info">
+                <div class="movie-title" id="tituloA"></div>
+                <div class="movie-year" id="anioA"></div>
+                <div class="movie-original-title" id="originalA"></div>
+                <div class="movie-details" id="detallesA"></div>
+            </div>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <div class="movie-card" id="cardB" onclick="seleccionarGanadora('B')">
+            <img class="poster" id="posterB" src="" alt="">
+            <div class="movie-info">
+                <div class="movie-title" id="tituloB"></div>
+                <div class="movie-year" id="anioB"></div>
+                <div class="movie-original-title" id="originalB"></div>
+                <div class="movie-details" id="detallesB"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Resultados Finales -->
+    <div class="resultados-screen" id="resultadosScreen">
+        <h2>🏆 ¡Torneo Terminado!</h2>
+        <p>Estas son las películas que elegiste:</p>
+        <div class="resultados-list" id="resultadosList"></div>
     </div>
 
     <script>
+        // CONEXIÓN A SUPABASE
         const SUPABASE_URL = 'https://sngdbenngxnbxhapkqkc.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const container = document.getElementById('cardContainer');
-        const subtitulo = document.querySelector('body > .subtitle');
-        const flechaIzq = document.getElementById('flechaIzq');
-        const flechaDer = document.getElementById('flechaDer');
-
         let usuarioActual = "";
-        let peliculasElegidas = [];
-        let tarjetaActualIndex = 0;
-        let procesando = false;
-        window.listaPeliculas = [];
+        let peliculasTodas = [];
+        
+        // Variables de estado del torneo
+        let rondaActual = 1;
+        let crucesPendientes = [];
+        let cruceActualIndex = 0;
+        let ganadorasRonda = [];
+        let historialGanadorasFinal = []; // Para mostrar al final
 
-        function ingresar() {
+        // Elementos del DOM
+        const loginScreen = document.getElementById('loginScreen');
+        const headerTorneo = document.getElementById('headerTorneo');
+        const matchContainer = document.getElementById('matchContainer');
+        const resultadosScreen = document.getElementById('resultadosScreen');
+        const textoRonda = document.getElementById('textoRonda');
+
+        // Login
+        document.getElementById('loginBtn').addEventListener('click', iniciarTorneo);
+        document.getElementById('usernameInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') iniciarTorneo();
+        });
+
+        async function iniciarTorneo() {
             const nombre = document.getElementById('usernameInput').value.trim();
             if (!nombre) return;
             usuarioActual = nombre;
-            document.getElementById('loginScreen').style.display = 'none';
-            inicializarApp();
-        }
+            
+            loginScreen.style.display = 'none';
+            headerTorneo.style.display = 'block';
+            matchContainer.style.display = 'flex';
 
-        document.getElementById('loginBtn').addEventListener('click', ingresar);
-        document.getElementById('usernameInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') ingresar();
-        });
-
-        async function inicializarApp() {
             try {
                 const respuesta = await fetch('./peliculas.json');
-                if (!respuesta.ok) throw new Error("No se encontró el archivo JSON");
-
                 const peliculasReales = await respuesta.json();
-                const peliculasActivas = peliculasReales.filter(p => p.activa === true);
-                peliculasActivas.sort(() => Math.random() - 0.5);
+                
+                // Filtramos activas y mezclamos
+                peliculasTodas = peliculasReales.filter(p => p.activa === true);
+                peliculasTodas.sort(() => Math.random() - 0.5);
 
-                cargarTarjetas(peliculasActivas);
+                if (peliculasTodas.length % 2 !== 0) {
+                    alert("El número de películas activas debe ser par para hacer los cruces. Hay " + peliculasTodas.length);
+                    return;
+                }
+
+                armarRonda(peliculasTodas);
             } catch (error) {
                 console.error("Error al cargar:", error);
-                container.innerHTML = "<div class='status-message'>Error al cargar las películas.</div>";
+                alert("Error al cargar las películas.");
             }
         }
 
         // Función para abreviar el nombre del director
         function abreviarNombre(nombreCompleto) {
             if (!nombreCompleto) return "";
-            
             return nombreCompleto.split(' ').map((palabra, index, array) => {
                 if (palabra[0] === palabra[0].toUpperCase() && index < array.length - 1) {
                     if (palabra.includes('-')) {
@@ -396,278 +358,140 @@
             }).join(' ');
         }
 
-        function crearTarjeta(movie) {
-            const card = document.createElement('div');
-            card.classList.add('movie-card');
-            card.setAttribute('data-id', movie.id);
+        // Arma los cruces de la ronda
+        function armarRonda(peliculas) {
+            crucesPendientes = [];
+            ganadorasRonda = [];
+            cruceActualIndex = 0;
 
-            const img = document.createElement('img');
-            img.src = movie.poster ? movie.poster : 'https://via.placeholder.com/600x900/cccccc/ffffff?text=Sin+Imagen';
-            img.alt = movie.titulo || '';
-
-            const info = document.createElement('div');
-            info.className = 'movie-info';
-
-            const row = document.createElement('div');
-            row.className = 'movie-title-row';
-
-            const titulo = document.createElement('span');
-            titulo.className = 'movie-title';
-            titulo.textContent = movie.titulo;
-
-            const anio = document.createElement('span');
-            anio.className = 'movie-year';
-            anio.textContent = movie.anio;
-
-            row.appendChild(titulo);
-            row.appendChild(anio);
-            info.appendChild(row);
-
-            if (movie.titulo_original && movie.titulo_original.trim() !== "") {
-                const original = document.createElement('div');
-                original.className = 'movie-original-title';
-                original.textContent = movie.titulo_original;
-                info.appendChild(original);
-            }
-
-            if (movie.director || movie.pais || movie.duracion) {
-                const details = document.createElement('div');
-                details.className = 'movie-details';
-                
-                let partes = [];
-                if (movie.director) partes.push(abreviarNombre(movie.director)); 
-                if (movie.pais) partes.push(movie.pais);
-                if (movie.duracion) partes.push(`${movie.duracion} min`);
-                
-                details.textContent = partes.join(' · '); 
-                info.appendChild(details);
-            }
-
-            card.appendChild(img);
-            card.appendChild(info);
-            return card;
-        }
-
-        function cargarTarjetas(listaPeliculas) {
-            container.innerHTML = "";
-            window.listaPeliculas = listaPeliculas;
-            tarjetaActualIndex = 0;
-
-            if (listaPeliculas.length === 0) {
-                finalizarVotacion();
-                return;
-            }
-
-            listaPeliculas.forEach(movie => container.appendChild(crearTarjeta(movie)));
-
-            actualizarCarrusel();
-            configurarGestosCarrusel();
-        }
-
-        function actualizarCarrusel() {
-            const total = window.listaPeliculas.length;
-            if (total === 0) return;
-
-            const offset = -(tarjetaActualIndex * 100);
-            const tarjetas = container.querySelectorAll('.movie-card');
-
-            tarjetas.forEach((card, index) => {
-                card.style.left = `${(index * 100) + offset}%`;
-            });
-
-            if (subtitulo) {
-                subtitulo.innerText = `Película ${tarjetaActualIndex + 1} de ${total}`;
-                subtitulo.style.fontWeight = "bold";
-                subtitulo.style.color = "rgba(120, 120, 120, 0.5)";
-            }
-
-            flechaIzq.style.opacity = "0.5";
-            flechaDer.style.opacity = "0.5";
-        }
-
-        function irAnterior() {
-            if (procesando) return;
-            const total = window.listaPeliculas.length;
-            if (total === 0) return;
-
-            if (tarjetaActualIndex > 0) {
-                tarjetaActualIndex--;
-            } else {
-                tarjetaActualIndex = total - 1;
-            }
-            actualizarCarrusel();
-        }
-
-        function irSiguiente() {
-            if (procesando) return;
-            const total = window.listaPeliculas.length;
-            if (total === 0) return;
-
-            if (tarjetaActualIndex < total - 1) {
-                tarjetaActualIndex++;
-            } else {
-                tarjetaActualIndex = 0;
-            }
-            actualizarCarrusel();
-        }
-
-        function configurarGestosCarrusel() {
-            const hamertime = new Hammer(container, { inputClass: Hammer.TouchMouseInput });
-            hamertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-
-            hamertime.on('pan', (event) => {
-                if (procesando || window.listaPeliculas.length === 0) return;
-                const offset = -(tarjetaActualIndex * 100) + (event.deltaX / 2.2);
-                const tarjetas = container.querySelectorAll('.movie-card');
-                tarjetas.forEach((card, index) => {
-                    card.style.transition = 'none';
-                    card.style.left = `${(index * 100) + offset}%`;
+            for (let i = 0; i < peliculas.length; i += 2) {
+                crucesPendientes.push({
+                    peliculaA: peliculas[i],
+                    peliculaB: peliculas[i + 1]
                 });
-            });
-
-            hamertime.on('panend', (event) => {
-                if (window.listaPeliculas.length === 0) return;
-                const tarjetas = container.querySelectorAll('.movie-card');
-                tarjetas.forEach(card => card.style.transition = '');
-
-                const total = window.listaPeliculas.length;
-
-                if (!procesando) {
-                    if (event.deltaX > 40) {
-                        if (tarjetaActualIndex > 0) {
-                            tarjetaActualIndex--;
-                        } else {
-                            tarjetaActualIndex = total - 1;
-                        }
-                    } else if (event.deltaX < -40) {
-                        if (tarjetaActualIndex < total - 1) {
-                            tarjetaActualIndex++;
-                        } else {
-                            tarjetaActualIndex = 0;
-                        }
-                    }
-                }
-                actualizarCarrusel();
-            });
-
-            flechaIzq.onclick = irAnterior;
-            flechaDer.onclick = irSiguiente;
-        }
-
-        async function guardarVoto(p) {
-            try {
-                await _supabase
-                    .from('votos_taller')
-                    .insert({
-                        participante: usuarioActual,
-                        pelicula_id: p.id,
-                        pelicula_titulo: p.titulo
-                    });
-            } catch (err) {
-                console.error("Error de conexión:", err);
             }
+
+            textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+            mostrarCruce();
         }
 
-        function decidirPelicula(esLike) {
-            if (procesando || window.listaPeliculas.length === 0) return;
-            procesando = true;
+        // Muestra el cruce actual en pantalla
+        function mostrarCruce() {
+            const cruce = crucesPendientes[cruceActualIndex];
+            const A = cruce.peliculaA;
+            const B = cruce.peliculaB;
 
-            const peliculaActual = window.listaPeliculas[tarjetaActualIndex];
-            const tarjetas = container.querySelectorAll('.movie-card');
-            const tarjetaDOM = tarjetas[tarjetaActualIndex];
+            // Resetear clases visuales
+            document.getElementById('cardA').classList.remove('perdedora');
+            document.getElementById('cardB').classList.remove('perdedora');
 
-            if (esLike) {
-                const voto = { id: peliculaActual.id, titulo: peliculaActual.titulo, anio: peliculaActual.anio };
-                peliculasElegidas.push(voto);
-                guardarVoto(voto); 
-                tarjetaDOM.style.transform = 'translateX(100%) rotate(15deg)';
-            } else {
-                tarjetaDOM.style.transform = 'translateX(-100%) rotate(-15deg)';
-            }
-            tarjetaDOM.style.opacity = '0';
-
-            setTimeout(() => {
-                tarjetaDOM.remove();
-                window.listaPeliculas.splice(tarjetaActualIndex, 1);
-
-                if (tarjetaActualIndex >= window.listaPeliculas.length && tarjetaActualIndex > 0) {
-                    tarjetaActualIndex--;
-                }
-
-                if (window.listaPeliculas.length === 0) {
-                    if (subtitulo) {
-                        subtitulo.innerText = "pensamos el cine";
-                        subtitulo.style.fontWeight = "400";
-                        subtitulo.style.color = "#222222";
-                    }
-                    finalizarVotacion();
-                } else {
-                    const tarjetasRestantes = container.querySelectorAll('.movie-card');
-                    tarjetasRestantes.forEach((card, idx) => {
-                        card.style.left = `${idx * 100}%`;
-                        card.style.transform = 'none';
-                        card.style.opacity = '1';
-                        card.style.transition = 'none';
-                    });
-                    setTimeout(() => {
-                        tarjetasRestantes.forEach(card => card.style.transition = '');
-                    }, 50);
-                    
-                    actualizarCarrusel();
-                }
-                procesando = false;
-            }, 300);
-        }
-
-        function finalizarVotacion() {
-            document.querySelector('.buttons').style.display = 'none';
-            flechaIzq.style.display = 'none';
-            flechaDer.style.display = 'none';
-
-            // Le avisamos al contenedor que terminó para que quite la sombra
-            container.classList.add('finalizado');
-            container.innerHTML = "";
+            // Cargar datos A
+            document.getElementById('posterA').src = A.poster || 'https://via.placeholder.com/110x160';
+            document.getElementById('tituloA').textContent = A.titulo;
+            document.getElementById('anioA').textContent = A.anio;
+            document.getElementById('originalA').textContent = A.titulo_original || "";
             
-            const msg = document.createElement('div');
-            msg.className = 'status-message';
-            msg.appendChild(document.createTextNode(`🍿 ¡Elegiste ${peliculasElegidas.length} películas!`));
-            msg.appendChild(document.createElement('br'));
+            let detallesA = [];
+            if (A.director) detallesA.push(abreviarNombre(A.director));
+            if (A.pais) detallesA.push(A.pais);
+            if (A.duracion) detallesA.push(`${A.duracion} min`);
+            document.getElementById('detallesA').textContent = detallesA.join(' · ');
 
-            const lista = document.createElement('div');
-            lista.className = 'likes-list';
+            // Cargar datos B
+            document.getElementById('posterB').src = B.poster || 'https://via.placeholder.com/110x160';
+            document.getElementById('tituloB').textContent = B.titulo;
+            document.getElementById('anioB').textContent = B.anio;
+            document.getElementById('originalB').textContent = B.titulo_original || "";
+            
+            let detallesB = [];
+            if (B.director) detallesB.push(abreviarNombre(B.director));
+            if (B.pais) detallesB.push(B.pais);
+            if (B.duracion) detallesB.push(`${B.duracion} min`);
+            document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            if (peliculasElegidas.length === 0) {
-                const vacio = document.createElement('div');
-                vacio.className = 'likes-empty';
-                vacio.textContent = 'No seleccionaste ninguna película.';
-                lista.appendChild(vacio);
-            } else {
-                peliculasElegidas.forEach(p => {
-                    const item = document.createElement('div');
-                    item.className = 'likes-item';
-                    item.appendChild(document.createTextNode(p.titulo + ' '));
-                    const anio = document.createElement('span');
-                    anio.textContent = p.anio;
-                    item.appendChild(anio);
-                    lista.appendChild(item);
-                });
-
-                // Agregamos la flechita hacia abajo
-                const flechaAbajo = document.createElement('div');
-                flechaAbajo.className = 'flecha-abajo';
-                flechaAbajo.innerHTML = `
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="#6488b4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(90deg);">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                `;
-                lista.appendChild(flechaAbajo);
-            }
-            msg.appendChild(lista);
-            container.appendChild(msg);
+            textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
         }
 
-        document.getElementById('rejectBtn').addEventListener('click', () => decidirPelicula(false));
-        document.getElementById('acceptBtn').addEventListener('click', () => decidirPelicula(true));
+        // Cuando el usuario toca un póster
+        async function seleccionarGanadora(opcion) {
+            const cruce = crucesPendientes[cruceActualIndex];
+            const ganadora = opcion === 'A' ? cruce.peliculaA : cruce.peliculaB;
+            const perdedora = opcion === 'A' ? cruce.peliculaB : cruce.peliculaA;
+
+            // 1. Animación visual
+            const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
+            const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
+            
+            cardPerdedora.classList.add('perdedora');
+
+            // 2. Guardar voto en Supabase (sin bloquear la animación)
+            _supabase.from('votos_torneo').insert({
+                participante: usuarioActual,
+                ronda: rondaActual,
+                pelicula_a_id: cruce.peliculaA.id,
+                pelicula_a_titulo: cruce.peliculaA.titulo,
+                pelicula_b_id: cruce.peliculaB.id,
+                pelicula_b_titulo: cruce.peliculaB.titulo,
+                ganadora_id: ganadora.id,
+                ganadora_titulo: ganadora.titulo
+            }).then(({ error }) => {
+                if (error) console.error("Error al guardar voto:", error);
+            });
+
+            // 3. Guardar en memoria
+            ganadorasRonda.push(ganadora);
+            if (rondaActual === 1) { // Solo guardamos las de la primera ronda para el resumen final
+                historialGanadorasFinal.push(ganadora); 
+            } else if (ganadorasRonda.length === 1) {
+                // Si estamos en la final, guardamos a la campeona
+                historialGanadorasFinal.push(ganadora); 
+            }
+
+            // 4. Pasar al siguiente cruce o a la siguiente ronda
+            setTimeout(() => {
+                cruceActualIndex++;
+                
+                if (cruceActualIndex < crucesPendientes.length) {
+                    // Siguiente cruce de la misma ronda
+                    cardGanadora.classList.remove('perdedora'); // Restauramos por si acaso
+                    mostrarCruce();
+                } else {
+                    // Terminó la ronda
+                    if (ganadorasRonda.length === 1) {
+                        // ERA LA FINAL
+                        finalizarTorneo();
+                    } else {
+                        // Pasamos a la siguiente ronda
+                        rondaActual++;
+                        armarRonda(ganadorasRonda);
+                    }
+                }
+            }, 500); // Esperamos medio segundo para que se vea la animación
+        }
+
+        // Pantalla final
+        function finalizarTorneo() {
+            matchContainer.style.display = 'none';
+            headerTorneo.style.display = 'none';
+            resultadosScreen.style.display = 'flex';
+
+            const lista = document.getElementById('resultadosList');
+            lista.innerHTML = '';
+            
+            // Mostramos las ganadoras de la primera ronda y la campeona final
+            historialGanadorasFinal.forEach((p, index) => {
+                const div = document.createElement('div');
+                div.className = 'resultados-item';
+                
+                if (index === historialGanadorasFinal.length - 1) {
+                    div.innerHTML = `<strong>🏆 ${p.titulo}</strong> <span>${p.anio}</span>`;
+                    div.style.color = '#6488b4';
+                } else {
+                    div.innerHTML = `${p.titulo} <span>${p.anio}</span>`;
+                }
+                lista.appendChild(div);
+            });
+        }
     </script>
 </body>
 </html>
