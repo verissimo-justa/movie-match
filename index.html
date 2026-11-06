@@ -28,6 +28,7 @@
             height: 100vh;
             height: 100dvh;
             width: 100vw;
+            position: relative;
         }
 
         /* Pantalla de Login */
@@ -67,7 +68,7 @@
         /* Contenedor de los cruces (VS) */
         .match-container {
             display: flex;
-            flex-direction: column; /* En vertical, uno arriba del otro */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 20px;
@@ -75,14 +76,16 @@
             max-width: 900px;
             padding: 10px;
             flex-grow: 1;
+            position: relative;
+            transition: all 0.5s ease;
         }
 
-        /* Si la pantalla está horizontal (o es compu), ponemos los pósters uno al lado del otro */
+        .match-container.centrando {
+            opacity: 0.5;
+        }
+
         @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
-            .match-container {
-                flex-direction: row;
-                gap: 60px;
-            }
+            .match-container { flex-direction: row; gap: 60px; }
         }
 
         /* Tarjeta de Película */
@@ -96,7 +99,7 @@
             box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
             border: 2px solid transparent;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
             width: 100%;
             max-width: 380px;
             position: relative;
@@ -107,16 +110,32 @@
             transform: scale(1.02);
         }
 
-        /* Cuando una es eliminada */
+        /* Clases de animación */
         .movie-card.perdedora {
             transform: scale(0);
             opacity: 0;
             pointer-events: none;
         }
 
+        .movie-card.ganadora-centrada {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(100, 136, 180, 0.4);
+            border-color: #6488b4;
+            z-index: 100;
+        }
+
+        .movie-card.salida-derecha {
+            transform: translateX(150%) rotate(10deg);
+            opacity: 0;
+        }
+        .movie-card.salida-izquierda {
+            transform: translateX(-150%) rotate(-10deg);
+            opacity: 0;
+        }
+
         /* Estilos de la foto */
         .movie-card .poster {
-            width: 110px; /* Un poco más chico para que quepa bien en celular */
+            width: 110px;
             height: 160px;
             object-fit: cover;
             border-radius: 8px;
@@ -132,18 +151,11 @@
             flex-grow: 1;
         }
 
-        /* Para la película de la izquierda, los datos van a la derecha del póster
-           Para la de la derecha, los datos van a la izquierda */
+        /* Alineación según posición */
         @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
-            .movie-card:nth-child(1) .movie-info {
-                text-align: left;
-            }
-            .movie-card:nth-child(2) {
-                flex-direction: row-reverse; /* Póster a la derecha, datos a la izquierda */
-            }
-            .movie-card:nth-child(2) .movie-info {
-                text-align: right;
-            }
+            .movie-card:nth-child(1) .movie-info { text-align: left; }
+            .movie-card:nth-child(2) { flex-direction: row-reverse; }
+            .movie-card:nth-child(2) .movie-info { text-align: right; }
         }
 
         /* Tipografías internas */
@@ -154,19 +166,22 @@
             text-transform: uppercase;
             line-height: 1.1;
             margin-bottom: 4px;
-        }
-        .movie-year {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            color: #8c8c8c;
-            margin-bottom: 4px;
+            order: 1; 
         }
         .movie-original-title {
             font-family: 'Oswald', sans-serif;
             font-size: 0.8rem;
             color: #8c8c8c;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
+            order: 2; 
+        }
+        .movie-year {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: #8c8c8c;
+            margin-bottom: 6px;
+            order: 3; 
         }
         .movie-details {
             font-family: 'Inter', sans-serif;
@@ -175,6 +190,7 @@
             text-transform: uppercase;
             font-weight: 600;
             line-height: 1.3;
+            order: 4; 
         }
 
         /* El "VS" entre las películas */
@@ -192,16 +208,41 @@
             justify-content: center;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
-        @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
-            .vs-badge {
-                margin: 0;
-            }
+
+        /* --- ANIMACIÓN DE RONDA --- */
+        .ronda-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7f2d4;
+            z-index: 5000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .ronda-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ronda-texto {
+            font-family: 'Fraunces', serif;
+            font-weight: 900;
+            font-size: 4rem;
+            color: rgba(120, 120, 120, 0.8);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: -2px;
         }
 
         /* Pantalla de Resultados */
         .resultados-screen {
-            display: none; /* Oculto por defecto */
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -248,6 +289,11 @@
         <button id="loginBtn">Ingresar</button>
     </div>
 
+    <!-- Overlay de Ronda -->
+    <div class="ronda-overlay" id="rondaOverlay">
+        <div class="ronda-texto" id="rondaTexto">RONDA 1</div>
+    </div>
+
     <!-- Encabezado del torneo -->
     <div class="header-torneo" id="headerTorneo" style="display: none;">
         <h1>cam match</h1>
@@ -260,20 +306,20 @@
             <img class="poster" id="posterA" src="" alt="">
             <div class="movie-info">
                 <div class="movie-title" id="tituloA"></div>
-                <div class="movie-year" id="anioA"></div>
-                <div class="movie-original-title" id="originalA"></div>
+                <div class="movie-original-title" id="originalA"></div> <!-- Ahora va 2do -->
+                <div class="movie-year" id="anioA"></div> <!-- Ahora va 3ro -->
                 <div class="movie-details" id="detallesA"></div>
             </div>
         </div>
 
-        <div class="vs-badge">VS</div>
+        <div class="vs-badge" id="vsBadge">VS</div>
 
         <div class="movie-card" id="cardB" onclick="seleccionarGanadora('B')">
             <img class="poster" id="posterB" src="" alt="">
             <div class="movie-info">
                 <div class="movie-title" id="tituloB"></div>
-                <div class="movie-year" id="anioB"></div>
-                <div class="movie-original-title" id="originalB"></div>
+                <div class="movie-original-title" id="originalB"></div> <!-- Ahora va 2do -->
+                <div class="movie-year" id="anioB"></div> <!-- Ahora va 3ro -->
                 <div class="movie-details" id="detallesB"></div>
             </div>
         </div>
@@ -295,12 +341,13 @@
         let usuarioActual = "";
         let peliculasTodas = [];
         
-        // Variables de estado del torneo
+        // Variables de estado
         let rondaActual = 1;
         let crucesPendientes = [];
         let cruceActualIndex = 0;
         let ganadorasRonda = [];
-        let historialGanadorasFinal = []; // Para mostrar al final
+        let historialGanadorasFinal = [];
+        let turnoSalida = 1; // 1 para derecha, -1 para izquierda
 
         // Elementos del DOM
         const loginScreen = document.getElementById('loginScreen');
@@ -308,6 +355,9 @@
         const matchContainer = document.getElementById('matchContainer');
         const resultadosScreen = document.getElementById('resultadosScreen');
         const textoRonda = document.getElementById('textoRonda');
+        const rondaOverlay = document.getElementById('rondaOverlay');
+        const rondaTexto = document.getElementById('rondaTexto');
+        const vsBadge = document.getElementById('vsBadge');
 
         // Login
         document.getElementById('loginBtn').addEventListener('click', iniciarTorneo);
@@ -328,23 +378,37 @@
                 const respuesta = await fetch('./peliculas.json');
                 const peliculasReales = await respuesta.json();
                 
-                // Filtramos activas y mezclamos
                 peliculasTodas = peliculasReales.filter(p => p.activa === true);
                 peliculasTodas.sort(() => Math.random() - 0.5);
 
                 if (peliculasTodas.length % 2 !== 0) {
-                    alert("El número de películas activas debe ser par para hacer los cruces. Hay " + peliculasTodas.length);
+                    alert("El número de películas activas debe ser par. Hay " + peliculasTodas.length);
                     return;
                 }
 
-                armarRonda(peliculasTodas);
+                mostrarAnimacionRonda(1, () => {
+                    armarRonda(peliculasTodas);
+                });
             } catch (error) {
                 console.error("Error al cargar:", error);
                 alert("Error al cargar las películas.");
             }
         }
 
-        // Función para abreviar el nombre del director
+        function mostrarAnimacionRonda(numeroRonda, callback) {
+            matchContainer.style.opacity = 0;
+            rondaTexto.innerText = `RONDA ${numeroRonda}`;
+            rondaOverlay.classList.add('active');
+
+            setTimeout(() => {
+                rondaOverlay.classList.remove('active');
+                setTimeout(() => {
+                    matchContainer.style.opacity = 1;
+                    if (callback) callback();
+                }, 1000);
+            }, 2000);
+        }
+
         function abreviarNombre(nombreCompleto) {
             if (!nombreCompleto) return "";
             return nombreCompleto.split(' ').map((palabra, index, array) => {
@@ -358,7 +422,6 @@
             }).join(' ');
         }
 
-        // Arma los cruces de la ronda
         function armarRonda(peliculas) {
             crucesPendientes = [];
             ganadorasRonda = [];
@@ -371,25 +434,24 @@
                 });
             }
 
-            textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
             mostrarCruce();
         }
 
-        // Muestra el cruce actual en pantalla
         function mostrarCruce() {
             const cruce = crucesPendientes[cruceActualIndex];
             const A = cruce.peliculaA;
             const B = cruce.peliculaB;
 
-            // Resetear clases visuales
-            document.getElementById('cardA').classList.remove('perdedora');
-            document.getElementById('cardB').classList.remove('perdedora');
+            document.getElementById('cardA').className = 'movie-card';
+            document.getElementById('cardB').className = 'movie-card';
+            vsBadge.style.opacity = 0.3;
+            vsBadge.style.transform = 'scale(1)';
+            matchContainer.classList.remove('centrando');
 
-            // Cargar datos A
             document.getElementById('posterA').src = A.poster || 'https://via.placeholder.com/110x160';
             document.getElementById('tituloA').textContent = A.titulo;
-            document.getElementById('anioA').textContent = A.anio;
             document.getElementById('originalA').textContent = A.titulo_original || "";
+            document.getElementById('anioA').textContent = A.anio;
             
             let detallesA = [];
             if (A.director) detallesA.push(abreviarNombre(A.director));
@@ -397,11 +459,10 @@
             if (A.duracion) detallesA.push(`${A.duracion} min`);
             document.getElementById('detallesA').textContent = detallesA.join(' · ');
 
-            // Cargar datos B
             document.getElementById('posterB').src = B.poster || 'https://via.placeholder.com/110x160';
             document.getElementById('tituloB').textContent = B.titulo;
-            document.getElementById('anioB').textContent = B.anio;
             document.getElementById('originalB').textContent = B.titulo_original || "";
+            document.getElementById('anioB').textContent = B.anio;
             
             let detallesB = [];
             if (B.director) detallesB.push(abreviarNombre(B.director));
@@ -412,19 +473,25 @@
             textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
         }
 
-        // Cuando el usuario toca un póster
         async function seleccionarGanadora(opcion) {
+            if (matchContainer.classList.contains('centrando')) return;
+
             const cruce = crucesPendientes[cruceActualIndex];
             const ganadora = opcion === 'A' ? cruce.peliculaA : cruce.peliculaB;
             const perdedora = opcion === 'A' ? cruce.peliculaB : cruce.peliculaA;
 
-            // 1. Animación visual
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
             const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
-            
-            cardPerdedora.classList.add('perdedora');
 
-            // 2. Guardar voto en Supabase (sin bloquear la animación)
+            cardPerdedora.classList.add('perdedora');
+            vsBadge.style.opacity = 0;
+            vsBadge.style.transform = 'scale(0)';
+            
+            matchContainer.classList.add('centrando');
+            cardGanadora.classList.add('ganadora-centrada');
+            
+            cardPerdedora.style.display = 'none'; 
+
             _supabase.from('votos_torneo').insert({
                 participante: usuarioActual,
                 ronda: rondaActual,
@@ -435,41 +502,40 @@
                 ganadora_id: ganadora.id,
                 ganadora_titulo: ganadora.titulo
             }).then(({ error }) => {
-                if (error) console.error("Error al guardar voto:", error);
+                if (error) console.error("Error al guardar:", error);
             });
 
-            // 3. Guardar en memoria
             ganadorasRonda.push(ganadora);
-            if (rondaActual === 1) { // Solo guardamos las de la primera ronda para el resumen final
-                historialGanadorasFinal.push(ganadora); 
-            } else if (ganadorasRonda.length === 1) {
-                // Si estamos en la final, guardamos a la campeona
-                historialGanadorasFinal.push(ganadora); 
+            if (rondaActual === 1 || ganadorasRonda.length === 1) {
+                historialGanadorasFinal.push(ganadora);
             }
 
-            // 4. Pasar al siguiente cruce o a la siguiente ronda
             setTimeout(() => {
-                cruceActualIndex++;
-                
-                if (cruceActualIndex < crucesPendientes.length) {
-                    // Siguiente cruce de la misma ronda
-                    cardGanadora.classList.remove('perdedora'); // Restauramos por si acaso
-                    mostrarCruce();
-                } else {
-                    // Terminó la ronda
-                    if (ganadorasRonda.length === 1) {
-                        // ERA LA FINAL
-                        finalizarTorneo();
+                const claseSalida = turnoSalida === 1 ? 'salida-derecha' : 'salida-izquierda';
+                cardGanadora.classList.add(claseSalida);
+                turnoSalida *= -1;
+
+                setTimeout(() => {
+                    cardPerdedora.style.display = 'flex';
+                    cruceActualIndex++;
+                    
+                    if (cruceActualIndex < crucesPendientes.length) {
+                        mostrarCruce();
                     } else {
-                        // Pasamos a la siguiente ronda
-                        rondaActual++;
-                        armarRonda(ganadorasRonda);
+                        if (ganadorasRonda.length === 1) {
+                            finalizarTorneo();
+                        } else {
+                            rondaActual++;
+                            mostrarAnimacionRonda(rondaActual, () => {
+                                armarRonda(ganadorasRonda);
+                            });
+                        }
                     }
-                }
-            }, 500); // Esperamos medio segundo para que se vea la animación
+                }, 600);
+
+            }, 1000);
         }
 
-        // Pantalla final
         function finalizarTorneo() {
             matchContainer.style.display = 'none';
             headerTorneo.style.display = 'none';
@@ -478,7 +544,6 @@
             const lista = document.getElementById('resultadosList');
             lista.innerHTML = '';
             
-            // Mostramos las ganadoras de la primera ronda y la campeona final
             historialGanadorasFinal.forEach((p, index) => {
                 const div = document.createElement('div');
                 div.className = 'resultados-item';
