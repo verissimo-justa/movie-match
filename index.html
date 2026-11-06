@@ -77,11 +77,6 @@
             padding: 10px;
             flex-grow: 1;
             position: relative;
-            transition: all 0.5s ease;
-        }
-
-        .match-container.centrando {
-            opacity: 0.5;
         }
 
         @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
@@ -103,6 +98,7 @@
             width: 100%;
             max-width: 380px;
             position: relative;
+            z-index: 1;
         }
 
         .movie-card:hover {
@@ -110,26 +106,31 @@
             transform: scale(1.02);
         }
 
-        /* Clases de animación */
+        /* Animaciones de selección */
         .movie-card.perdedora {
-            transform: scale(0);
+            transform: scale(0.8);
             opacity: 0;
             pointer-events: none;
         }
 
         .movie-card.ganadora-centrada {
-            transform: scale(1.1);
-            box-shadow: 0 15px 35px rgba(100, 136, 180, 0.4);
-            border-color: #6488b4;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.1);
             z-index: 100;
+            box-shadow: 0 20px 40px rgba(100, 136, 180, 0.4);
+            border-color: #6488b4;
+            pointer-events: none;
+            margin: 0;
         }
 
         .movie-card.salida-derecha {
-            transform: translateX(150%) rotate(10deg);
+            transform: translate(150%, -50%) rotate(15deg) scale(1.1);
             opacity: 0;
         }
         .movie-card.salida-izquierda {
-            transform: translateX(-150%) rotate(-10deg);
+            transform: translate(-250%, -50%) rotate(-15deg) scale(1.1);
             opacity: 0;
         }
 
@@ -151,7 +152,6 @@
             flex-grow: 1;
         }
 
-        /* Alineación según posición */
         @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
             .movie-card:nth-child(1) .movie-info { text-align: left; }
             .movie-card:nth-child(2) { flex-direction: row-reverse; }
@@ -211,36 +211,53 @@
             transition: all 0.3s ease;
         }
 
-        /* --- ANIMACIÓN DE RONDA --- */
-        .ronda-overlay {
+        /* --- ANIMACIONES FULLSCREEN (RONDA Y GRILLA) --- */
+        .ronda-overlay, .grilla-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background-color: #f7f2d4;
             z-index: 5000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
         }
 
-        .ronda-overlay.active {
+        .ronda-overlay.active, .grilla-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
 
         .ronda-texto {
-            font-family: 'Fraunces', serif;
-            font-weight: 900;
-            font-size: 4rem;
-            color: rgba(120, 120, 120, 0.8);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 3.5rem; /* 10-20% menor a 4rem */
+            color: rgba(150, 150, 150, 0.7); /* Gris más suave */
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -1px;
         }
 
-        /* Pantalla de Resultados */
+        .grilla-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .grilla-item img {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- PANTALLA FINAL --- */
         .resultados-screen {
             display: none;
             flex-direction: column;
@@ -249,34 +266,53 @@
             text-align: center;
             padding: 20px;
             width: 100%;
+            max-width: 500px;
         }
-        .resultados-screen h2 {
+        
+        .trofeo {
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+        }
+
+        .ganadora-texto {
             font-family: 'Fraunces', serif;
             color: #6488b4;
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
-        .resultados-list {
+
+        /* Ficha grande de la ganadora */
+        .ficha-ganadora {
             background: white;
-            padding: 20px;
             border-radius: 16px;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            max-height: 60vh;
-            overflow-y: auto;
-            width: 100%;
-            max-width: 400px;
-            text-align: left;
-        }
-        .resultados-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 1.1rem;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
+            width: 240px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
         }
+        
+        .ficha-ganadora img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ficha-ganadora .movie-info {
+            text-align: center;
+            padding: 0;
+            width: 100%;
+        }
+
+        .ficha-ganadora .movie-title { font-size: 1.3rem; margin-bottom: 2px; }
+        .ficha-ganadora .movie-original-title { font-size: 0.85rem; margin-bottom: 4px; }
+        .ficha-ganadora .movie-year { font-size: 1.1rem; margin-bottom: 6px; }
+        .ficha-ganadora .movie-details { font-size: 0.8rem; }
+
     </style>
 </head>
 <body>
@@ -289,9 +325,14 @@
         <button id="loginBtn">Ingresar</button>
     </div>
 
-    <!-- Overlay de Ronda -->
+    <!-- Overlay: Animación de Ronda -->
     <div class="ronda-overlay" id="rondaOverlay">
         <div class="ronda-texto" id="rondaTexto">RONDA 1</div>
+    </div>
+
+    <!-- Overlay: Grilla de Miniaturas -->
+    <div class="grilla-overlay" id="grillaOverlay">
+        <div class="grilla-container" id="grillaContainer"></div>
     </div>
 
     <!-- Encabezado del torneo -->
@@ -306,8 +347,8 @@
             <img class="poster" id="posterA" src="" alt="">
             <div class="movie-info">
                 <div class="movie-title" id="tituloA"></div>
-                <div class="movie-original-title" id="originalA"></div> <!-- Ahora va 2do -->
-                <div class="movie-year" id="anioA"></div> <!-- Ahora va 3ro -->
+                <div class="movie-original-title" id="originalA"></div>
+                <div class="movie-year" id="anioA"></div>
                 <div class="movie-details" id="detallesA"></div>
             </div>
         </div>
@@ -318,8 +359,8 @@
             <img class="poster" id="posterB" src="" alt="">
             <div class="movie-info">
                 <div class="movie-title" id="tituloB"></div>
-                <div class="movie-original-title" id="originalB"></div> <!-- Ahora va 2do -->
-                <div class="movie-year" id="anioB"></div> <!-- Ahora va 3ro -->
+                <div class="movie-original-title" id="originalB"></div>
+                <div class="movie-year" id="anioB"></div>
                 <div class="movie-details" id="detallesB"></div>
             </div>
         </div>
@@ -327,9 +368,18 @@
 
     <!-- Pantalla de Resultados Finales -->
     <div class="resultados-screen" id="resultadosScreen">
-        <h2>🏆 ¡Torneo Terminado!</h2>
-        <p>Estas son las películas que elegiste:</p>
-        <div class="resultados-list" id="resultadosList"></div>
+        <div class="trofeo">🏆</div>
+        <div class="ganadora-texto">¡Tenemos tu ganadora!</div>
+        
+        <div class="ficha-ganadora" id="fichaGanadora">
+            <img id="posterGanadora" src="" alt="">
+            <div class="movie-info">
+                <div class="movie-title" id="tituloGanadora"></div>
+                <div class="movie-original-title" id="originalGanadora"></div>
+                <div class="movie-year" id="anioGanadora"></div>
+                <div class="movie-details" id="detallesGanadora"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -341,13 +391,11 @@
         let usuarioActual = "";
         let peliculasTodas = [];
         
-        // Variables de estado
         let rondaActual = 1;
         let crucesPendientes = [];
         let cruceActualIndex = 0;
         let ganadorasRonda = [];
-        let historialGanadorasFinal = [];
-        let turnoSalida = 1; // 1 para derecha, -1 para izquierda
+        let turnoSalida = 1;
 
         // Elementos del DOM
         const loginScreen = document.getElementById('loginScreen');
@@ -358,8 +406,9 @@
         const rondaOverlay = document.getElementById('rondaOverlay');
         const rondaTexto = document.getElementById('rondaTexto');
         const vsBadge = document.getElementById('vsBadge');
+        const grillaOverlay = document.getElementById('grillaOverlay');
+        const grillaContainer = document.getElementById('grillaContainer');
 
-        // Login
         document.getElementById('loginBtn').addEventListener('click', iniciarTorneo);
         document.getElementById('usernameInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') iniciarTorneo();
@@ -386,36 +435,66 @@
                     return;
                 }
 
-                mostrarAnimacionRonda(1, () => {
-                    armarRonda(peliculasTodas);
-                });
+                // Iniciamos la secuencia de Ronda 1
+                iniciarRonda(peliculasTodas);
             } catch (error) {
                 console.error("Error al cargar:", error);
                 alert("Error al cargar las películas.");
             }
         }
 
-        function mostrarAnimacionRonda(numeroRonda, callback) {
+        // Secuencia de inicio de ronda: Espera -> RONDA X -> Grilla -> Cruces
+        function iniciarRonda(peliculas) {
             matchContainer.style.opacity = 0;
-            rondaTexto.innerText = `RONDA ${numeroRonda}`;
-            rondaOverlay.classList.add('active');
-
+            grillaOverlay.classList.remove('active');
+            rondaOverlay.classList.remove('active');
+            
+            // 1. Medio segundo de espera antes del fade in
             setTimeout(() => {
-                rondaOverlay.classList.remove('active');
+                // 2. Fade in RONDA X
+                rondaTexto.innerText = `RONDA ${rondaActual}`;
+                rondaOverlay.classList.add('active');
+
+                // 3. Espera 2s, fade out RONDA X
                 setTimeout(() => {
-                    matchContainer.style.opacity = 1;
-                    if (callback) callback();
-                }, 1000);
-            }, 2000);
+                    rondaOverlay.classList.remove('active');
+
+                    // 4. Espera que termine el fade out (1s) y muestra la grilla
+                    setTimeout(() => {
+                        armarGrilla(peliculas);
+                        grillaOverlay.classList.add('active');
+
+                        // 5. Espera 2.5s, fade out grilla
+                        setTimeout(() => {
+                            grillaOverlay.classList.remove('active');
+
+                            // 6. Espera el fade out y arranca el primer cruce
+                            setTimeout(() => {
+                                matchContainer.style.opacity = 1;
+                                armarRonda(peliculas);
+                            }, 1000);
+
+                        }, 2500);
+                    }, 1000);
+                }, 2000);
+            }, 500);
+        }
+
+        function armarGrilla(peliculas) {
+            grillaContainer.innerHTML = '';
+            peliculas.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'grilla-item';
+                div.innerHTML = `<img src="${p.poster || 'https://via.placeholder.com/110x160'}" alt="">`;
+                grillaContainer.appendChild(div);
+            });
         }
 
         function abreviarNombre(nombreCompleto) {
             if (!nombreCompleto) return "";
             return nombreCompleto.split(' ').map((palabra, index, array) => {
                 if (palabra[0] === palabra[0].toUpperCase() && index < array.length - 1) {
-                    if (palabra.includes('-')) {
-                        return palabra.split('-').map(p => p[0] + '.').join('-');
-                    }
+                    if (palabra.includes('-')) return palabra.split('-').map(p => p[0] + '.').join('-');
                     return palabra[0] + '.';
                 }
                 return palabra;
@@ -433,7 +512,6 @@
                     peliculaB: peliculas[i + 1]
                 });
             }
-
             mostrarCruce();
         }
 
@@ -446,13 +524,11 @@
             document.getElementById('cardB').className = 'movie-card';
             vsBadge.style.opacity = 0.3;
             vsBadge.style.transform = 'scale(1)';
-            matchContainer.classList.remove('centrando');
 
             document.getElementById('posterA').src = A.poster || 'https://via.placeholder.com/110x160';
             document.getElementById('tituloA').textContent = A.titulo;
             document.getElementById('originalA').textContent = A.titulo_original || "";
             document.getElementById('anioA').textContent = A.anio;
-            
             let detallesA = [];
             if (A.director) detallesA.push(abreviarNombre(A.director));
             if (A.pais) detallesA.push(A.pais);
@@ -463,7 +539,6 @@
             document.getElementById('tituloB').textContent = B.titulo;
             document.getElementById('originalB').textContent = B.titulo_original || "";
             document.getElementById('anioB').textContent = B.anio;
-            
             let detallesB = [];
             if (B.director) detallesB.push(abreviarNombre(B.director));
             if (B.pais) detallesB.push(B.pais);
@@ -474,24 +549,25 @@
         }
 
         async function seleccionarGanadora(opcion) {
-            if (matchContainer.classList.contains('centrando')) return;
+            if (document.querySelector('.ganadora-centrada')) return; // Evitar doble clic
 
             const cruce = crucesPendientes[cruceActualIndex];
             const ganadora = opcion === 'A' ? cruce.peliculaA : cruce.peliculaB;
-            const perdedora = opcion === 'A' ? cruce.peliculaB : cruce.peliculaA;
-
+            
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
             const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
 
+            // La perdedora desaparece
             cardPerdedora.classList.add('perdedora');
             vsBadge.style.opacity = 0;
             vsBadge.style.transform = 'scale(0)';
             
-            matchContainer.classList.add('centrando');
-            cardGanadora.classList.add('ganadora-centrada');
-            
-            cardPerdedora.style.display = 'none'; 
+            // La ganadora se centra (la clase fixed hace que vuele al medio)
+            setTimeout(() => {
+                cardGanadora.classList.add('ganadora-centrada');
+            }, 100);
 
+            // Guardar voto
             _supabase.from('votos_torneo').insert({
                 participante: usuarioActual,
                 ronda: rondaActual,
@@ -506,56 +582,47 @@
             });
 
             ganadorasRonda.push(ganadora);
-            if (rondaActual === 1 || ganadorasRonda.length === 1) {
-                historialGanadorasFinal.push(ganadora);
-            }
 
+            // Esperar 1.5s centrada, luego hacerla volar
             setTimeout(() => {
                 const claseSalida = turnoSalida === 1 ? 'salida-derecha' : 'salida-izquierda';
                 cardGanadora.classList.add(claseSalida);
                 turnoSalida *= -1;
 
                 setTimeout(() => {
-                    cardPerdedora.style.display = 'flex';
-                    cruceActualIndex++;
+                    cardPerdedora.classList.remove('perdedora');
+                    cardGanadora.className = 'movie-card'; // Resetea todo (incluido fixed)
                     
+                    cruceActualIndex++;
                     if (cruceActualIndex < crucesPendientes.length) {
                         mostrarCruce();
                     } else {
                         if (ganadorasRonda.length === 1) {
-                            finalizarTorneo();
+                            finalizarTorneo(ganadora);
                         } else {
                             rondaActual++;
-                            mostrarAnimacionRonda(rondaActual, () => {
-                                armarRonda(ganadorasRonda);
-                            });
+                            iniciarRonda(ganadorasRonda);
                         }
                     }
-                }, 600);
-
-            }, 1000);
+                }, 800); // Tiempo de vuelo
+            }, 1500); // Tiempo centrada
         }
 
-        function finalizarTorneo() {
+        function finalizarTorneo(ganadoraFinal) {
             matchContainer.style.display = 'none';
             headerTorneo.style.display = 'none';
             resultadosScreen.style.display = 'flex';
 
-            const lista = document.getElementById('resultadosList');
-            lista.innerHTML = '';
+            document.getElementById('posterGanadora').src = ganadoraFinal.poster || 'https://via.placeholder.com/240x360';
+            document.getElementById('tituloGanadora').textContent = ganadoraFinal.titulo;
+            document.getElementById('originalGanadora').textContent = ganadoraFinal.titulo_original || "";
+            document.getElementById('anioGanadora').textContent = ganadoraFinal.anio;
             
-            historialGanadorasFinal.forEach((p, index) => {
-                const div = document.createElement('div');
-                div.className = 'resultados-item';
-                
-                if (index === historialGanadorasFinal.length - 1) {
-                    div.innerHTML = `<strong>🏆 ${p.titulo}</strong> <span>${p.anio}</span>`;
-                    div.style.color = '#6488b4';
-                } else {
-                    div.innerHTML = `${p.titulo} <span>${p.anio}</span>`;
-                }
-                lista.appendChild(div);
-            });
+            let detalles = [];
+            if (ganadoraFinal.director) detalles.push(abreviarNombre(ganadoraFinal.director));
+            if (ganadoraFinal.pais) detalles.push(ganadoraFinal.pais);
+            if (ganadoraFinal.duracion) detalles.push(`${ganadoraFinal.duracion} min`);
+            document.getElementById('detallesGanadora').textContent = detalles.join(' · ');
         }
     </script>
 </body>
