@@ -518,12 +518,15 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            // Si el subtítulo está vacío, lo llenamos. Si no, lo actualizamos con el cruce actual.
-            const esFinalCruce = (crucesPendientes.length === 1);
-            if (esFinalCruce) {
-                textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
-            } else {
-                textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+            // NUEVO: Solo actualizamos el subtítulo si NO estamos en medio de una animación de ronda
+            // (es decir, si ya pasaron los carteles de RONDA X y la grilla)
+            if (matchContainer.style.opacity === "1") {
+                const esFinalCruce = (crucesPendientes.length === 1);
+                if (esFinalCruce) {
+                    textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
+                } else {
+                    textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+                }
             }
 
             setTimeout(() => {
