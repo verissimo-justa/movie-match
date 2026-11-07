@@ -403,6 +403,9 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
+            // NUEVO: Ocultamos el subtítulo antes de la animación
+            textoRonda.style.visibility = 'hidden';
+
             const esFinal = (peliculas.length === 2);
             
             if (esFinal) {
@@ -429,6 +432,10 @@
 
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
+                                
+                                // NUEVO: Volvemos a mostrar el subtítulo justo antes de los cruces
+                                textoRonda.style.visibility = 'visible'; 
+                                
                                 armarRonda(peliculas);
                             }, 1000);
                         }, 2000);
