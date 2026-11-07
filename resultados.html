@@ -128,7 +128,7 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // LÓGICA DE PUNTOS: Por Ronda Alcanzada
+        // LÓGICA DE PUNTOS
         const PUNTOS_RONDA = { 1: 0, 2: 1, 3: 2, 4: 3 };
         const BONO_GANADORA = 5; 
 
@@ -144,49 +144,37 @@
                     return;
                 }
 
-                // Agrupamos los votos por participante
-                const participantes = {};
-                votos.forEach(v => {
-                    if (!participantes[v.participante]) participantes[v.participante] = [];
-                    participantes[v.participante].push(v);
-                });
-
                 const puntajes = {};
                 const desgloses = {};
                 const infoPeliculas = {};
 
-                // Calculamos los puntos para cada participante
-                for (const [nombre, votosDelParticipante] of Object.entries(participantes)) {
+                // Procesamos voto por voto
+                votos.forEach(voto => {
+                    const idGanadora = voto.ganadora_id;
+                    const tituloGanadora = voto.ganadora_titulo;
+                    const ronda = voto.ronda;
+
+                    if (!infoPeliculas[idGanadora]) infoPeliculas[idGanadora] = { titulo: tituloGanadora };
+                    if (!puntajes[idGanadora]) {
+                        puntajes[idGanadora] = 0;
+                        desgloses[idGanadora] = { 2: 0, 3: 0, 4: 0, bono: 0 };
+                    }
+
+                    // Sumamos puntos por ronda
+                    let puntosRonda = PUNTOS_RONDA[ronda] || 0;
+                    puntajes[idGanadora] += puntosRonda;
                     
-                    // Ronda máxima a la que llegó este participante
-                    const rondaMaxima = Math.max(...votosDelParticipante.map(v => v.ronda));
+                    // Anotamos el desglose si es ronda 2, 3 o 4
+                    if (ronda >= 2) {
+                        desgloses[idGanadora][ronda]++;
+                    }
 
-                    votosDelParticipante.forEach(voto => {
-                        const idGanadora = voto.ganadora_id;
-                        const tituloGanadora = voto.ganadora_titulo;
-
-                        if (!infoPeliculas[idGanadora]) infoPeliculas[idGanadora] = { titulo: tituloGanadora };
-                        if (!puntajes[idGanadora]) {
-                            puntajes[idGanadora] = 0;
-                            desgloses[idGanadora] = { 2: 0, 3: 0, 4: 0, bono: 0 }; // Solo contamos de R2 en adelante
-                        }
-
-                        // Sumamos puntos por la ronda alcanzada
-                        let puntos = PUNTOS_RONDA[voto.ronda] || 0;
-                        puntajes[idGanadora] += puntos;
-                        
-                        // Si la ronda fue 2, 3 o 4, lo anotamos en el desglose
-                        if (voto.ronda >= 2) {
-                            desgloses[idGanadora][voto.ronda]++;
-                        }
-
-                        // Si esta victoria fue en la ronda máxima (la final), sumamos el bono
-                        if (voto.ronda === rondaMaxima) {
-                            puntajes[idGanadora] += BONO_GANADORA;
-                            desgloses[idGanadora].bono++;
-                        }
-                    });
-                }
+                    // Si ganó la Ronda 4, se lleva el bono
+                    if (ronda === 4) {
+                        puntajes[idGanadora] += BONO_GANADORA;
+                        desgloses[idGanadora].bono++;
+                    }
+                });
 
                 // Ordenamos el ranking
                 const rankingArray = Object.keys(puntajes).map(id => ({
@@ -199,7 +187,7 @@
                 // Mostramos en pantalla
                 document.getElementById('loading').style.display = 'none';
                 
-                const participantesUnicos = Object.keys(participantes).length;
+                const participantesUnicos = new Set(votos.map(v => v.participante)).size;
                 document.getElementById('subtitulo').innerText = `Total de participantes: ${participantesUnicos}`;
                 
                 const contenedor = document.getElementById('rankingContainer');
