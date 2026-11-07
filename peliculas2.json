@@ -37,8 +37,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kQOrS0DLUXYsqPMedM2G6NJcJBq.jpg",
     "director": "Jacques Tati",
     "pais": "FR",
-    "duracion": 115,
-    "activa": true
+    "duracion": 115
   },
   {
     "id": 5,
@@ -340,7 +339,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/vPTZwlq1IC4o1DCsEZEl2uGljzm.jpg",
     "director": "Elio Petri",
     "pais": "IT",
-    "duracion": 111
+    "duracion": 111,
+    "activa": true
   },
   {
     "id": 34,
