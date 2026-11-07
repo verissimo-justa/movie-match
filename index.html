@@ -50,7 +50,9 @@
 
         /* Título superior */
         .header-torneo {
-            text-align: center; margin-top: 15px; margin-bottom: 15px; z-index: 10;
+            text-align: center; margin-top: 15px; margin-bottom: 15px; 
+            z-index: 6000; /* NUEVO: Para que quede por encima de las animaciones */
+            position: relative; /* NUEVO: Para que el z-index funcione */
         }
         .header-torneo h1 {
             font-family: 'Fraunces', serif !important; font-weight: 900 !important;
@@ -142,9 +144,19 @@
 
         /* --- ANIMACIONES FULLSCREEN (RONDA Y GRILLA) --- */
         .ronda-overlay, .grilla-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background-color: #f7f2d4; z-index: 5000; opacity: 0; pointer-events: none;
+            position: fixed; 
+            top: 80px; /* NUEVO: Arranca más abajo para no tapar el título */
+            left: 0; 
+            width: 100%; 
+            height: calc(100% - 80px); /* NUEVO: Ajustamos el alto para que no se desborde */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            background-color: #f7f2d4; 
+            z-index: 5000; 
+            opacity: 0; 
+            pointer-events: none;
             transition: opacity 0.8s ease;
         }
         .ronda-overlay.active, .grilla-overlay.active { opacity: 1; pointer-events: auto; }
