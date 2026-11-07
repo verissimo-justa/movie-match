@@ -39,11 +39,11 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .login-screen input {
-            padding: 12px 20px; font-size: 1.1rem; border: 2px solid #6488b4;
+            padding: 12px 20px; font-size: 1.1rem; border: 2px solid #008080;
             border-radius: 8px; margin-bottom: 15px; width: 260px; outline: none; text-align: center;
         }
         .login-screen button {
-            padding: 12px 30px; font-size: 1.1rem; background-color: #6488b4; color: white;
+            padding: 12px 30px; font-size: 1.1rem; background-color: #008080; color: white;
             border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
         }
 
@@ -53,7 +53,7 @@
         }
         .header-torneo h1 {
             font-family: 'Fraunces', serif !important; font-weight: 900 !important;
-            font-size: 2rem; color: #6488b4;
+            font-size: 2rem; color: #008080;
         }
         .header-torneo p {
             font-size: 1rem; font-weight: bold; color: rgba(120, 120, 120, 0.8);
@@ -74,7 +74,7 @@
         .movie-card {
             display: flex; flex-direction: row; align-items: center;
             background: #ffffff; border-radius: 16px; padding: 15px;
-            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.15);
             border: 2px solid transparent; cursor: pointer;
             opacity: 0; /* Arrancan invisibles */
             transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), 
@@ -90,7 +90,7 @@
         }
 
         .movie-card:hover {
-            border-color: #6488b4;
+            border-color: #008080;
         }
 
         /* Clases de animación */
@@ -102,8 +102,8 @@
 
         .movie-card.ganadora-centrada {
             z-index: 100;
-            box-shadow: 0 20px 40px rgba(100, 136, 180, 0.4);
-            border-color: #6488b4;
+            box-shadow: 0 20px 40px rgba(0, 128, 128, 0.4);
+            border-color: #008080;
             pointer-events: none;
         }
 
@@ -129,10 +129,10 @@
         .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; }
         .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase; margin-bottom: 4px; order: 2; }
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c; margin-bottom: 6px; order: 3; }
-        .movie-details { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #6488b4; text-transform: uppercase; font-weight: 600; line-height: 1.3; order: 4; }
+        .movie-details { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #008080; text-transform: uppercase; font-weight: 600; line-height: 1.3; order: 4; }
 
         .vs-badge {
-            font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #6488b4;
+            font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #008080;
             opacity: 0.3; background: white; width: 45px; height: 45px; display: flex;
             align-items: center; justify-content: center; border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;
@@ -167,11 +167,11 @@
             text-align: center; padding: 20px; width: 100%; max-width: 500px;
         }
         .trofeo { font-size: 3.5rem; margin-bottom: 5px; }
-        .ganadora-texto { font-family: 'Fraunces', serif; color: #6488b4; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+        .ganadora-texto { font-family: 'Fraunces', serif; color: #008080; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
 
         .ficha-ganadora {
             background: white; border-radius: 16px; padding: 15px;
-            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15); width: 240px;
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.15); width: 240px;
             display: flex; flex-direction: column; align-items: center;
         }
         .ficha-ganadora img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 12px; }
@@ -185,7 +185,7 @@
 <body>
 
     <div class="login-screen" id="loginScreen">
-        <h1 style="font-family: 'Fraunces'; font-size: 2.5rem; color: #6488b4;">cámara match</h1>
+        <h1 style="font-family: 'Fraunces'; font-size: 2.5rem; color: #008080;">cámara match</h1>
         <div style="margin-bottom: 20px; font-size: 1.1rem;">torneo de pelis</div>
         <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15" autocomplete="off">
         <button id="loginBtn">Ingresar</button>
