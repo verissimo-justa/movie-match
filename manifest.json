@@ -1,6 +1,6 @@
 {
-  "name": "cámara Match - torneo de Pelis",
-  "short_name": "Cámara Match",
+  "name": "cámara match - torneo de Pelis",
+  "short_name": "cámara match",
   "start_url": "/movie-match/",
   "display": "standalone",
   "background_color": "#f7f2d4",
