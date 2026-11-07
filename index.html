@@ -83,6 +83,11 @@
             width: 100%; max-width: 380px; position: relative; z-index: 1;
         }
 
+        /* NUEVO: Cuando están listas, se muestran */
+        .movie-card.visible {
+            opacity: 1;
+        }
+
         /* Al hacer hover solo cambiamos el borde, no el transform, para no romper la animación */
         .movie-card:hover {
             border-color: #6488b4;
