@@ -124,6 +124,7 @@
             .movie-card:nth-child(2) .movie-info { text-align: right; }
         }
 
+        /* Orden de los datos */
         .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; }
         .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase; margin-bottom: 4px; order: 2; }
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c; margin-bottom: 6px; order: 3; }
@@ -300,20 +301,28 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // NUEVO: Actualizamos los textos ACÁ, antes de la animación
+            // Actualizamos los textos ACÁ, antes de la animación
             rondaTexto.innerText = `RONDA ${rondaActual}`;
             textoRonda.innerText = `Ronda ${rondaActual}`;
 
             setTimeout(() => {
-                // (Borramos la línea que estaba acá)
+                // 1. Mostramos el cartel de RONDA X
                 rondaOverlay.classList.add('active');
 
+                // 2. Esperamos 2 segundos a que se lea la ronda
+                setTimeout(() => {
+                    rondaOverlay.classList.remove('active');
+
+                    // 3. Esperamos 1 segundo a que termine el fade out y mostramos la grilla
                     setTimeout(() => {
                         armarGrilla(peliculas);
                         grillaOverlay.classList.add('active');
 
+                        // 4. Esperamos 2 segundos a que se vea la grilla
                         setTimeout(() => {
                             grillaOverlay.classList.remove('active');
+
+                            // 5. Esperamos 1 segundo y arrancamos con los cruces
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
                                 armarRonda(peliculas);
@@ -321,7 +330,7 @@
                         }, 2000);
                     }, 1000);
                 }, 2000);
-            }, 500);
+            }, 500); 
         }
 
         function armarGrilla(peliculas) {
@@ -369,7 +378,6 @@
             cardB.classList.remove('visible');
 
             // 2. Forzamos el re-renderizado moviendo las tarjetas (evita el borde fantasma)
-            // PERO nos aseguramos de reinsertar el "VS" en el medio
             const parent = cardA.parentNode;
             parent.appendChild(cardA);
             parent.insertBefore(vsBadge, cardA.nextSibling);
