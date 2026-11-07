@@ -403,31 +403,25 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // 1. Vaciamos el subtítulo y nos aseguramos de que el título esté visible
+            // NUEVO: Vaciamos el subtítulo y mostramos el encabezado
             textoRonda.innerText = ""; 
             headerTorneo.style.display = 'block';
 
             const esFinal = (peliculas.length === 2);
             
-            // Guardamos el texto que vamos a usar después, pero no lo mostramos aún
-            let textoRondaFinal = "";
             if (esFinal) {
                 rondaTexto.innerText = `RONDA FINAL`;
-                textoRondaFinal = `Ronda Final - Cruce 1 de 1`;
             } else {
                 rondaTexto.innerText = `RONDA ${rondaActual}`;
-                textoRondaFinal = `Ronda ${rondaActual}`; // Lo completamos después en mostrarCruce
             }
 
             setTimeout(() => {
-                // 2. Aparece el cartel de RONDA X (el subtítulo sigue vacío)
                 rondaOverlay.classList.add('active');
 
                 setTimeout(() => {
                     rondaOverlay.classList.remove('active');
 
                     setTimeout(() => {
-                        // 3. Aparece la grilla (el subtítulo sigue vacío)
                         armarGrilla(peliculas);
                         tituloGrilla.style.display = 'none'; 
                         grillaOverlay.classList.add('active');
@@ -437,9 +431,6 @@
 
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
-                                
-                                // 4. AHORA SÍ: Llenamos el subtítulo y arrancamos los cruces
-                                textoRonda.innerText = textoRondaFinal;
                                 armarRonda(peliculas);
                             }, 1000);
                         }, 2000);
@@ -527,11 +518,15 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            const esFinalCruce = (crucesPendientes.length === 1);
-            if (esFinalCruce) {
-                textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
-            } else {
-                textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+            // Si el subtítulo está vacío, significa que venimos de una animación de ronda. 
+            // Recién ahí lo actualizamos con el número de cruce.
+            if (textoRonda.innerText === "") {
+                const esFinalCruce = (crucesPendientes.length === 1);
+                if (esFinalCruce) {
+                    textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
+                } else {
+                    textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+                }
             }
 
             setTimeout(() => {
