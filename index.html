@@ -181,7 +181,10 @@
             display: flex; flex-direction: column; align-items: center;
         }
         .ficha-ganadora img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 12px; }
-        .ficha-ganadora .movie-info { text-align: center; padding: 0; width: 100%; }
+        
+        /* CORRECCIÓN: Alineación a la izquierda para los datos de la ganadora */
+        .ficha-ganadora .movie-info { text-align: left; padding: 0; width: 100%; }
+        
         .ficha-ganadora .movie-title { font-size: 1.3rem; margin-bottom: 2px; }
         .ficha-ganadora .movie-original-title { font-size: 0.85rem; margin-bottom: 4px; }
         .ficha-ganadora .movie-year { font-size: 1.1rem; margin-bottom: 6px; }
@@ -278,7 +281,7 @@
         
         let peliculasEliminadas = []; 
         let esperandoRepechaje = false;
-        let animandoRonda = false; // NUEVO: Bandera para controlar el subtítulo
+        let animandoRonda = false;
 
         const loginScreen = document.getElementById('loginScreen');
         const headerTorneo = document.getElementById('headerTorneo');
@@ -335,7 +338,7 @@
             matchContainer.style.display = 'flex';
             
             matchContainer.style.opacity = 1;
-            textoRonda.style.display = 'block'; // Aseguramos que se vea
+            textoRonda.style.display = 'block'; 
             mostrarCruce();
         });
 
@@ -407,7 +410,6 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // NUEVO: Ocultamos el subtítulo por completo
             textoRonda.style.display = 'none'; 
 
             const esFinal = (peliculas.length === 2);
@@ -435,7 +437,7 @@
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
                                 animandoRonda = false; 
-                                textoRonda.style.display = 'block'; // NUEVO: Lo mostramos de nuevo
+                                textoRonda.style.display = 'block'; 
                                 armarRonda(peliculas);
                             }, 1000);
                         }, 2000);
@@ -475,8 +477,7 @@
             }
             mostrarCruce();
         }
-        // Función para traducir códigos de país
-        // Función para traducir códigos de país
+
         function traducirPais(codigo) {
             const paises = {
                 'US': 'USA',
@@ -561,7 +562,6 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            // SOLO actualizamos el subtítulo si NO estamos en medio de una animación de ronda
             if (!animandoRonda) {
                 const esFinalCruce = (crucesPendientes.length === 1);
                 if (esFinalCruce) {
@@ -691,22 +691,18 @@
         }
 
         function armarTernaFinal() {
-            // 1. Ocultamos el encabezado para ganar espacio
             headerTorneo.style.display = 'none';
 
             const finalistas = ganadorasRonda;
             const parent = matchContainer;
 
-            // 2. FORZAMOS EL DISEÑO EN COLUMNA
             parent.style.flexDirection = 'column'; 
             parent.style.alignItems = 'center';
             parent.style.justifyContent = 'center';
             parent.style.gap = '10px';
 
-            // 3. Limpiamos el contenedor
             parent.innerHTML = ''; 
 
-            // 4. Agregamos el cartel ARRIBA de todo
             const indicador = document.createElement('div');
             indicador.innerText = "¡Elegí a la campeona!";
             indicador.style.textAlign = 'center';
@@ -716,14 +712,12 @@
             indicador.style.marginBottom = '10px';
             parent.appendChild(indicador);
 
-            // 5. Agregamos las 3 tarjetas apiladas
             finalistas.forEach((peli, index) => {
                 const card = document.createElement('div');
                 card.className = 'movie-card visible';
                 card.style.marginBottom = '10px'; 
                 card.onclick = () => elegirCampeona(peli);
                 
-                // Armamos los detalles de forma limpia (sin puntos de más)
                 let detalles = [];
                 if (peli.director) detalles.push(abreviarNombre(peli.director));
                 if (peli.pais) detalles.push(traducirPais(peli.pais));
