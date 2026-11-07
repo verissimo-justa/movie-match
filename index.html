@@ -424,7 +424,13 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+            // NUEVO: Si es la final, el subtítulo dice "Ronda Final"
+            const esFinalCruce = (crucesPendientes.length === 1);
+            if (esFinalCruce) {
+                textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
+            } else {
+                textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+            }
 
             // 5. Hacemos visibles las tarjetas una vez que todo está listo
             setTimeout(() => {
