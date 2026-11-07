@@ -475,7 +475,34 @@
             }
             mostrarCruce();
         }
-
+        // Función para traducir códigos de país
+        function traducirPais(codigo) {
+            const paises = {
+                'US': 'EEUU',
+                'FR': 'FRA',
+                'KR': 'COR',
+                'JP': 'JAP',
+                'GB': 'GBR',
+                'IT': 'ITA',
+                'DE': 'ALE',
+                'AR': 'ARG',
+                'BR': 'BRA',
+                'MX': 'MEX',
+                'ES': 'ESP',
+                'SE': 'SUE',
+                'BE': 'BEL',
+                'NL': 'PBA',
+                'PL': 'POL',
+                'HK': 'HKG',
+                'RU': 'RUS',
+                'CN': 'CHN',
+                'CL': 'CHI',
+                'XC': 'CHE',
+                'RFA': 'RFA'
+            };
+            return paises[codigo] || codigo; // Si no está en la lista, deja el original
+            
+        }
         function mostrarCruce() {
             const cruce = crucesPendientes[cruceActualIndex];
             const A = cruce.peliculaA;
