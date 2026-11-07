@@ -48,10 +48,10 @@
             border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
         }
 
-        /* --- NUEVO: Cartel de "Continuar Torneo" --- */
+        /* --- Cartel de "Continuar Torneo" --- */
         .modal-continuar {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(247, 242, 212, 0.95); /* Fondo crema semitransparente */
+            background-color: rgba(247, 242, 212, 0.95);
             z-index: 9999;
             display: none; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 20px;
@@ -162,7 +162,8 @@
             display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
             gap: 15px; max-width: 600px; width: 90%;
         }
-        .grilla-item { width: 70px; flex-shrink: 0; }
+        .grilla-item { width: 70px; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; }
+        .grilla-item:hover { transform: scale(1.1); }
         @media (min-width: 600px) { .grilla-item { width: 100px; } }
         .grilla-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
@@ -210,7 +211,9 @@
         <div class="ronda-texto" id="rondaTexto">RONDA 1</div>
     </div>
 
+    <!-- Overlay de la Grilla (usado para la Ronda y para el Repechaje) -->
     <div class="grilla-overlay" id="grillaOverlay">
+        <h2 id="tituloGrilla" style="font-family: 'Oswald'; color: #008080; margin-bottom: 20px; display: none; text-align: center;"></h2>
         <div class="grilla-container" id="grillaContainer"></div>
     </div>
 
@@ -263,7 +266,6 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // CLAVE PARA GUARDAR EL PROGRESO EN EL TELÉFONO
         const CLAVE_GUARDADO = 'camara_match_progreso';
 
         let usuarioActual = "";
@@ -273,6 +275,10 @@
         let cruceActualIndex = 0;
         let ganadorasRonda = [];
         let turnoSalida = 1;
+        
+        // NUEVO: Array para guardar las que van perdiendo
+        let peliculasEliminadas = []; 
+        let esperandoRepechaje = false;
 
         const loginScreen = document.getElementById('loginScreen');
         const headerTorneo = document.getElementById('headerTorneo');
@@ -284,8 +290,8 @@
         const vsBadge = document.getElementById('vsBadge');
         const grillaOverlay = document.getElementById('grillaOverlay');
         const grillaContainer = document.getElementById('grillaContainer');
+        const tituloGrilla = document.getElementById('tituloGrilla');
 
-        // Elementos del modal
         const modalContinuar = document.getElementById('modalContinuar');
         const textoModalContinuar = document.getElementById('textoModalContinuar');
         const btnContinuar = document.getElementById('btnContinuar');
@@ -296,13 +302,11 @@
             if (e.key === 'Enter') iniciarTorneo();
         });
 
-        // Al cargar la página, revisamos si hay un progreso guardado
         window.addEventListener('DOMContentLoaded', () => {
             const guardado = localStorage.getItem(CLAVE_GUARDADO);
             if (guardado) {
                 try {
                     const estado = JSON.parse(guardado);
-                    // Si el torneo no estaba terminado, mostramos el cartel
                     if (estado && !estado.terminado && estado.nombre) {
                         textoModalContinuar.innerText = `Hola ${estado.nombre}, parece que no terminaste tu torneo. ¿Querés continuar donde dejaste?`;
                         modalContinuar.style.display = 'flex';
@@ -312,13 +316,11 @@
             }
         });
 
-        // Botón para continuar el torneo guardado
         btnContinuar.addEventListener('click', () => {
             const guardado = localStorage.getItem(CLAVE_GUARDADO);
             if (!guardado) return;
             const estado = JSON.parse(guardado);
             
-            // Restauramos todas las variables
             usuarioActual = estado.nombre;
             peliculasTodas = estado.peliculasTodas;
             rondaActual = estado.rondaActual;
@@ -326,17 +328,16 @@
             cruceActualIndex = estado.cruceActualIndex;
             ganadorasRonda = estado.ganadorasRonda;
             turnoSalida = estado.turnoSalida;
+            peliculasEliminadas = estado.peliculasEliminadas || []; // Restauramos las eliminadas
 
             modalContinuar.style.display = 'none';
             headerTorneo.style.display = 'block';
             matchContainer.style.display = 'flex';
             
-            // Saltamos la animación de ronda y vamos directo al cruce
             matchContainer.style.opacity = 1;
             mostrarCruce();
         });
 
-        // Botón para empezar de cero
         btnReiniciar.addEventListener('click', () => {
             localStorage.removeItem(CLAVE_GUARDADO);
             modalContinuar.style.display = 'none';
@@ -352,7 +353,6 @@
             matchContainer.style.display = 'flex';
 
             try {
-                // Si hay un progreso guardado con OTRO nombre, lo borramos
                 const guardado = localStorage.getItem(CLAVE_GUARDADO);
                 if (guardado) {
                     const estado = JSON.parse(guardado);
@@ -370,6 +370,10 @@
                     alert("El número de películas activas debe ser par. Hay " + peliculasTodas.length);
                     return;
                 }
+                
+                // Reseteamos las eliminadas al empezar
+                peliculasEliminadas = [];
+                esperandoRepechaje = false;
                 iniciarRonda(peliculasTodas);
             } catch (error) {
                 console.error("Error al cargar:", error);
@@ -390,6 +394,7 @@
                 cruceActualIndex: cruceActualIndex,
                 ganadorasRonda: ganadorasRonda,
                 turnoSalida: turnoSalida,
+                peliculasEliminadas: peliculasEliminadas, // Guardamos las eliminadas
                 terminado: false
             };
             localStorage.setItem(CLAVE_GUARDADO, JSON.stringify(estado));
@@ -418,6 +423,7 @@
 
                     setTimeout(() => {
                         armarGrilla(peliculas);
+                        tituloGrilla.style.display = 'none'; // Ocultamos el título de "Salvá una" si quedó de antes
                         grillaOverlay.classList.add('active');
 
                         setTimeout(() => {
@@ -530,7 +536,11 @@
 
             const cruce = crucesPendientes[cruceActualIndex];
             const ganadora = opcion === 'A' ? cruce.peliculaA : cruce.peliculaB;
+            const perdedora = opcion === 'A' ? cruce.peliculaB : cruce.peliculaA;
             
+            // NUEVO: Guardamos la perdedora en el array de eliminadas
+            peliculasEliminadas.push(perdedora);
+
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
             const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
 
@@ -583,16 +593,20 @@
                     
                     cruceActualIndex++;
                     if (cruceActualIndex < crucesPendientes.length) {
-                        // Guardamos el progreso antes de pasar al siguiente cruce
                         guardarProgreso();
                         mostrarCruce();
                     } else {
+                        // TERMINÓ UNA RONDA
                         if (ganadorasRonda.length === 1) {
-                            guardarProgreso(true); // Si terminó, borramos el guardado
+                            // ERA LA FINAL
+                            guardarProgreso(true); 
                             finalizarTorneo(ganadora);
+                        } else if (ganadorasRonda.length === 2 && rondaActual === 3) {
+                            // NUEVO: SI QUEDAN 2 FINALISTAS Y ESTAMOS EN SEMIS, VAMOS AL REPECHAJE
+                            guardarProgreso();
+                            mostrarRepechaje();
                         } else {
                             rondaActual++;
-                            // Guardamos el progreso al terminar una ronda
                             guardarProgreso();
                             iniciarRonda(ganadorasRonda);
                         }
@@ -601,26 +615,59 @@
             }, 1500); 
         }
 
-        function finalizarTorneo(ganadoraFinal) {
-            matchContainer.style.display = 'none';
-            headerTorneo.style.display = 'none';
-            resultadosScreen.style.display = 'flex';
-
-            document.getElementById('posterGanadora').src = ganadoraFinal.poster || 'https://via.placeholder.com/240x360';
-            document.getElementById('tituloGanadora').textContent = ganadoraFinal.titulo;
-            document.getElementById('originalGanadora').textContent = ganadoraFinal.titulo_original || "";
-            document.getElementById('anioGanadora').textContent = ganadoraFinal.anio;
+        // NUEVA FUNCIÓN: Mostrar el Repechaje
+        function mostrarRepechaje() {
+            matchContainer.style.opacity = 0;
+            esperandoRepechaje = true;
             
-            let detalles = [];
-            if (ganadoraFinal.director) detalles.push(abreviarNombre(ganadoraFinal.director));
-            if (ganadoraFinal.pais) detalles.push(ganadoraFinal.pais);
-            if (ganadoraFinal.duracion) detalles.push(`${ganadoraFinal.duracion} min`);
-            document.getElementById('detallesGanadora').textContent = detalles.join(' · ');
+            // Armamos la grilla con las eliminadas
+            grillaContainer.innerHTML = '';
+            peliculasEliminadas.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'grilla-item';
+                // Al hacer clic en una miniatura, la "salvamos"
+                div.onclick = () => salvarPelicula(p);
+                div.innerHTML = `<img src="${p.poster || 'https://via.placeholder.com/110x160'}" alt="${p.titulo}">`;
+                grillaContainer.appendChild(div);
+            });
+
+            tituloGrilla.innerText = "SALVÁ UNA";
+            tituloGrilla.style.display = 'block';
+            grillaOverlay.classList.add('active');
         }
-    </script>
-    <script>
-            if ('serviceWorker' in navigator) {navigator.serviceWorker.register('/movie-match/sw.js');
+
+        // NUEVA FUNCIÓN: Cuando eligen a la salvada
+        function salvarPelicula(peliculaSalvada) {
+            if (!esperandoRepechaje) return;
+            esperandoRepechaje = false;
+
+            grillaOverlay.classList.remove('active');
+            tituloGrilla.style.display = 'none';
+
+            // La salvada se suma a las 2 finalistas
+            ganadorasRonda.push(peliculaSalvada);
+
+            // Arrancamos la final (terna)
+            matchContainer.style.opacity = 1;
+            armarTernaFinal();
         }
-    </script>
-</body>
-</html>
+
+        // NUEVA FUNCIÓN: Armar la Terna Final (3 tarjetas)
+        function armarTernaFinal() {
+            // Como no usamos cruces de a 2, ocultamos el match-container normal
+            // y mostramos las 3 tarjetas de forma especial
+            // Para simplificar, vamos a usar una estructura temporal en el mismo matchContainer
+            
+            const finalistas = ganadorasRonda; // Son 3
+            const parent = matchContainer;
+            parent.innerHTML = ''; // Limpiamos las tarjetas normales
+
+            // Creamos las 3 tarjetas de la final
+            finalistas.forEach((peli, index) => {
+                const card = document.createElement('div');
+                card.className = 'movie-card visible';
+                card.style.marginBottom = '15px'; // Para que se apilen en celular
+                card.onclick = () => elegirCampeona(peli);
+                
+                card.innerHTML = `
+                    <img class="poster" src="${peli.poster || '
