@@ -478,7 +478,7 @@
         // Función para traducir códigos de país
         function traducirPais(codigo) {
             const paises = {
-                'US': 'EEUU',
+                'US': 'EUA',
                 'FR': 'FRA',
                 'KR': 'COR',
                 'JP': 'JAP',
@@ -497,8 +497,18 @@
                 'RU': 'RUS',
                 'CN': 'CHN',
                 'CL': 'CHI',
-                'XC': 'CHE',
-                'RFA': 'RFA'
+                'XC': 'CHE', 
+                'RFA': 'RFA',
+                'PT': 'POR',
+                'IR': 'IRN',
+                'DK': 'DIN',
+                'TW': 'TWN',
+                'CA': 'CAN',
+                'AU': 'AUS',
+                'IN': 'IND',
+                'TR': 'TUR',
+                'GR': 'GRE',
+                'RO': 'RUM'
             };
             return paises[codigo] || codigo; // Si no está en la lista, deja el original
             
