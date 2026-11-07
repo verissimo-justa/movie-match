@@ -157,7 +157,7 @@
                     if (!infoPeliculas[idGanadora]) infoPeliculas[idGanadora] = { titulo: tituloGanadora };
                     if (!puntajes[idGanadora]) {
                         puntajes[idGanadora] = 0;
-                        desgloses[idGanadora] = { 1: 0, 2: 0, 3: 0, 4: 0, bono: 0 };
+                        desgloses[idGanadora] = { 1: 0, 2: 0, 3: 0, 4: 0, bono: 0, salvadas: 0 };
                     }
 
                     // Sumamos puntos por ronda
@@ -171,6 +171,9 @@
                     if (ronda === 4) {
                         puntajes[idGanadora] += BONO_GANADORA;
                         desgloses[idGanadora].bono++;
+                    } else {
+                        // Si sumó puntos por una ronda que no es la final, fue salvada
+                        desgloses[idGanadora].salvadas++;
                     }
                 });
 
@@ -201,11 +204,20 @@
 
                     // Armamos el desglose
                     let desgloseTexto = [];
-                    if (peli.desglose[1] > 0) desgloseTexto.push(`${peli.desglose[1]}xGanó R1`);
-                    if (peli.desglose[2] > 0) desgloseTexto.push(`${peli.desglose[2]}xGanó R2`);
-                    if (peli.desglose[3] > 0) desgloseTexto.push(`${peli.desglose[3]}xGanó R3`);
-                    if (peli.desglose[4] > 0) desgloseTexto.push(`${peli.desglose[4]}xGanó Final`);
-                    if (peli.desglose.bono > 0) desgloseTexto.push(`+${peli.desglose.bono * BONO_GANADORA}pt Bono`);
+                    
+                    // Si ganó la final, mostramos el recorrido completo
+                    if (peli.desglose[4] > 0) {
+                        if (peli.desglose[1] > 0) desgloseTexto.push(`${peli.desglose[1]}xGanó R1`);
+                        if (peli.desglose[2] > 0) desgloseTexto.push(`${peli.desglose[2]}xGanó R2`);
+                        if (peli.desglose[3] > 0) desgloseTexto.push(`${peli.desglose[3]}xGanó R3`);
+                        desgloseTexto.push(`${peli.desglose[4]}xGanó Final`);
+                        desgloseTexto.push(`+${peli.desglose.bono * BONO_GANADORA}pt Bono`);
+                    } else {
+                        // Si no ganó la final, sus puntos vienen de una salvación
+                        if (peli.desglose[1] > 0) desgloseTexto.push(`${peli.desglose[1]}xSalvada en R1`);
+                        if (peli.desglose[2] > 0) desgloseTexto.push(`${peli.desglose[2]}xSalvada en R2`);
+                        if (peli.desglose[3] > 0) desgloseTexto.push(`${peli.desglose[3]}xSalvada en R3`);
+                    }
 
                     div.innerHTML = `
                         <div class="posicion">#${index + 1}</div>
