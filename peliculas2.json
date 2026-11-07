@@ -92,7 +92,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/bBf0N1kNQGr6btlO9F66VAV1moz.jpg",
     "director": "František Vláčil",
     "pais": "XC",
-    "duracion": 166,
+    "duracion": 166
   },
   {
     "id": 10,
@@ -102,7 +102,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg",
     "director": "Spike Lee",
     "pais": "US",
-    "duracion": 120,
+    "duracion": 120
   },
   {
     "id": 11,
@@ -112,7 +112,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
     "director": "Orson Welles",
     "pais": "US",
-    "duracion": 119,
+    "duracion": 119
   },
   {
     "id": 12,
@@ -122,7 +122,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/2KFfwiPct1hwqi9dkKqoom0BenC.jpg",
     "director": "Agnès Varda",
     "pais": "FR",
-    "duracion": 106,
+    "duracion": 106
   },
   {
     "id": 13,
@@ -143,7 +143,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/8y7Z9Gvcq52uOlJlUWyn2epGGRd.jpg",
     "director": "Georges Franju",
     "pais": "FR",
-    "duracion": 84,
+    "duracion": 84
   },
   {
     "id": 15,
@@ -687,9 +687,4 @@
     "titulo": "La luz incidente",
     "titulo_original": "",
     "anio": 2015,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4QxGvJO8.jpg",
-    "director": "Ariel Rotter",
-    "pais": "AR",
-    "duracion": 95
-  }
-]
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4Q
