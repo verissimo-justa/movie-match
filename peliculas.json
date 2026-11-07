@@ -8,7 +8,6 @@
     "director": "Joon-Ho Bong",
     "pais": "KR",
     "duracion": 133,
-    "activa": true
   },
   {
     "id": 2,
@@ -19,7 +18,6 @@
     "director": "Sidney Lumet",
     "pais": "US",
     "duracion": 97,
-    "activa": true
   },
   {
     "id": 3,
@@ -30,7 +28,6 @@
     "director": "Billy Wilder",
     "pais": "US",
     "duracion": 110,
-    "activa": true
   },
   {
     "id": 4,
@@ -96,7 +93,6 @@
     "director": "František Vláčil",
     "pais": "XC",
     "duracion": 166,
-    "activa": true
   },
   {
     "id": 10,
@@ -107,7 +103,6 @@
     "director": "Spike Lee",
     "pais": "US",
     "duracion": 120,
-    "activa": true
   },
   {
     "id": 11,
@@ -118,7 +113,6 @@
     "director": "Orson Welles",
     "pais": "US",
     "duracion": 119,
-    "activa": true
   },
   {
     "id": 12,
@@ -129,7 +123,6 @@
     "director": "Agnès Varda",
     "pais": "FR",
     "duracion": 106,
-    "activa": true
   },
   {
     "id": 13,
@@ -151,7 +144,6 @@
     "director": "Georges Franju",
     "pais": "FR",
     "duracion": 84,
-    "activa": true
   },
   {
     "id": 15,
@@ -184,6 +176,7 @@
     "director": "Bernardo Bertolucci",
     "pais": "DE",
     "duracion": 108
+    "activa": true
   },
   {
     "id": 18,
@@ -204,6 +197,7 @@
     "director": "Wojciech Has",
     "pais": "PL",
     "duracion": 183
+    "activa": true
   },
   {
     "id": 20,
@@ -234,6 +228,7 @@
     "director": "Otto Preminger",
     "pais": "US",
     "duracion": 161
+    "activa": true
   },
   {
     "id": 23,
@@ -244,6 +239,7 @@
     "director": "Chantal Akerman",
     "pais": "BE",
     "duracion": 202
+    "activa": true
   },
   {
     "id": 24,
@@ -254,6 +250,7 @@
     "director": "Lee Chang-dong",
     "pais": "KR",
     "duracion": 139
+    "activa": true
   },
   {
     "id": 25,
