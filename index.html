@@ -276,7 +276,6 @@
         let ganadorasRonda = [];
         let turnoSalida = 1;
         
-        // NUEVO: Array para guardar las que van perdiendo
         let peliculasEliminadas = []; 
         let esperandoRepechaje = false;
 
@@ -328,7 +327,7 @@
             cruceActualIndex = estado.cruceActualIndex;
             ganadorasRonda = estado.ganadorasRonda;
             turnoSalida = estado.turnoSalida;
-            peliculasEliminadas = estado.peliculasEliminadas || []; // Restauramos las eliminadas
+            peliculasEliminadas = estado.peliculasEliminadas || []; 
 
             modalContinuar.style.display = 'none';
             headerTorneo.style.display = 'block';
@@ -371,7 +370,6 @@
                     return;
                 }
                 
-                // Reseteamos las eliminadas al empezar
                 peliculasEliminadas = [];
                 esperandoRepechaje = false;
                 iniciarRonda(peliculasTodas);
@@ -394,7 +392,7 @@
                 cruceActualIndex: cruceActualIndex,
                 ganadorasRonda: ganadorasRonda,
                 turnoSalida: turnoSalida,
-                peliculasEliminadas: peliculasEliminadas, // Guardamos las eliminadas
+                peliculasEliminadas: peliculasEliminadas, 
                 terminado: false
             };
             localStorage.setItem(CLAVE_GUARDADO, JSON.stringify(estado));
@@ -423,7 +421,7 @@
 
                     setTimeout(() => {
                         armarGrilla(peliculas);
-                        tituloGrilla.style.display = 'none'; // Ocultamos el título de "Salvá una" si quedó de antes
+                        tituloGrilla.style.display = 'none'; 
                         grillaOverlay.classList.add('active');
 
                         setTimeout(() => {
@@ -538,7 +536,7 @@
             const ganadora = opcion === 'A' ? cruce.peliculaA : cruce.peliculaB;
             const perdedora = opcion === 'A' ? cruce.peliculaB : cruce.peliculaA;
             
-            // NUEVO: Guardamos la perdedora en el array de eliminadas
+            perdedora.rondaEliminacion = rondaActual;
             peliculasEliminadas.push(perdedora);
 
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
@@ -596,13 +594,10 @@
                         guardarProgreso();
                         mostrarCruce();
                     } else {
-                        // TERMINÓ UNA RONDA
                         if (ganadorasRonda.length === 1) {
-                            // ERA LA FINAL
                             guardarProgreso(true); 
                             finalizarTorneo(ganadora);
                         } else if (ganadorasRonda.length === 2 && rondaActual === 3) {
-                            // NUEVO: SI QUEDAN 2 FINALISTAS Y ESTAMOS EN SEMIS, VAMOS AL REPECHAJE
                             guardarProgreso();
                             mostrarRepechaje();
                         } else {
@@ -615,18 +610,15 @@
             }, 1500); 
         }
 
-        // NUEVA FUNCIÓN: Mostrar el Repechaje
         function mostrarRepechaje() {
             matchContainer.style.opacity = 0;
             esperandoRepechaje = true;
             
-            // Armamos la grilla con las eliminadas
             grillaContainer.innerHTML = '';
             peliculasEliminadas.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'grilla-item';
-                // Al hacer clic en una miniatura, la "salvamos"
-                div.onclick = () => salvarPelicula(p);
+                div.onclick = () => salvarPelicula(p, p.rondaEliminacion);
                 div.innerHTML = `<img src="${p.poster || 'https://via.placeholder.com/110x160'}" alt="${p.titulo}">`;
                 grillaContainer.appendChild(div);
             });
@@ -636,37 +628,29 @@
             grillaOverlay.classList.add('active');
         }
 
-        // NUEVA FUNCIÓN: Cuando eligen a la salvada
-        function salvarPelicula(peliculaSalvada) {
+        function salvarPelicula(peliculaSalvada, rondaEliminacion) {
             if (!esperandoRepechaje) return;
             esperandoRepechaje = false;
 
             grillaOverlay.classList.remove('active');
             tituloGrilla.style.display = 'none';
 
-            // La salvada se suma a las 2 finalistas
+            peliculaSalvada.rondaEliminacion = rondaEliminacion || 1;
+            
             ganadorasRonda.push(peliculaSalvada);
-
-            // Arrancamos la final (terna)
             matchContainer.style.opacity = 1;
             armarTernaFinal();
         }
 
-        // NUEVA FUNCIÓN: Armar la Terna Final (3 tarjetas)
         function armarTernaFinal() {
-            // Como no usamos cruces de a 2, ocultamos el match-container normal
-            // y mostramos las 3 tarjetas de forma especial
-            // Para simplificar, vamos a usar una estructura temporal en el mismo matchContainer
-            
-            const finalistas = ganadorasRonda; // Son 3
+            const finalistas = ganadorasRonda;
             const parent = matchContainer;
-            parent.innerHTML = ''; // Limpiamos las tarjetas normales
+            parent.innerHTML = ''; 
 
-            // Creamos las 3 tarjetas de la final
             finalistas.forEach((peli, index) => {
                 const card = document.createElement('div');
                 card.className = 'movie-card visible';
-                card.style.marginBottom = '15px'; // Para que se apilen en celular
+                card.style.marginBottom = '15px';
                 card.onclick = () => elegirCampeona(peli);
                 
                 card.innerHTML = `
@@ -681,7 +665,6 @@
                 parent.appendChild(card);
             });
 
-            // Un pequeño texto indicador
             const indicador = document.createElement('div');
             indicador.innerText = "¡Elegí a la campeona!";
             indicador.style.textAlign = 'center';
@@ -694,16 +677,15 @@
             textoRonda.innerText = `Ronda Final - Terna de Campeonas`;
         }
 
-        // NUEVA FUNCIÓN: Elegir Campeona de la Terna
         function elegirCampeona(campeona) {
-            // Guardamos el voto de la final en Supabase
-            // Para mantener la consistencia de la tabla, guardamos un "cruce" ficticio
+            const rondaVoto = campeona.rondaEliminacion || 4;
+
             _supabase.from('votos_torneo').insert({
                 participante: usuarioActual,
-                ronda: 4, // Ronda final
-                pelicula_a_id: campeona.id, // Usamos el ID de la campeona como A
+                ronda: rondaVoto,
+                pelicula_a_id: campeona.id,
                 pelicula_a_titulo: campeona.titulo,
-                pelicula_b_id: campeona.id, // Mismo ID para que no sea ambiguo
+                pelicula_b_id: campeona.id,
                 pelicula_b_titulo: campeona.titulo,
                 ganadora_id: campeona.id,
                 ganadora_titulo: campeona.titulo
