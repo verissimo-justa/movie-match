@@ -48,11 +48,28 @@
             border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
         }
 
+        /* --- NUEVO: Cartel de "Continuar Torneo" --- */
+        .modal-continuar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(247, 242, 212, 0.95); /* Fondo crema semitransparente */
+            z-index: 9999;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 20px;
+        }
+        .modal-continuar h2 { color: #008080; font-family: 'Fraunces', serif; font-size: 2rem; margin-bottom: 10px; }
+        .modal-continuar p { font-size: 1.1rem; margin-bottom: 25px; color: #555; }
+        .modal-botones { display: flex; gap: 15px; }
+        .modal-continuar button {
+            padding: 12px 25px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-weight: bold; border: 2px solid #008080;
+        }
+        .btn-continuar { background-color: #008080; color: white; }
+        .btn-reiniciar { background-color: transparent; color: #008080; }
+
         /* Título superior */
         .header-torneo {
             text-align: center; margin-top: 15px; margin-bottom: 15px; 
-            z-index: 6000; /* NUEVO: Para que quede por encima de las animaciones */
-            position: relative; /* NUEVO: Para que el z-index funcione */
+            z-index: 6000;
+            position: relative;
         }
         .header-torneo h1 {
             font-family: 'Fraunces', serif !important; font-weight: 900 !important;
@@ -79,7 +96,7 @@
             background: #ffffff; border-radius: 16px; padding: 15px;
             box-shadow: 0 10px 25px rgba(0, 128, 128, 0.15);
             border: 2px solid transparent; cursor: pointer;
-            opacity: 0; /* Arrancan invisibles */
+            opacity: 0;
             transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), 
                         opacity 0.4s ease, 
                         box-shadow 0.4s ease,
@@ -87,22 +104,10 @@
             width: 100%; max-width: 380px; position: relative; z-index: 1;
         }
 
-        /* Cuando están listas, se muestran */
-        .movie-card.visible {
-            opacity: 1;
-        }
+        .movie-card.visible { opacity: 1; }
+        .movie-card:hover { border-color: #008080; }
 
-        .movie-card:hover {
-            border-color: #008080;
-        }
-
-        /* Clases de animación */
-        .movie-card.perdedora {
-            transform: scale(0.8);
-            opacity: 0;
-            pointer-events: none;
-        }
-
+        .movie-card.perdedora { transform: scale(0.8); opacity: 0; pointer-events: none; }
         .movie-card.ganadora-centrada {
             z-index: 100;
             box-shadow: 0 20px 40px rgba(0, 128, 128, 0.4);
@@ -110,13 +115,11 @@
             pointer-events: none;
         }
 
-        /* Estilos de la foto */
         .movie-card .poster {
             width: 110px; height: 160px; object-fit: cover; border-radius: 8px; flex-shrink: 0;
-            background-color: #f7f2d4; /* Fondo suave por si tarda en cargar */
+            background-color: #f7f2d4;
         }
 
-        /* Datos de la película */
         .movie-info {
             display: flex; flex-direction: column; justify-content: center;
             padding: 0 15px; flex-grow: 1;
@@ -128,7 +131,6 @@
             .movie-card:nth-child(2) .movie-info { text-align: right; }
         }
 
-        /* Orden de los datos */
         .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; }
         .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase; margin-bottom: 4px; order: 2; }
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c; margin-bottom: 6px; order: 3; }
@@ -144,19 +146,9 @@
 
         /* --- ANIMACIONES FULLSCREEN (RONDA Y GRILLA) --- */
         .ronda-overlay, .grilla-overlay {
-            position: fixed; 
-            top: 80px; /* NUEVO: Arranca más abajo para no tapar el título */
-            left: 0; 
-            width: 100%; 
-            height: calc(100% - 80px); /* NUEVO: Ajustamos el alto para que no se desborde */
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            background-color: #f7f2d4; 
-            z-index: 5000; 
-            opacity: 0; 
-            pointer-events: none;
+            position: fixed; top: 80px; left: 0; width: 100%; height: calc(100% - 80px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background-color: #f7f2d4; z-index: 5000; opacity: 0; pointer-events: none;
             transition: opacity 0.8s ease;
         }
         .ronda-overlay.active, .grilla-overlay.active { opacity: 1; pointer-events: auto; }
@@ -196,6 +188,16 @@
     </style>
 </head>
 <body>
+
+    <!-- Cartel para continuar torneo -->
+    <div class="modal-continuar" id="modalContinuar">
+        <h2>¡Hola de nuevo!</h2>
+        <p id="textoModalContinuar">Parece que no terminaste tu torneo. ¿Querés continuar donde dejaste?</p>
+        <div class="modal-botones">
+            <button class="btn-reiniciar" id="btnReiniciar">Empezar de nuevo</button>
+            <button class="btn-continuar" id="btnContinuar">Continuar</button>
+        </div>
+    </div>
 
     <div class="login-screen" id="loginScreen">
         <h1 style="font-family: 'Fraunces'; font-size: 2.5rem; color: #008080;">cámara match</h1>
@@ -261,6 +263,9 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // CLAVE PARA GUARDAR EL PROGRESO EN EL TELÉFONO
+        const CLAVE_GUARDADO = 'camara_match_progreso';
+
         let usuarioActual = "";
         let peliculasTodas = [];
         let rondaActual = 1;
@@ -280,9 +285,62 @@
         const grillaOverlay = document.getElementById('grillaOverlay');
         const grillaContainer = document.getElementById('grillaContainer');
 
+        // Elementos del modal
+        const modalContinuar = document.getElementById('modalContinuar');
+        const textoModalContinuar = document.getElementById('textoModalContinuar');
+        const btnContinuar = document.getElementById('btnContinuar');
+        const btnReiniciar = document.getElementById('btnReiniciar');
+
         document.getElementById('loginBtn').addEventListener('click', iniciarTorneo);
         document.getElementById('usernameInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') iniciarTorneo();
+        });
+
+        // Al cargar la página, revisamos si hay un progreso guardado
+        window.addEventListener('DOMContentLoaded', () => {
+            const guardado = localStorage.getItem(CLAVE_GUARDADO);
+            if (guardado) {
+                try {
+                    const estado = JSON.parse(guardado);
+                    // Si el torneo no estaba terminado, mostramos el cartel
+                    if (estado && !estado.terminado && estado.nombre) {
+                        textoModalContinuar.innerText = `Hola ${estado.nombre}, parece que no terminaste tu torneo. ¿Querés continuar donde dejaste?`;
+                        modalContinuar.style.display = 'flex';
+                        loginScreen.style.display = 'none';
+                    }
+                } catch(e) { console.error("Error al leer guardado", e); }
+            }
+        });
+
+        // Botón para continuar el torneo guardado
+        btnContinuar.addEventListener('click', () => {
+            const guardado = localStorage.getItem(CLAVE_GUARDADO);
+            if (!guardado) return;
+            const estado = JSON.parse(guardado);
+            
+            // Restauramos todas las variables
+            usuarioActual = estado.nombre;
+            peliculasTodas = estado.peliculasTodas;
+            rondaActual = estado.rondaActual;
+            crucesPendientes = estado.crucesPendientes;
+            cruceActualIndex = estado.cruceActualIndex;
+            ganadorasRonda = estado.ganadorasRonda;
+            turnoSalida = estado.turnoSalida;
+
+            modalContinuar.style.display = 'none';
+            headerTorneo.style.display = 'block';
+            matchContainer.style.display = 'flex';
+            
+            // Saltamos la animación de ronda y vamos directo al cruce
+            matchContainer.style.opacity = 1;
+            mostrarCruce();
+        });
+
+        // Botón para empezar de cero
+        btnReiniciar.addEventListener('click', () => {
+            localStorage.removeItem(CLAVE_GUARDADO);
+            modalContinuar.style.display = 'none';
+            loginScreen.style.display = 'flex';
         });
 
         async function iniciarTorneo() {
@@ -294,6 +352,15 @@
             matchContainer.style.display = 'flex';
 
             try {
+                // Si hay un progreso guardado con OTRO nombre, lo borramos
+                const guardado = localStorage.getItem(CLAVE_GUARDADO);
+                if (guardado) {
+                    const estado = JSON.parse(guardado);
+                    if (estado.nombre !== nombre) {
+                        localStorage.removeItem(CLAVE_GUARDADO);
+                    }
+                }
+
                 const respuesta = await fetch('./peliculas.json');
                 const peliculasReales = await respuesta.json();
                 peliculasTodas = peliculasReales.filter(p => p.activa === true);
@@ -310,12 +377,29 @@
             }
         }
 
+        function guardarProgreso(terminado = false) {
+            if (terminado) {
+                localStorage.removeItem(CLAVE_GUARDADO);
+                return;
+            }
+            const estado = {
+                nombre: usuarioActual,
+                peliculasTodas: peliculasTodas,
+                rondaActual: rondaActual,
+                crucesPendientes: crucesPendientes,
+                cruceActualIndex: cruceActualIndex,
+                ganadorasRonda: ganadorasRonda,
+                turnoSalida: turnoSalida,
+                terminado: false
+            };
+            localStorage.setItem(CLAVE_GUARDADO, JSON.stringify(estado));
+        }
+
         function iniciarRonda(peliculas) {
             matchContainer.style.opacity = 0;
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // NUEVO: Verificamos si es la final (cuando solo quedan 2 películas)
             const esFinal = (peliculas.length === 2);
             
             if (esFinal) {
@@ -327,23 +411,18 @@
             }
 
             setTimeout(() => {
-                // 1. Mostramos el cartel de RONDA X (o FINAL)
                 rondaOverlay.classList.add('active');
 
-                // 2. Esperamos 2 segundos a que se lea la ronda
                 setTimeout(() => {
                     rondaOverlay.classList.remove('active');
 
-                    // 3. Esperamos 1 segundo a que termine el fade out y mostramos la grilla
                     setTimeout(() => {
                         armarGrilla(peliculas);
                         grillaOverlay.classList.add('active');
 
-                        // 4. Esperamos 2 segundos a que se vea la grilla
                         setTimeout(() => {
                             grillaOverlay.classList.remove('active');
 
-                            // 5. Esperamos 1 segundo y arrancamos con los cruces
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
                                 armarRonda(peliculas);
@@ -394,17 +473,14 @@
             const cardA = document.getElementById('cardA');
             const cardB = document.getElementById('cardB');
 
-            // 1. Ocultamos las tarjetas antes de cambiar el contenido
             cardA.classList.remove('visible');
             cardB.classList.remove('visible');
 
-            // 2. Forzamos el re-renderizado moviendo las tarjetas (evita el borde fantasma)
             const parent = cardA.parentNode;
             parent.appendChild(cardA);
             parent.insertBefore(vsBadge, cardA.nextSibling);
             parent.appendChild(cardB);
 
-            // 3. Limpiamos estilos en línea
             cardA.style.transform = '';
             cardB.style.transform = '';
             cardA.style.opacity = '';
@@ -416,7 +492,6 @@
             vsBadge.style.transform = 'scale(1)';
             vsBadge.style.display = 'flex';
 
-            // 4. Cargamos los datos
             document.getElementById('posterA').src = A.poster || 'https://via.placeholder.com/110x160';
             document.getElementById('tituloA').textContent = A.titulo;
             document.getElementById('originalA').textContent = A.titulo_original || "";
@@ -437,7 +512,6 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            // NUEVO: Si es la final, el subtítulo dice "Ronda Final"
             const esFinalCruce = (crucesPendientes.length === 1);
             if (esFinalCruce) {
                 textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
@@ -445,7 +519,6 @@
                 textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
             }
 
-            // 5. Hacemos visibles las tarjetas una vez que todo está listo
             setTimeout(() => {
                 cardA.classList.add('visible');
                 cardB.classList.add('visible');
@@ -461,12 +534,10 @@
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
             const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
 
-            // 1. Perdedora desaparece
             cardPerdedora.classList.add('perdedora');
             vsBadge.style.opacity = 0;
             vsBadge.style.transform = 'scale(0)';
             
-            // 2. Calculamos la distancia hacia el centro
             const rect = cardGanadora.getBoundingClientRect();
             const windowCenterX = window.innerWidth / 2;
             const windowCenterY = window.innerHeight / 2;
@@ -476,7 +547,6 @@
             const deltaX = windowCenterX - cardCenterX;
             const deltaY = windowCenterY - cardCenterY;
 
-            // 3. Movemos la tarjeta al centro con transform (se desplaza suavemente)
             cardGanadora.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
             cardGanadora.classList.add('ganadora-centrada');
 
@@ -496,18 +566,15 @@
             ganadorasRonda.push(ganadora);
 
             setTimeout(() => {
-                // 4. Vuela hacia la izquierda o derecha
                 const salidaX = turnoSalida === 1 ? window.innerWidth : -window.innerWidth;
                 cardGanadora.style.transform = `translate(${salidaX}px, ${deltaY}px) rotate(${turnoSalida * 15}deg) scale(1.05)`;
                 cardGanadora.style.opacity = '0';
                 turnoSalida *= -1;
 
                 setTimeout(() => {
-                    // Restauramos todo para el próximo cruce
                     cardGanadora.classList.remove('ganadora-centrada');
                     cardPerdedora.classList.remove('perdedora');
                     
-                    // Ocultamos las tarjetas para que no se vea el cambio brusco
                     cardGanadora.classList.remove('visible');
                     cardPerdedora.classList.remove('visible');
 
@@ -516,12 +583,17 @@
                     
                     cruceActualIndex++;
                     if (cruceActualIndex < crucesPendientes.length) {
+                        // Guardamos el progreso antes de pasar al siguiente cruce
+                        guardarProgreso();
                         mostrarCruce();
                     } else {
                         if (ganadorasRonda.length === 1) {
+                            guardarProgreso(true); // Si terminó, borramos el guardado
                             finalizarTorneo(ganadora);
                         } else {
                             rondaActual++;
+                            // Guardamos el progreso al terminar una ronda
+                            guardarProgreso();
                             iniciarRonda(ganadorasRonda);
                         }
                     }
