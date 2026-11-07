@@ -643,6 +643,9 @@
         }
 
         function armarTernaFinal() {
+            // NUEVO: Ocultamos el encabezado para ganar espacio
+            headerTorneo.style.display = 'none';
+
             const finalistas = ganadorasRonda;
             const parent = matchContainer;
             parent.innerHTML = ''; 
@@ -650,7 +653,7 @@
             finalistas.forEach((peli, index) => {
                 const card = document.createElement('div');
                 card.className = 'movie-card visible';
-                card.style.marginBottom = '15px';
+                card.style.marginBottom = '10px'; // Achicamos el margen para que entren las 3
                 card.onclick = () => elegirCampeona(peli);
                 
                 card.innerHTML = `
@@ -671,12 +674,12 @@
             indicador.style.fontFamily = 'Oswald';
             indicador.style.color = '#008080';
             indicador.style.fontSize = '1.2rem';
-            indicador.style.marginBottom = '20px';
+            indicador.style.marginBottom = '15px'; // Menos margen abajo del cartel
             parent.prepend(indicador);
 
-            textoRonda.innerText = `Ronda Final - Terna de Campeonas`;
+            // Eliminamos la línea de textoRonda porque el encabezado ahora está oculto
         }
-
+        
         function elegirCampeona(campeona) {
             const rondaVoto = campeona.rondaEliminacion || 4;
 
