@@ -335,6 +335,7 @@
             matchContainer.style.display = 'flex';
             
             matchContainer.style.opacity = 1;
+            textoRonda.style.display = 'block'; // Aseguramos que se vea
             mostrarCruce();
         });
 
@@ -400,15 +401,14 @@
         }
 
         function iniciarRonda(peliculas) {
-            animandoRonda = true; // ACTIVAMOS LA BANDERA
+            animandoRonda = true; 
 
             matchContainer.style.opacity = 0;
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // Vaciamos el subtítulo y mostramos el encabezado
-            textoRonda.innerText = ""; 
-            headerTorneo.style.display = 'block';
+            // NUEVO: Ocultamos el subtítulo por completo
+            textoRonda.style.display = 'none'; 
 
             const esFinal = (peliculas.length === 2);
             
@@ -434,7 +434,8 @@
 
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
-                                animandoRonda = false; // DESACTIVAMOS LA BANDERA
+                                animandoRonda = false; 
+                                textoRonda.style.display = 'block'; // NUEVO: Lo mostramos de nuevo
                                 armarRonda(peliculas);
                             }, 1000);
                         }, 2000);
