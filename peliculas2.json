@@ -7,7 +7,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
     "director": "Joon-Ho Bong",
     "pais": "KR",
-    "duracion": 133,
+    "duracion": 133
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zhG3vKWyDRaZYoaww1UVAi29T9h.jpg",
     "director": "Sidney Lumet",
     "pais": "US",
-    "duracion": 97,
+    "duracion": 97
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg",
     "director": "Billy Wilder",
     "pais": "US",
-    "duracion": 110,
+    "duracion": 110
   },
   {
     "id": 4,
