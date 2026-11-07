@@ -643,17 +643,36 @@
         }
 
         function armarTernaFinal() {
-            // NUEVO: Ocultamos el encabezado para ganar espacio
+            // 1. Ocultamos el encabezado para ganar espacio
             headerTorneo.style.display = 'none';
 
             const finalistas = ganadorasRonda;
             const parent = matchContainer;
+
+            // 2. FORZAMOS EL DISEÑO EN COLUMNA (Para que en la compu no se pongan uno al lado del otro)
+            parent.style.flexDirection = 'column'; 
+            parent.style.alignItems = 'center';
+            parent.style.justifyContent = 'center';
+            parent.style.gap = '10px';
+
+            // 3. Limpiamos el contenedor
             parent.innerHTML = ''; 
 
+            // 4. Agregamos el cartel ARRIBA de todo
+            const indicador = document.createElement('div');
+            indicador.innerText = "¡Elegí a la campeona!";
+            indicador.style.textAlign = 'center';
+            indicador.style.fontFamily = 'Oswald';
+            indicador.style.color = '#008080';
+            indicador.style.fontSize = '1.2rem';
+            indicador.style.marginBottom = '10px';
+            parent.appendChild(indicador);
+
+            // 5. Agregamos las 3 tarjetas apiladas
             finalistas.forEach((peli, index) => {
                 const card = document.createElement('div');
                 card.className = 'movie-card visible';
-                card.style.marginBottom = '10px'; // Achicamos el margen para que entren las 3
+                card.style.marginBottom = '10px'; 
                 card.onclick = () => elegirCampeona(peli);
                 
                 card.innerHTML = `
@@ -667,17 +686,6 @@
                 `;
                 parent.appendChild(card);
             });
-
-            const indicador = document.createElement('div');
-            indicador.innerText = "¡Elegí a la campeona!";
-            indicador.style.textAlign = 'center';
-            indicador.style.fontFamily = 'Oswald';
-            indicador.style.color = '#008080';
-            indicador.style.fontSize = '1.2rem';
-            indicador.style.marginBottom = '15px'; // Menos margen abajo del cartel
-            parent.prepend(indicador);
-
-            // Eliminamos la línea de textoRonda porque el encabezado ahora está oculto
         }
         
         function elegirCampeona(campeona) {
