@@ -403,7 +403,7 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // NUEVO: Vaciamos el subtítulo y mostramos el encabezado
+            // Vaciamos el subtítulo y mostramos el encabezado
             textoRonda.innerText = ""; 
             headerTorneo.style.display = 'block';
 
@@ -518,15 +518,12 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            // Si el subtítulo está vacío, significa que venimos de una animación de ronda. 
-            // Recién ahí lo actualizamos con el número de cruce.
-            if (textoRonda.innerText === "") {
-                const esFinalCruce = (crucesPendientes.length === 1);
-                if (esFinalCruce) {
-                    textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
-                } else {
-                    textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
-                }
+            // Si el subtítulo está vacío, lo llenamos. Si no, lo actualizamos con el cruce actual.
+            const esFinalCruce = (crucesPendientes.length === 1);
+            if (esFinalCruce) {
+                textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
+            } else {
+                textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
             }
 
             setTimeout(() => {
@@ -655,7 +652,7 @@
             const finalistas = ganadorasRonda;
             const parent = matchContainer;
 
-            // 2. FORZAMOS EL DISEÑO EN COLUMNA (Para que en la compu no se pongan uno al lado del otro)
+            // 2. FORZAMOS EL DISEÑO EN COLUMNA
             parent.style.flexDirection = 'column'; 
             parent.style.alignItems = 'center';
             parent.style.justifyContent = 'center';
