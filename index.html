@@ -476,9 +476,10 @@
             mostrarCruce();
         }
         // Función para traducir códigos de país
+        // Función para traducir códigos de país
         function traducirPais(codigo) {
             const paises = {
-                'US': 'EUA',
+                'US': 'USA',
                 'FR': 'FRA',
                 'KR': 'COR',
                 'JP': 'JAP',
@@ -510,9 +511,9 @@
                 'GR': 'GRE',
                 'RO': 'RUM'
             };
-            return paises[codigo] || codigo; // Si no está en la lista, deja el original
-            
+            return paises[codigo] || codigo;
         }
+        
         function mostrarCruce() {
             const cruce = crucesPendientes[cruceActualIndex];
             const A = cruce.peliculaA;
@@ -546,7 +547,7 @@
             document.getElementById('anioA').textContent = A.anio;
             let detallesA = [];
             if (A.director) detallesA.push(abreviarNombre(A.director));
-            if (A.pais) detallesA.push(A.pais);
+            if (A.pais) detallesA.push(traducirPais(A.pais));
             if (A.duracion) detallesA.push(`${A.duracion} min`);
             document.getElementById('detallesA').textContent = detallesA.join(' · ');
 
@@ -556,7 +557,7 @@
             document.getElementById('anioB').textContent = B.anio;
             let detallesB = [];
             if (B.director) detallesB.push(abreviarNombre(B.director));
-            if (B.pais) detallesB.push(B.pais);
+            if (B.pais) detallesB.push(traducirPais(B.pais));
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
@@ -722,13 +723,20 @@
                 card.style.marginBottom = '10px'; 
                 card.onclick = () => elegirCampeona(peli);
                 
+                // Armamos los detalles de forma limpia (sin puntos de más)
+                let detalles = [];
+                if (peli.director) detalles.push(abreviarNombre(peli.director));
+                if (peli.pais) detalles.push(traducirPais(peli.pais));
+                if (peli.duracion) detalles.push(`${peli.duracion} min`);
+                const detallesTexto = detalles.join(' · ');
+
                 card.innerHTML = `
                     <img class="poster" src="${peli.poster || 'https://via.placeholder.com/110x160'}" alt="">
                     <div class="movie-info">
                         <div class="movie-title">${peli.titulo}</div>
                         <div class="movie-original-title">${peli.titulo_original || ''}</div>
                         <div class="movie-year">${peli.anio}</div>
-                        <div class="movie-details">${peli.director ? abreviarNombre(peli.director) : ''} ${peli.pais ? '· ' + peli.pais : ''} ${peli.duracion ? '· ' + peli.duracion + ' min' : ''}</div>
+                        <div class="movie-details">${detallesTexto}</div>
                     </div>
                 `;
                 parent.appendChild(card);
@@ -767,7 +775,7 @@
             
             let detalles = [];
             if (ganadoraFinal.director) detalles.push(abreviarNombre(ganadoraFinal.director));
-            if (ganadoraFinal.pais) detalles.push(ganadoraFinal.pais);
+            if (ganadoraFinal.pais) detalles.push(traducirPais(ganadoraFinal.pais));
             if (ganadoraFinal.duracion) detalles.push(`${ganadoraFinal.duracion} min`);
             document.getElementById('detallesGanadora').textContent = detalles.join(' · ');
         }
