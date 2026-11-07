@@ -278,6 +278,7 @@
         
         let peliculasEliminadas = []; 
         let esperandoRepechaje = false;
+        let animandoRonda = false; // NUEVO: Bandera para controlar el subtítulo
 
         const loginScreen = document.getElementById('loginScreen');
         const headerTorneo = document.getElementById('headerTorneo');
@@ -399,6 +400,8 @@
         }
 
         function iniciarRonda(peliculas) {
+            animandoRonda = true; // ACTIVAMOS LA BANDERA
+
             matchContainer.style.opacity = 0;
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
@@ -431,6 +434,7 @@
 
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
+                                animandoRonda = false; // DESACTIVAMOS LA BANDERA
                                 armarRonda(peliculas);
                             }, 1000);
                         }, 2000);
@@ -518,9 +522,8 @@
             if (B.duracion) detallesB.push(`${B.duracion} min`);
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
-            // NUEVO: Solo actualizamos el subtítulo si NO estamos en medio de una animación de ronda
-            // (es decir, si ya pasaron los carteles de RONDA X y la grilla)
-            if (matchContainer.style.opacity === "1") {
+            // SOLO actualizamos el subtítulo si NO estamos en medio de una animación de ronda
+            if (!animandoRonda) {
                 const esFinalCruce = (crucesPendientes.length === 1);
                 if (esFinalCruce) {
                     textoRonda.innerText = `Ronda Final - Cruce 1 de 1`;
