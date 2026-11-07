@@ -75,7 +75,7 @@
             background: #ffffff; border-radius: 16px; padding: 15px;
             box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
             border: 2px solid transparent; cursor: pointer;
-            /* Transición suave para transformaciones (animación) y opacidad */
+            opacity: 0; /* Arrancan invisibles */
             transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), 
                         opacity 0.4s ease, 
                         box-shadow 0.4s ease,
@@ -83,12 +83,11 @@
             width: 100%; max-width: 380px; position: relative; z-index: 1;
         }
 
-        /* NUEVO: Cuando están listas, se muestran */
+        /* Cuando están listas, se muestran */
         .movie-card.visible {
             opacity: 1;
         }
 
-        /* Al hacer hover solo cambiamos el borde, no el transform, para no romper la animación */
         .movie-card:hover {
             border-color: #6488b4;
         }
@@ -100,7 +99,6 @@
             pointer-events: none;
         }
 
-        /* La tarjeta que vuela al centro. Usamos coordenadas fijas pero sin cambiar position */
         .movie-card.ganadora-centrada {
             z-index: 100;
             box-shadow: 0 20px 40px rgba(100, 136, 180, 0.4);
@@ -111,6 +109,7 @@
         /* Estilos de la foto */
         .movie-card .poster {
             width: 110px; height: 160px; object-fit: cover; border-radius: 8px; flex-shrink: 0;
+            background-color: #f7f2d4; /* Fondo suave por si tarda en cargar */
         }
 
         /* Datos de la película */
@@ -135,6 +134,7 @@
             opacity: 0.3; background: white; width: 45px; height: 45px; display: flex;
             align-items: center; justify-content: center; border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         /* --- ANIMACIONES FULLSCREEN (RONDA Y GRILLA) --- */
@@ -363,13 +363,18 @@
             const cardA = document.getElementById('cardA');
             const cardB = document.getElementById('cardB');
 
-            // LA SOLUCIÓN AL BORDE: Forzamos al navegador a re-renderizar las tarjetas
-            // quitándolas del DOM y volviéndolas a insertar.
-            const parent = cardA.parentNode;
-            parent.appendChild(cardA); // Mueve cardA al final
-            parent.insertBefore(cardB, cardA.nextSibling); // Reubica cardB
+            // 1. Ocultamos las tarjetas antes de cambiar el contenido
+            cardA.classList.remove('visible');
+            cardB.classList.remove('visible');
 
-            // Limpiamos estilos en línea que hayan quedado
+            // 2. Forzamos el re-renderizado moviendo las tarjetas (evita el borde fantasma)
+            // PERO nos aseguramos de reinsertar el "VS" en el medio
+            const parent = cardA.parentNode;
+            parent.appendChild(cardA);
+            parent.insertBefore(vsBadge, cardA.nextSibling);
+            parent.appendChild(cardB);
+
+            // 3. Limpiamos estilos en línea
             cardA.style.transform = '';
             cardB.style.transform = '';
             cardA.style.opacity = '';
@@ -379,8 +384,9 @@
             
             vsBadge.style.opacity = 0.3;
             vsBadge.style.transform = 'scale(1)';
-            vsBadge.style.display = 'flex'; // Lo restauramos
+            vsBadge.style.display = 'flex';
 
+            // 4. Cargamos los datos
             document.getElementById('posterA').src = A.poster || 'https://via.placeholder.com/110x160';
             document.getElementById('tituloA').textContent = A.titulo;
             document.getElementById('originalA').textContent = A.titulo_original || "";
@@ -402,6 +408,12 @@
             document.getElementById('detallesB').textContent = detallesB.join(' · ');
 
             textoRonda.innerText = `Ronda ${rondaActual} - Cruce ${cruceActualIndex + 1} de ${crucesPendientes.length}`;
+
+            // 5. Hacemos visibles las tarjetas una vez que todo está listo
+            setTimeout(() => {
+                cardA.classList.add('visible');
+                cardB.classList.add('visible');
+            }, 50);
         }
 
         async function seleccionarGanadora(opcion) {
@@ -459,7 +471,10 @@
                     cardGanadora.classList.remove('ganadora-centrada');
                     cardPerdedora.classList.remove('perdedora');
                     
-                    // Si el navegador dejó el :hover pegado, esto lo fuerza a limpiarlo
+                    // Ocultamos las tarjetas para que no se vea el cambio brusco
+                    cardGanadora.classList.remove('visible');
+                    cardPerdedora.classList.remove('visible');
+
                     cardGanadora.style.transform = '';
                     cardGanadora.style.opacity = '';
                     
