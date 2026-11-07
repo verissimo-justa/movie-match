@@ -300,12 +300,13 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            setTimeout(() => {
-                rondaTexto.innerText = `RONDA ${rondaActual}`;
-                rondaOverlay.classList.add('active');
+            // NUEVO: Actualizamos los textos ACÁ, antes de la animación
+            rondaTexto.innerText = `RONDA ${rondaActual}`;
+            textoRonda.innerText = `Ronda ${rondaActual}`;
 
-                setTimeout(() => {
-                    rondaOverlay.classList.remove('active');
+            setTimeout(() => {
+                // (Borramos la línea que estaba acá)
+                rondaOverlay.classList.add('active');
 
                     setTimeout(() => {
                         armarGrilla(peliculas);
