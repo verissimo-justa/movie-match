@@ -164,8 +164,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kS7i093sQpkLTawUEdgf4HVOHSc.jpg",
     "director": "Federico Fellini",
     "pais": "IT",
-    "duracion": 123,
-    "activa": true
+    "duracion": 123
   },
   {
     "id": 17,
@@ -320,7 +319,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/jE8ygUYBUGyUcM4sR6iinPqYeDK.jpg",
     "director": "Henri-Georges Clouzot",
     "pais": "FR",
-    "duracion": 118
+    "duracion": 118,
+    "activa": true
   },
   {
     "id": 32,
@@ -687,4 +687,9 @@
     "titulo": "La luz incidente",
     "titulo_original": "",
     "anio": 2015,
-    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4Q
+    "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4QxGvJO8.jpg",
+    "director": "Ariel Rotter",
+    "pais": "AR",
+    "duracion": 95
+  }
+]
