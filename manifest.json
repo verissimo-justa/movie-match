@@ -1,5 +1,5 @@
 {
-  "name": "Cámara Match - Torneo de pelis",
+  "name": "cámara Match - torneo de Pelis",
   "short_name": "Cámara Match",
   "start_url": "/movie-match/",
   "display": "standalone",
@@ -7,12 +7,12 @@
   "theme_color": "#6488b4",
   "icons": [
     {
-      "src": "https://via.placeholder.com/192x192/6488b4/ffffff?text=CM",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://via.placeholder.com/512x512/6488b4/ffffff?text=CM",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
