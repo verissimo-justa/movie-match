@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados Finales - Cámara Match</title>
+    <title>Resultados finales - cámara match</title>
 
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
             font-family: 'Fraunces', serif;
             font-weight: 900;
             font-size: 2.2rem;
-            color: #6488b4;
+            color: #008080;
             margin-bottom: 5px;
             text-align: center;
         }
@@ -42,7 +42,7 @@
 
         .loading {
             font-size: 1.2rem;
-            color: #6488b4;
+            color: #008080;
             font-weight: bold;
             margin-top: 50px;
         }
@@ -53,7 +53,7 @@
             padding: 20px;
             width: 100%;
             max-width: 600px;
-            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.15);
         }
 
         .ranking-item {
@@ -101,7 +101,7 @@
             font-family: 'Oswald', sans-serif;
             font-size: 1.4rem;
             font-weight: 600;
-            color: #6488b4;
+            color: #008080;
             text-align: right;
             flex-shrink: 0;
             min-width: 60px;
@@ -109,7 +109,7 @@
 
         /* Efecto para el Top 3 */
         .top-1 .posicion { color: #d4af37; font-size: 2rem; }
-        .top-1 .titulo { color: #6488b4; }
+        .top-1 .titulo { color: #008080; }
         .top-2 .posicion { color: #a8a8a8; }
         .top-3 .posicion { color: #cd7f32; }
     </style>
@@ -128,10 +128,8 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // ¡ACÁ ESTÁ LA MAGIA CORREGIDA!
-        // Ganar R1 = 1pt, Ganar R2 = 2pts, Ganar R3 = 3pts, Llegar a la final = 4pts
+        // Lógica de puntos
         const PUNTOS_RONDA = { 1: 1, 2: 2, 3: 3, 4: 4 };
-        // Bono extra para la ganadora absoluta
         const BONO_GANADORA = 5; 
 
         async function calcularResultados() {
