@@ -362,7 +362,7 @@
                     }
                 }
 
-                const respuesta = await fetch('./peliculas.json');
+                const respuesta = await fetch('./peliculas2.json');
                 const peliculasReales = await respuesta.json();
                 peliculasTodas = peliculasReales.filter(p => p.activa === true);
                 peliculasTodas.sort(() => Math.random() - 0.5);
@@ -736,7 +736,8 @@
         }
     </script>
     <script>
-            if ('serviceWorker' in navigator) {navigator.serviceWorker.register('/movie-match/sw.js');
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/movie-match/sw.js');
         }
     </script>
 </body>
