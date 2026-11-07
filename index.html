@@ -670,4 +670,71 @@
                 card.onclick = () => elegirCampeona(peli);
                 
                 card.innerHTML = `
-                    <img class="poster" src="${peli.poster || '
+                    <img class="poster" src="${peli.poster || 'https://via.placeholder.com/110x160'}" alt="">
+                    <div class="movie-info">
+                        <div class="movie-title">${peli.titulo}</div>
+                        <div class="movie-original-title">${peli.titulo_original || ''}</div>
+                        <div class="movie-year">${peli.anio}</div>
+                        <div class="movie-details">${peli.director ? abreviarNombre(peli.director) : ''} ${peli.pais ? '· ' + peli.pais : ''} ${peli.duracion ? '· ' + peli.duracion + ' min' : ''}</div>
+                    </div>
+                `;
+                parent.appendChild(card);
+            });
+
+            // Un pequeño texto indicador
+            const indicador = document.createElement('div');
+            indicador.innerText = "¡Elegí a la campeona!";
+            indicador.style.textAlign = 'center';
+            indicador.style.fontFamily = 'Oswald';
+            indicador.style.color = '#008080';
+            indicador.style.fontSize = '1.2rem';
+            indicador.style.marginBottom = '20px';
+            parent.prepend(indicador);
+
+            textoRonda.innerText = `Ronda Final - Terna de Campeonas`;
+        }
+
+        // NUEVA FUNCIÓN: Elegir Campeona de la Terna
+        function elegirCampeona(campeona) {
+            // Guardamos el voto de la final en Supabase
+            // Para mantener la consistencia de la tabla, guardamos un "cruce" ficticio
+            _supabase.from('votos_torneo').insert({
+                participante: usuarioActual,
+                ronda: 4, // Ronda final
+                pelicula_a_id: campeona.id, // Usamos el ID de la campeona como A
+                pelicula_a_titulo: campeona.titulo,
+                pelicula_b_id: campeona.id, // Mismo ID para que no sea ambiguo
+                pelicula_b_titulo: campeona.titulo,
+                ganadora_id: campeona.id,
+                ganadora_titulo: campeona.titulo
+            }).then(({ error }) => {
+                if (error) console.error("Error al guardar:", error);
+            });
+
+            guardarProgreso(true);
+            finalizarTorneo(campeona);
+        }
+
+        function finalizarTorneo(ganadoraFinal) {
+            matchContainer.style.display = 'none';
+            headerTorneo.style.display = 'none';
+            resultadosScreen.style.display = 'flex';
+
+            document.getElementById('posterGanadora').src = ganadoraFinal.poster || 'https://via.placeholder.com/240x360';
+            document.getElementById('tituloGanadora').textContent = ganadoraFinal.titulo;
+            document.getElementById('originalGanadora').textContent = ganadoraFinal.titulo_original || "";
+            document.getElementById('anioGanadora').textContent = ganadoraFinal.anio;
+            
+            let detalles = [];
+            if (ganadoraFinal.director) detalles.push(abreviarNombre(ganadoraFinal.director));
+            if (ganadoraFinal.pais) detalles.push(ganadoraFinal.pais);
+            if (ganadoraFinal.duracion) detalles.push(`${ganadoraFinal.duracion} min`);
+            document.getElementById('detallesGanadora').textContent = detalles.join(' · ');
+        }
+    </script>
+    <script>
+            if ('serviceWorker' in navigator) {navigator.serviceWorker.register('/movie-match/sw.js');
+        }
+    </script>
+</body>
+</html>
