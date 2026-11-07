@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados Finales - cámara match</title>
+    <title>Resultados Finales - Cámara Match</title>
 
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
             border-radius: 16px;
             padding: 20px;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
         }
 
@@ -75,17 +75,9 @@
             flex-shrink: 0;
         }
 
-        .poster-mini {
-            width: 45px;
-            height: 65px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-right: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
         .info {
             flex-grow: 1;
+            padding-right: 15px;
         }
 
         .titulo {
@@ -97,10 +89,12 @@
             color: #333;
         }
 
-        .anio {
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.9rem;
-            color: #8c8c8c;
+        .desglose {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 3px;
+            text-transform: uppercase;
         }
 
         .puntos {
@@ -110,28 +104,22 @@
             color: #6488b4;
             text-align: right;
             flex-shrink: 0;
-        }
-        .puntos small {
-            display: block;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
-            color: #8c8c8c;
-            font-weight: 400;
+            min-width: 60px;
         }
 
         /* Efecto para el Top 3 */
-        .top-1 .posicion { color: #d4af37; font-size: 2rem; } /* Oro */
+        .top-1 .posicion { color: #d4af37; font-size: 2rem; }
         .top-1 .titulo { color: #6488b4; }
-        .top-2 .posicion { color: #a8a8a8; } /* Plata */
-        .top-3 .posicion { color: #cd7f32; } /* Bronce */
+        .top-2 .posicion { color: #a8a8a8; }
+        .top-3 .posicion { color: #cd7f32; }
     </style>
 </head>
 <body>
 
     <h1>Resultados del Torneo</h1>
-    <div class="subtitle" id="subtitulo">Calculando puntos de consenso...</div>
+    <div class="subtitle" id="subtitulo">Calculando puntos...</div>
 
-    <div class="loading" id="loading">Cargando datos de los participantes ⏳</div>
+    <div class="loading" id="loading">Cargando datos ⏳</div>
     
     <div class="ranking" id="rankingContainer" style="display: none;"></div>
 
@@ -140,80 +128,79 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZ2RiZW5uZ3huYnhoYXBrcWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3MTA3MTYsImV4cCI6MjEwODI4NjcxNn0.2ypfGrSiDPeXoctRU5VCBGsZn3o6J62wwQ3ftMbUZ6w';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Puntos por ronda según tu lógica
-        const PUNTOS_RONDA = {
-            1: 0,
-            2: 1,
-            3: 2,
-            4: 3
-        };
-        const PUNTOS_GANADORA_EXTRA = 5;
+        // LÓGICA DE PUNTOS: Por Ronda Alcanzada
+        const PUNTOS_RONDA = { 1: 0, 2: 1, 3: 2, 4: 3 };
+        const BONO_GANADORA = 5; 
 
         async function calcularResultados() {
             try {
-                // 1. Traemos todos los votos de la tabla
                 const { data: votos, error } = await _supabase
                     .from('votos_torneo')
                     .select('*');
 
                 if (error) throw error;
-
                 if (!votos || votos.length === 0) {
                     document.getElementById('loading').innerText = "Aún no hay votos registrados.";
                     return;
                 }
 
-                // 2. Agrupamos los votos por participante para saber dónde terminó el torneo de cada uno
+                // Agrupamos los votos por participante
                 const participantes = {};
                 votos.forEach(v => {
-                    if (!participantes[v.participante]) {
-                        participantes[v.participante] = [];
-                    }
+                    if (!participantes[v.participante]) participantes[v.participante] = [];
                     participantes[v.participante].push(v);
                 });
 
                 const puntajes = {};
-                const infoPeliculas = {}; // Para guardar el póster y el año
+                const desgloses = {};
+                const infoPeliculas = {};
 
-                // 3. Calculamos los puntos
+                // Calculamos los puntos para cada participante
                 for (const [nombre, votosDelParticipante] of Object.entries(participantes)) {
                     
-                    // Encontramos cuál fue la ronda máxima de este participante (la final)
+                    // Ronda máxima a la que llegó este participante
                     const rondaMaxima = Math.max(...votosDelParticipante.map(v => v.ronda));
 
                     votosDelParticipante.forEach(voto => {
                         const idGanadora = voto.ganadora_id;
                         const tituloGanadora = voto.ganadora_titulo;
 
-                        // Guardamos la info de la película (la primera vez que la vemos)
-                        if (!infoPeliculas[idGanadora]) {
-                            infoPeliculas[idGanadora] = { titulo: tituloGanadora };
+                        if (!infoPeliculas[idGanadora]) infoPeliculas[idGanadora] = { titulo: tituloGanadora };
+                        if (!puntajes[idGanadora]) {
+                            puntajes[idGanadora] = 0;
+                            desgloses[idGanadora] = { 2: 0, 3: 0, 4: 0, bono: 0 }; // Solo contamos de R2 en adelante
                         }
 
-                        // Inicializamos el puntaje si no existe
-                        if (!puntajes[idGanadora]) puntajes[idGanadora] = 0;
+                        // Sumamos puntos por la ronda alcanzada
+                        let puntos = PUNTOS_RONDA[voto.ronda] || 0;
+                        puntajes[idGanadora] += puntos;
+                        
+                        // Si la ronda fue 2, 3 o 4, lo anotamos en el desglose
+                        if (voto.ronda >= 2) {
+                            desgloses[idGanadora][voto.ronda]++;
+                        }
 
-                        // Sumamos los puntos de la ronda en la que ganó este cruce
-                        let puntosRonda = PUNTOS_RONDA[voto.ronda] || 0;
-                        puntajes[idGanadora] += puntosRonda;
-
-                        // Si este cruce era de la última ronda de este participante (la final), sumamos los 5 extra
+                        // Si esta victoria fue en la ronda máxima (la final), sumamos el bono
                         if (voto.ronda === rondaMaxima) {
-                            puntajes[idGanadora] += PUNTOS_GANADORA_EXTRA;
+                            puntajes[idGanadora] += BONO_GANADORA;
+                            desgloses[idGanadora].bono++;
                         }
                     });
                 }
 
-                // 4. Ordenamos el ranking
+                // Ordenamos el ranking
                 const rankingArray = Object.keys(puntajes).map(id => ({
                     id: id,
                     titulo: infoPeliculas[id].titulo,
-                    puntos: puntajes[id]
+                    puntos: puntajes[id],
+                    desglose: desgloses[id]
                 })).sort((a, b) => b.puntos - a.puntos);
 
-                // 5. Mostramos en pantalla
+                // Mostramos en pantalla
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('subtitulo').innerText = `Torneo finalizado. Total de participantes: ${Object.keys(participantes).length}`;
+                
+                const participantesUnicos = Object.keys(participantes).length;
+                document.getElementById('subtitulo').innerText = `Total de participantes: ${participantesUnicos}`;
                 
                 const contenedor = document.getElementById('rankingContainer');
                 contenedor.style.display = 'block';
@@ -226,10 +213,18 @@
                     else if (index === 1) div.classList.add('top-2');
                     else if (index === 2) div.classList.add('top-3');
 
+                    // Armamos el desglose
+                    let desgloseTexto = [];
+                    if (peli.desglose[2] > 0) desgloseTexto.push(`${peli.desglose[2]}xLlegó R2`);
+                    if (peli.desglose[3] > 0) desgloseTexto.push(`${peli.desglose[3]}xLlegó R3`);
+                    if (peli.desglose[4] > 0) desgloseTexto.push(`${peli.desglose[4]}xLlegó Final`);
+                    if (peli.desglose.bono > 0) desgloseTexto.push(`+${peli.desglose.bono * BONO_GANADORA}pt Bono`);
+
                     div.innerHTML = `
                         <div class="posicion">#${index + 1}</div>
                         <div class="info">
                             <div class="titulo">${peli.titulo}</div>
+                            <div class="desglose">${desgloseTexto.join(' · ')}</div>
                         </div>
                         <div class="puntos">
                             ${peli.puntos} pts
@@ -244,7 +239,6 @@
             }
         }
 
-        // Ejecutamos al cargar la página
         calcularResultados();
     </script>
 </body>
