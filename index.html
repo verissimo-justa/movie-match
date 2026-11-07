@@ -302,12 +302,19 @@
             grillaOverlay.classList.remove('active');
             rondaOverlay.classList.remove('active');
             
-            // Actualizamos los textos ACÁ, antes de la animación
-            rondaTexto.innerText = `RONDA ${rondaActual}`;
-            textoRonda.innerText = `Ronda ${rondaActual}`;
+            // NUEVO: Verificamos si es la final (cuando solo quedan 2 películas)
+            const esFinal = (peliculas.length === 2);
+            
+            if (esFinal) {
+                rondaTexto.innerText = `RONDA FINAL`;
+                textoRonda.innerText = `Ronda Final`;
+            } else {
+                rondaTexto.innerText = `RONDA ${rondaActual}`;
+                textoRonda.innerText = `Ronda ${rondaActual}`;
+            }
 
             setTimeout(() => {
-                // 1. Mostramos el cartel de RONDA X
+                // 1. Mostramos el cartel de RONDA X (o FINAL)
                 rondaOverlay.classList.add('active');
 
                 // 2. Esperamos 2 segundos a que se lea la ronda
