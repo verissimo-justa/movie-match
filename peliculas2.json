@@ -670,7 +670,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/uwKqnUPE4dSM0kKuMW0vXpURh2T.jpg",
     "director": "Terry Zwigoff",
     "pais": "GB",
-    "duracion": 111
+    "duracion": 111,
+    "activa": true
   },
   {
     "id": 67,
@@ -680,7 +681,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/gLIvvUdlocGjm8XVLxhWHAKWrRq.jpg",
     "director": "Lone Scherfig",
     "pais": "GB",
-    "duracion": 100
+    "duracion": 100,
+    "activa": true
   },
   {
     "id": 68,
@@ -690,6 +692,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/daD5rfkBHCiND8uhjPw4QxGvJO8.jpg",
     "director": "Ariel Rotter",
     "pais": "AR",
-    "duracion": 95
+    "duracion": 95,
+    "activa": true
   }
 ]
