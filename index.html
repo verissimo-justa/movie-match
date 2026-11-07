@@ -48,34 +48,20 @@
 
         /* Título superior */
         .header-torneo {
-            text-align: center;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            z-index: 10;
+            text-align: center; margin-top: 15px; margin-bottom: 15px; z-index: 10;
         }
         .header-torneo h1 {
-            font-family: 'Fraunces', serif !important;
-            font-weight: 900 !important;
-            font-size: 2rem;
-            color: #6488b4;
+            font-family: 'Fraunces', serif !important; font-weight: 900 !important;
+            font-size: 2rem; color: #6488b4;
         }
         .header-torneo p {
-            font-size: 1rem;
-            font-weight: bold;
-            color: rgba(120, 120, 120, 0.8);
+            font-size: 1rem; font-weight: bold; color: rgba(120, 120, 120, 0.8);
         }
 
         /* Contenedor de los cruces (VS) */
         .match-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 900px;
-            padding: 10px;
-            flex-grow: 1;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            gap: 20px; width: 100%; max-width: 900px; padding: 10px; flex-grow: 1;
             position: relative;
         }
 
@@ -85,28 +71,21 @@
 
         /* Tarjeta de Película */
         .movie-card {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 15px;
+            display: flex; flex-direction: row; align-items: center;
+            background: #ffffff; border-radius: 16px; padding: 15px;
             box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
-            border: 2px solid transparent; /* Borde base transparente */
-            cursor: pointer;
-            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+            border: 2px solid transparent; cursor: pointer;
+            /* Transición suave para transformaciones (animación) y opacidad */
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), 
                         opacity 0.4s ease, 
                         box-shadow 0.4s ease,
                         border-color 0.3s ease;
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            z-index: 1;
+            width: 100%; max-width: 380px; position: relative; z-index: 1;
         }
 
+        /* Al hacer hover solo cambiamos el borde, no el transform, para no romper la animación */
         .movie-card:hover {
             border-color: #6488b4;
-            transform: scale(1.02);
         }
 
         /* Clases de animación */
@@ -116,45 +95,23 @@
             pointer-events: none;
         }
 
-        /* Tarjeta centrada: Mantenemos su tamaño, pero la fijamos al centro */
+        /* La tarjeta que vuela al centro. Usamos coordenadas fijas pero sin cambiar position */
         .movie-card.ganadora-centrada {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 380px; /* Forzamos el ancho para que no se estire */
-            max-width: 90vw;
-            transform: translate(-50%, -50%) scale(1.05);
             z-index: 100;
             box-shadow: 0 20px 40px rgba(100, 136, 180, 0.4);
             border-color: #6488b4;
             pointer-events: none;
-            margin: 0;
-            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición más suave */
         }
 
-        .movie-card.salida-derecha {
-            transform: translate(100vw, -50%) rotate(15deg) scale(1.05);
-            opacity: 0;
-        }
-        .movie-card.salida-izquierda {
-            transform: translate(-150vw, -50%) rotate(-15deg) scale(1.05);
-            opacity: 0;
-        }
-
+        /* Estilos de la foto */
         .movie-card .poster {
-            width: 110px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 8px;
-            flex-shrink: 0;
+            width: 110px; height: 160px; object-fit: cover; border-radius: 8px; flex-shrink: 0;
         }
 
+        /* Datos de la película */
         .movie-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 15px;
-            flex-grow: 1;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 0 15px; flex-grow: 1;
         }
 
         @media (min-width: 600px) and (orientation: landscape), (min-width: 768px) {
@@ -163,28 +120,16 @@
             .movie-card:nth-child(2) .movie-info { text-align: right; }
         }
 
-        .movie-title {
-            font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600;
-            text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; 
-        }
-        .movie-original-title {
-            font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c;
-            text-transform: uppercase; margin-bottom: 4px; order: 2; 
-        }
-        .movie-year {
-            font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c;
-            margin-bottom: 6px; order: 3; 
-        }
-        .movie-details {
-            font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #6488b4;
-            text-transform: uppercase; font-weight: 600; line-height: 1.3; order: 4; 
-        }
+        .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; }
+        .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase; margin-bottom: 4px; order: 2; }
+        .movie-year { font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c; margin-bottom: 6px; order: 3; }
+        .movie-details { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #6488b4; text-transform: uppercase; font-weight: 600; line-height: 1.3; order: 4; }
 
         .vs-badge {
-            font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem;
-            color: #6488b4; opacity: 0.3; background: white;
-            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;
+            font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.5rem; color: #6488b4;
+            opacity: 0.3; background: white; width: 45px; height: 45px; display: flex;
+            align-items: center; justify-content: center; border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;
         }
 
         /* --- ANIMACIONES FULLSCREEN (RONDA Y GRILLA) --- */
@@ -194,80 +139,44 @@
             background-color: #f7f2d4; z-index: 5000; opacity: 0; pointer-events: none;
             transition: opacity 0.8s ease;
         }
-
-        .ronda-overlay.active, .grilla-overlay.active {
-            opacity: 1; pointer-events: auto;
-        }
+        .ronda-overlay.active, .grilla-overlay.active { opacity: 1; pointer-events: auto; }
 
         .ronda-texto {
             font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 3.5rem;
-            color: rgba(150, 150, 150, 0.7); text-align: center;
-            text-transform: uppercase; letter-spacing: -1px;
+            color: rgba(150, 150, 150, 0.7); text-align: center; text-transform: uppercase; letter-spacing: -1px;
         }
 
-        /* Grilla flexible que se centra si hay pocos elementos */
         .grilla-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            max-width: 600px;
-            width: 90%;
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            gap: 15px; max-width: 600px; width: 90%;
         }
-
-        /* Para darle el tamaño de miniaturas a cada póster */
-        .grilla-item {
-            width: 70px; 
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 600px) {
-            .grilla-item { width: 100px; } /* Más grandes en pantallas grandes */
-        }
-
-        .grilla-item img {
-            width: 100%;
-            aspect-ratio: 2/3;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        .grilla-item { width: 70px; flex-shrink: 0; }
+        @media (min-width: 600px) { .grilla-item { width: 100px; } }
+        .grilla-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* --- PANTALLA FINAL --- */
         .resultados-screen {
             display: none; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 20px; width: 100%; max-width: 500px;
         }
-        
         .trofeo { font-size: 3.5rem; margin-bottom: 5px; }
-
-        .ganadora-texto {
-            font-family: 'Fraunces', serif; color: #6488b4; font-size: 2.2rem;
-            font-weight: 900; margin-bottom: 20px; line-height: 1.1;
-        }
+        .ganadora-texto { font-family: 'Fraunces', serif; color: #6488b4; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
 
         .ficha-ganadora {
             background: white; border-radius: 16px; padding: 15px;
-            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15);
-            width: 240px; display: flex; flex-direction: column; align-items: center;
+            box-shadow: 0 10px 25px rgba(100, 136, 180, 0.15); width: 240px;
+            display: flex; flex-direction: column; align-items: center;
         }
-        
-        .ficha-ganadora img {
-            width: 100%; height: auto; border-radius: 10px; margin-bottom: 12px;
-        }
-
+        .ficha-ganadora img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 12px; }
         .ficha-ganadora .movie-info { text-align: center; padding: 0; width: 100%; }
         .ficha-ganadora .movie-title { font-size: 1.3rem; margin-bottom: 2px; }
         .ficha-ganadora .movie-original-title { font-size: 0.85rem; margin-bottom: 4px; }
         .ficha-ganadora .movie-year { font-size: 1.1rem; margin-bottom: 6px; }
         .ficha-ganadora .movie-details { font-size: 0.8rem; }
-
     </style>
 </head>
 <body>
 
-    <!-- Pantalla de Login -->
     <div class="login-screen" id="loginScreen">
         <h1 style="font-family: 'Fraunces'; font-size: 2.5rem; color: #6488b4;">cam match</h1>
         <div style="margin-bottom: 20px; font-size: 1.1rem;">torneo de cine</div>
@@ -275,23 +184,19 @@
         <button id="loginBtn">Ingresar</button>
     </div>
 
-    <!-- Overlay: Animación de Ronda -->
     <div class="ronda-overlay" id="rondaOverlay">
         <div class="ronda-texto" id="rondaTexto">RONDA 1</div>
     </div>
 
-    <!-- Overlay: Grilla de Miniaturas -->
     <div class="grilla-overlay" id="grillaOverlay">
         <div class="grilla-container" id="grillaContainer"></div>
     </div>
 
-    <!-- Encabezado del torneo -->
     <div class="header-torneo" id="headerTorneo" style="display: none;">
         <h1>cam match</h1>
         <p id="textoRonda">Ronda 1</p>
     </div>
 
-    <!-- Contenedor del Match (VS) -->
     <div class="match-container" id="matchContainer" style="display: none;">
         <div class="movie-card" id="cardA" onclick="seleccionarGanadora('A')">
             <img class="poster" id="posterA" src="" alt="">
@@ -316,7 +221,6 @@
         </div>
     </div>
 
-    <!-- Pantalla de Resultados Finales -->
     <div class="resultados-screen" id="resultadosScreen">
         <div class="trofeo">🏆</div>
         <div class="ganadora-texto">¡Tenemos tu ganadora!</div>
@@ -365,7 +269,6 @@
             const nombre = document.getElementById('usernameInput').value.trim();
             if (!nombre) return;
             usuarioActual = nombre;
-            
             loginScreen.style.display = 'none';
             headerTorneo.style.display = 'block';
             matchContainer.style.display = 'flex';
@@ -373,7 +276,6 @@
             try {
                 const respuesta = await fetch('./peliculas.json');
                 const peliculasReales = await respuesta.json();
-                
                 peliculasTodas = peliculasReales.filter(p => p.activa === true);
                 peliculasTodas.sort(() => Math.random() - 0.5);
 
@@ -381,7 +283,6 @@
                     alert("El número de películas activas debe ser par. Hay " + peliculasTodas.length);
                     return;
                 }
-
                 iniciarRonda(peliculasTodas);
             } catch (error) {
                 console.error("Error al cargar:", error);
@@ -407,15 +308,13 @@
 
                         setTimeout(() => {
                             grillaOverlay.classList.remove('active');
-
                             setTimeout(() => {
                                 matchContainer.style.opacity = 1;
                                 armarRonda(peliculas);
                             }, 1000);
-
-                        }, 2000); // Grilla visible 2s
+                        }, 2000);
                     }, 1000);
-                }, 2000); // Ronda visible 2s
+                }, 2000);
             }, 500);
         }
 
@@ -446,10 +345,7 @@
             cruceActualIndex = 0;
 
             for (let i = 0; i < peliculas.length; i += 2) {
-                crucesPendientes.push({
-                    peliculaA: peliculas[i],
-                    peliculaB: peliculas[i + 1]
-                });
+                crucesPendientes.push({ peliculaA: peliculas[i], peliculaB: peliculas[i + 1] });
             }
             mostrarCruce();
         }
@@ -459,14 +355,26 @@
             const A = cruce.peliculaA;
             const B = cruce.peliculaB;
 
-            // Limpiamos las clases de estado anteriores (bordes, centrado, etc)
             const cardA = document.getElementById('cardA');
             const cardB = document.getElementById('cardB');
+
+            // LA SOLUCIÓN AL BORDE: Forzamos al navegador a re-renderizar las tarjetas
+            // quitándolas del DOM y volviéndolas a insertar.
+            const parent = cardA.parentNode;
+            parent.appendChild(cardA); // Mueve cardA al final
+            parent.insertBefore(cardB, cardA.nextSibling); // Reubica cardB
+
+            // Limpiamos estilos en línea que hayan quedado
+            cardA.style.transform = '';
+            cardB.style.transform = '';
+            cardA.style.opacity = '';
+            cardB.style.opacity = '';
             cardA.className = 'movie-card';
             cardB.className = 'movie-card';
             
             vsBadge.style.opacity = 0.3;
             vsBadge.style.transform = 'scale(1)';
+            vsBadge.style.display = 'flex'; // Lo restauramos
 
             document.getElementById('posterA').src = A.poster || 'https://via.placeholder.com/110x160';
             document.getElementById('tituloA').textContent = A.titulo;
@@ -500,12 +408,23 @@
             const cardGanadora = opcion === 'A' ? document.getElementById('cardA') : document.getElementById('cardB');
             const cardPerdedora = opcion === 'A' ? document.getElementById('cardB') : document.getElementById('cardA');
 
-            // 1. Perdedora se va
+            // 1. Perdedora desaparece
             cardPerdedora.classList.add('perdedora');
             vsBadge.style.opacity = 0;
             vsBadge.style.transform = 'scale(0)';
             
-            // 2. Ganadora vuela al centro
+            // 2. Calculamos la distancia hacia el centro
+            const rect = cardGanadora.getBoundingClientRect();
+            const windowCenterX = window.innerWidth / 2;
+            const windowCenterY = window.innerHeight / 2;
+            const cardCenterX = rect.left + (rect.width / 2);
+            const cardCenterY = rect.top + (rect.height / 2);
+
+            const deltaX = windowCenterX - cardCenterX;
+            const deltaY = windowCenterY - cardCenterY;
+
+            // 3. Movemos la tarjeta al centro con transform (se desplaza suavemente)
+            cardGanadora.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
             cardGanadora.classList.add('ganadora-centrada');
 
             _supabase.from('votos_torneo').insert({
@@ -524,14 +443,20 @@
             ganadorasRonda.push(ganadora);
 
             setTimeout(() => {
-                const claseSalida = turnoSalida === 1 ? 'salida-derecha' : 'salida-izquierda';
-                cardGanadora.classList.add(claseSalida);
+                // 4. Vuela hacia la izquierda o derecha
+                const salidaX = turnoSalida === 1 ? window.innerWidth : -window.innerWidth;
+                cardGanadora.style.transform = `translate(${salidaX}px, ${deltaY}px) rotate(${turnoSalida * 15}deg) scale(1.05)`;
+                cardGanadora.style.opacity = '0';
                 turnoSalida *= -1;
 
                 setTimeout(() => {
-                    // Restauramos las tarjetas
+                    // Restauramos todo para el próximo cruce
+                    cardGanadora.classList.remove('ganadora-centrada');
                     cardPerdedora.classList.remove('perdedora');
-                    cardGanadora.classList.remove('ganadora-centrada', 'salida-derecha', 'salida-izquierda');
+                    
+                    // Si el navegador dejó el :hover pegado, esto lo fuerza a limpiarlo
+                    cardGanadora.style.transform = '';
+                    cardGanadora.style.opacity = '';
                     
                     cruceActualIndex++;
                     if (cruceActualIndex < crucesPendientes.length) {
