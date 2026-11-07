@@ -175,7 +175,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/nLJjFRqIJAK8qz0OKYnpKCblZNK.jpg",
     "director": "Bernardo Bertolucci",
     "pais": "DE",
-    "duracion": 108
+    "duracion": 108,
     "activa": true
   },
   {
@@ -196,7 +196,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/3P8g5U4gbifjM2lnqSpZogh7FrD.jpg",
     "director": "Wojciech Has",
     "pais": "PL",
-    "duracion": 183
+    "duracion": 183,
     "activa": true
   },
   {
@@ -227,7 +227,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/b2G1QSAwtBv9luhEwErIgSRaU92.jpg",
     "director": "Otto Preminger",
     "pais": "US",
-    "duracion": 161
+    "duracion": 161,
     "activa": true
   },
   {
@@ -238,7 +238,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/fqfSu8Y1YSVFkoCJyiTXI6woYma.jpg",
     "director": "Chantal Akerman",
     "pais": "BE",
-    "duracion": 202
+    "duracion": 202,
     "activa": true
   },
   {
@@ -249,7 +249,7 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/5RS3zovYbHdpZqLqyEOr24qWKwf.jpg",
     "director": "Lee Chang-dong",
     "pais": "KR",
-    "duracion": 139
+    "duracion": 139,
     "activa": true
   },
   {
@@ -502,7 +502,7 @@
     "pais": "GB",
     "duracion": 116
   },
-    {
+  {
     "id": 50,
     "titulo": "Los inocentes",
     "titulo_original": "The Innocents",
