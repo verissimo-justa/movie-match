@@ -775,9 +775,27 @@
         }
     </script>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/movie-match/sw.js');
-        }
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/movie-match/sw.js')
+                .then(registration => {
+                    // Detectar si hay una actualización disponible
+                    registration.onupdatefound = () => {
+                        const installingWorker = registration.installing;
+                        installingWorker.onstatechange = () => {
+                            if (installingWorker.state === 'installed') {
+                                if (navigator.serviceWorker.controller) {
+                                    // Hay una nueva versión, recargamos la página
+                                    console.log('Nueva versión disponible. Recargando...');
+                                    window.location.reload();
+                                }
+                            }
+                        };
+                    };
+                })
+                .catch(error => console.error('Error al registrar SW:', error));
+        });
+    }
     </script>
 </body>
 </html>
