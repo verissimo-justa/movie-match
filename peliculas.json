@@ -390,7 +390,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/u6Bz2BnPnuCgT6koT4LeiCUNJQi.jpg",
     "director": "Luiz Fernando Carvalho",
     "pais": "BR",
-    "duracion": 171
+    "duracion": 171,
+    "activa": true
   },
   {
     "id": 39,
@@ -420,7 +421,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/1ho0d4LNZw3Y0voeKmSvPSgJOJ2.jpg",
     "director": "Justine Triet",
     "pais": "FR",
-    "duracion": 151
+    "duracion": 151,
+    "activa": true
   },
   {
     "id": 42,
@@ -530,7 +532,8 @@
     "poster": "https://image.tmdb.org/t/p/w600_and_h900_face/kWXA6PfQ0PpZpoCXoeBFRciRrUw.jpg",
     "director": "İlker Çatak",
     "pais": "DE",
-    "duracion": 98
+    "duracion": 98,
+    "activa": true
   },
   {
     "id": 53,
