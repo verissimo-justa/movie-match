@@ -19,13 +19,15 @@
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* FUENTE COOPER LOCAL */
         @font-face {
-        font-family: 'CooperLtBT';
-        src: url('/movie-match/CooperLtBT.ttf') format('truetype');
-        font-weight: bold; /* Le decimos que esta fuente ES el peso bold */
-        font-style: normal;
-        font-display: swap;
-}
+            font-family: 'CooperLtBT';
+            src: url('/movie-match/CooperLtBT.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
                 
         body {
             background-color: #f7f2d4;
@@ -74,19 +76,21 @@
         .btn-continuar { background-color: #008080; color: white; }
         .btn-reiniciar { background-color: transparent; color: #008080; }
 
-        /* Título superior */
+        /* Título superior (Rondas) */
         .header-torneo {
             text-align: center; margin-top: 15px; margin-bottom: 15px; 
             z-index: 6000;
             position: relative;
         }
+        
+        /* ESTA ES LA REGLA QUE SE HABÍA ROTO */
         .header-torneo h1 {
-            h1 {
             font-family: 'CooperLtBT', 'Fraunces', serif !important;
-            font-weight: bold !important; /* O 700 */font-family: 'CooperLtBT', 'Fraunces', serif !important; 
+            font-weight: bold !important; 
             font-size: 2rem; 
             color: #008080;
         }
+        
         .header-torneo p {
             font-size: 1rem; font-weight: bold; color: rgba(120, 120, 120, 0.8);
         }
@@ -136,6 +140,7 @@
             display: flex; flex-direction: column; justify-content: center;
             padding: 0 15px; flex-grow: 1;
         }
+        
         /* Todos los posters a la izquierda y los datos a la derecha */
         .movie-card .movie-info {
             text-align: left;
@@ -144,6 +149,8 @@
         .movie-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; text-transform: uppercase; line-height: 1.1; margin-bottom: 4px; order: 1; }
         .movie-original-title { font-family: 'Oswald', sans-serif; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase; margin-bottom: 4px; order: 2; }
         .movie-year { font-family: 'Oswald', sans-serif; font-size: 1rem; color: #8c8c8c; margin-bottom: 6px; order: 3; }
+        
+        /* FICHA TÉCNICA CON OSWALD LIVIANA */
         .movie-details { font-family: 'Oswald', sans-serif; font-size: 0.9rem; color: #008080; text-transform: uppercase; font-weight: 400; line-height: 1.3; order: 4; }
 
         .vs-badge {
@@ -183,7 +190,16 @@
             text-align: center; padding: 20px; width: 100%; max-width: 500px;
         }
         .trofeo { font-size: 3.5rem; margin-bottom: 5px; }
-        .ganadora-texto { font-family: 'Fraunces', serif; color: #008080; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+        
+        /* TEXTO GANADORA CON COOPER */
+        .ganadora-texto { 
+            font-family: 'CooperLtBT', 'Fraunces', serif; 
+            color: #008080; 
+            font-size: 2.2rem; 
+            font-weight: bold; 
+            margin-bottom: 20px; 
+            line-height: 1.1; 
+        }
 
         .ficha-ganadora {
             background: white; border-radius: 16px; padding: 15px;
@@ -192,7 +208,6 @@
         }
         .ficha-ganadora img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 12px; }
         
-        /* CORRECCIÓN: Alineación a la izquierda para los datos de la ganadora */
         .ficha-ganadora .movie-info { text-align: left; padding: 0; width: 100%; }
         
         .ficha-ganadora .movie-title { font-size: 1.3rem; margin-bottom: 2px; }
@@ -214,6 +229,7 @@
     </div>
 
     <div class="login-screen" id="loginScreen">
+        <!-- TÍTULO DEL LOGIN CON COOPER -->
         <h1 style="font-family: 'CooperLtBT', 'Fraunces', serif; font-size: 2.5rem; color: #008080; font-weight: bold;">cámara match</h1>
         <div style="margin-bottom: 20px; font-size: 1.1rem;">torneo de pelis</div>
         <input type="text" id="usernameInput" placeholder="Tu nombre o alias" maxlength="15" autocomplete="off">
@@ -789,13 +805,11 @@
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/movie-match/sw.js')
                 .then(registration => {
-                    // Detectar si hay una actualización disponible
                     registration.onupdatefound = () => {
                         const installingWorker = registration.installing;
                         installingWorker.onstatechange = () => {
                             if (installingWorker.state === 'installed') {
                                 if (navigator.serviceWorker.controller) {
-                                    // Hay una nueva versión, recargamos la página
                                     console.log('Nueva versión disponible. Recargando...');
                                     window.location.reload();
                                 }
