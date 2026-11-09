@@ -27,6 +27,36 @@
         font-display: swap; /* Asegura que el texto se vea mientras carga la fuente */
         }
         
+                /* Botón de instalar PWA */
+        .btn-instalar-pwa {
+            display: none; /* Oculto por defecto, se muestra con JS */
+            position: fixed; 
+            bottom: 25px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 99999;
+            
+            /* Estética similar al botón de "Ingresar" */
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            background-color: #008080; 
+            color: white;
+            border: none;
+            border-radius: 8px; /* Igual al del login */
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 128, 128, 0.3); /* Sombra verde sutil */
+            
+            /* Animación de entrada */
+            animation: aparecer 0.5s ease forwards;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
         body {
             background-color: #f7f2d4;
             color: #333333;
@@ -201,6 +231,10 @@
     </style>
 </head>
 <body>
+        <!-- Botón para instalar la PWA -->
+    <button id="btnInstalar" class="btn-instalar-pwa">
+        📲 Instalar cámara match
+    </button>
 
     <!-- Cartel para continuar torneo -->
     <div class="modal-continuar" id="modalContinuar">
@@ -314,6 +348,13 @@
             if (e.key === 'Enter') iniciarTorneo();
         });
 
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.getElementById('btnInstalar');
+            if (btn) btn.style.display = 'block'; // O 'flex'
+        });
+        
         window.addEventListener('DOMContentLoaded', () => {
             const guardado = localStorage.getItem(CLAVE_GUARDADO);
             if (guardado) {
