@@ -22,10 +22,10 @@
         @font-face {
         font-family: 'CooperLtBT';
         src: url('/movie-match/CooperLtBT.ttf') format('truetype');
-        font-weight: normal; /* O normal, según cómo esté diseñada la fuente */
+        font-weight: bold; /* Le decimos que esta fuente ES el peso bold */
         font-style: normal;
-        font-display: swap; /* Asegura que el texto se vea mientras carga la fuente */
-        }
+        font-display: swap;
+}
                 
         body {
             background-color: #f7f2d4;
@@ -81,8 +81,9 @@
             position: relative;
         }
         .header-torneo h1 {
-            font-family: 'CooperLtBT', 'Fraunces', serif !important; 
-            font-weight: normal !important; /* Usa el peso nativo de Cooper */
+            h1 {
+            font-family: 'CooperLtBT', 'Fraunces', serif !important;
+            font-weight: bold !important; /* O 700 */font-family: 'CooperLtBT', 'Fraunces', serif !important; 
             font-size: 2rem; 
             color: #008080;
         }
